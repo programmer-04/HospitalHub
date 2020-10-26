@@ -67,7 +67,7 @@ class Hospphoneno(models.Model):
         unique_together = (('hospid', 'hospphoneno'),)
 
 
-class Hosppincodemodel(models.Model):
+class Hosppincode(models.Model):
     pincode = models.ForeignKey('Hospital', models.DO_NOTHING, db_column='Pincode', blank=True, null=True)  # Field name made lowercase.
     hospcity = models.CharField(db_column='HospCity', max_length=25, blank=True, null=True)  # Field name made lowercase.
     hospcountry = models.CharField(db_column='HospCountry', max_length=25, blank=True, null=True)  # Field name made lowercase.

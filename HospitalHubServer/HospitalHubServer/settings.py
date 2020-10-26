@@ -25,7 +25,7 @@ SECRET_KEY = 'wv^sbd434msg)&z+jg+$11**g1n1695*+ozwfqg$xk8h)sk_x_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0']
 
 
 # Application definition
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'HospitalHubServer.wsgi.application'
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Hospital',
+        'NAME': 'HospitalHub',
         'USER': 'dj',
         'PASSWORD': '1231',
     }
