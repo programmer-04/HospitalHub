@@ -91,6 +91,13 @@ class Hospital(models.Model):
         managed = False
         db_table = 'Hospital'
 
+    def __str__(self):
+        return self.hospname
+
+    def get_absolute_url(self):
+        """Returns the url to access a particular instance of the model."""
+        return reverse('model-detail-view', args=[str(self.id)])
+
 
 class User(models.Model):
     userid = models.IntegerField(db_column='UserID', primary_key=True)  # Field name made lowercase.

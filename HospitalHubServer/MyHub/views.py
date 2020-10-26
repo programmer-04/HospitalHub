@@ -3,5 +3,27 @@ from django.http import HttpResponse
 
 # Create your views here.
 
+from MyHub.models import Amb, Doctor, Doctoredu, Doctorspeciality, Hosppaymode, Hospphoneno, Hosppincodemodel, Hospital, User, Usercomplaint, Usergender, Vehicletype
+
 def index(request):
-    return HttpResponse("<h1>This is the MyHub app</h1>")
+    """View function for home page of site."""
+
+    # Generate counts of some of the main objects
+    num_hosps = Hospital.objects.all().count()
+    num_doctors = Doctor.objects.all().count()
+    
+    # Available books (status = 'a')
+    #num_instances_available = BookInstance.objects.filter(status__exact='a').count()
+    
+    # The 'all()' is implied by default.    
+    num_users = User.objects.count()
+    
+    context = {
+        'num_hosps': num_hosps,
+        'num_doctors': num_doctors,
+        #'num_instances_available': num_instances_available,
+        'num_users': num_users,
+    }
+
+    # Render the HTML template index.html with the data in the context variable
+    return render(request, 'index.html', context=context)
