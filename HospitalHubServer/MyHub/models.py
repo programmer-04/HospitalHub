@@ -6,6 +6,8 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+#from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
 class Amb(models.Model):
@@ -77,7 +79,7 @@ class Hosppincodemodel(models.Model):
         db_table = 'HospPincode'
 
 
-class Hospital(models.Model):
+class hospital(models.Model):
     hospid = models.IntegerField(db_column='HospID', primary_key=True)  # Field name made lowercase.
     hospname = models.CharField(db_column='HospName', max_length=100, blank=True, null=True)  # Field name made lowercase.
     hospbuilding = models.CharField(db_column='HospBuilding', max_length=25, blank=True, null=True)  # Field name made lowercase.
@@ -95,9 +97,7 @@ class Hospital(models.Model):
         return self.hospname
 
     def get_absolute_url(self):
-        """Returns the url to access a particular instance of the model."""
-        return reverse('model-detail-view', args=[str(self.id)])
-
+        return reverse('hospital-detail', args=[str(self.hospid)])
 
 class User(models.Model):
     userid = models.IntegerField(db_column='UserID', primary_key=True)  # Field name made lowercase.

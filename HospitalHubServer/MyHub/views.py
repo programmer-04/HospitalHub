@@ -3,13 +3,13 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-from MyHub.models import Amb, Doctor, Doctoredu, Doctorspeciality, Hosppaymode, Hospphoneno, Hosppincodemodel, Hospital, User, Usercomplaint, Usergender, Vehicletype
+from MyHub.models import Amb, Doctor, Doctoredu, Doctorspeciality, Hosppaymode, Hospphoneno, Hosppincodemodel, hospital, User, Usercomplaint, Usergender, Vehicletype
 
 def index(request):
     """View function for home page of site."""
 
     # Generate counts of some of the main objects
-    num_hosps = Hospital.objects.all().count()
+    num_hosps = hospital.objects.all().count()
     num_doctors = Doctor.objects.all().count()
     
     # Available books (status = 'a')
@@ -27,3 +27,11 @@ def index(request):
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
+
+from django.views import generic
+
+class hospitalListView(generic.ListView):
+    model = hospital
+
+class hospitalDetailView(generic.DetailView):
+    model = hospital    

@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Hospital List</h1>
+  {% if hospital_list %}
+  <ul>
+    {% for hosp in hospital_list %}
+      <li>
+        <a href="{{ hosp.get_absolute_url }}">{{ hosp.hospname }}</a> 
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no books in the library.</p>
+  {% endif %}       
+{% endblock %}
