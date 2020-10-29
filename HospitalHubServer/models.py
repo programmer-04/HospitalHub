@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-from django.db import models
-
-# Create your models here.
-=======
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
 #   * Rearrange models' order
@@ -11,8 +6,6 @@ from django.db import models
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-#from django.http import HttpResponseRedirect
-from django.urls import reverse
 
 
 class Amb(models.Model):
@@ -74,7 +67,7 @@ class Hospphoneno(models.Model):
         unique_together = (('hospid', 'hospphoneno'),)
 
 
-class Hosppincodemodel(models.Model):
+class Hosppincode(models.Model):
     pincode = models.ForeignKey('Hospital', models.DO_NOTHING, db_column='Pincode', blank=True, null=True)  # Field name made lowercase.
     hospcity = models.CharField(db_column='HospCity', max_length=25, blank=True, null=True)  # Field name made lowercase.
     hospcountry = models.CharField(db_column='HospCountry', max_length=25, blank=True, null=True)  # Field name made lowercase.
@@ -84,7 +77,7 @@ class Hosppincodemodel(models.Model):
         db_table = 'HospPincode'
 
 
-class hospital(models.Model):
+class Hospital(models.Model):
     hospid = models.IntegerField(db_column='HospID', primary_key=True)  # Field name made lowercase.
     hospname = models.CharField(db_column='HospName', max_length=100, blank=True, null=True)  # Field name made lowercase.
     hospbuilding = models.CharField(db_column='HospBuilding', max_length=25, blank=True, null=True)  # Field name made lowercase.
@@ -98,11 +91,6 @@ class hospital(models.Model):
         managed = False
         db_table = 'Hospital'
 
-    def __str__(self):
-        return self.hospname
-
-    def get_absolute_url(self):
-        return reverse('hospital-detail', args=[str(self.hospid)])
 
 class User(models.Model):
     userid = models.IntegerField(db_column='UserID', primary_key=True)  # Field name made lowercase.
@@ -149,4 +137,3 @@ class Vehicletype(models.Model):
     class Meta:
         managed = False
         db_table = 'VehicleType'
->>>>>>> 97969be225cfb49aa6da4c5e428ba1c8b9fd53dd

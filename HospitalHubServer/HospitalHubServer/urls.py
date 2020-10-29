@@ -1,7 +1,11 @@
 """HospitalHubServer URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
+<<<<<<< HEAD
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
+=======
+    https://docs.djangoproject.com/en/3.1/topics/http/urls/
+>>>>>>> 97969be225cfb49aa6da4c5e428ba1c8b9fd53dd
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -14,6 +18,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+<<<<<<< HEAD
 from django.urls import path,include
 
 urlpatterns = [
@@ -24,3 +29,27 @@ urlpatterns = [
 
 
 
+=======
+from django.urls import path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+# Use include() to add paths from the catalog application 
+from django.urls import include
+
+urlpatterns += [
+    path('MyHub/', include('MyHub.urls')),
+]
+#Add URL maps to redirect the base URL to our application
+from django.views.generic import RedirectView
+urlpatterns += [
+    path('', RedirectView.as_view(url='MyHub/', permanent=True)),
+]
+
+# Use static() to add url mapping to serve static files during development (only)
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+>>>>>>> 97969be225cfb49aa6da4c5e428ba1c8b9fd53dd
