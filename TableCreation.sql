@@ -12,9 +12,9 @@ create table User(UserID int primary key, UserEmailID varchar(25) not null uniqu
 create table UserGender(GenderID int primary key, foreign key(GenderID) references User(UserGenderID), GenderName varchar(25));
 create table UserComplaint(UserID int, UserComplaintID int, foreign key(UserID) references User(UserID), primary key(UserID, UserComplaintID), UserComplaintDate date, UserComplaint varchar(100));
 
-create Doctor(DoctorID int primary key, DoctorFirstName varchar(100), DoctorLastName varchar(100));
-create DoctorSpeciality(DoctorID int, DoctorSpeciality varchar(100), primary key(DoctorID, DoctorSpeciality), foreign key(DoctorID) references Doctor(DoctorID));
-create DoctorEdu(DoctorID int, DoctorDegree varchar(25), DoctorUni varchar(25), primary key(DoctorID, DoctorDegree), foreign key(DoctorID) references Doctor(DoctorID));
+create table Doctor(DoctorID int primary key, DoctorFirstName varchar(100), DoctorLastName varchar(100));
+create table DoctorSpeciality(DoctorID int, DoctorSpeciality varchar(100), primary key(DoctorID, DoctorSpeciality), foreign key(DoctorID) references Doctor(DoctorID));
+create table DoctorEdu(DoctorID int, DoctorDegree varchar(25), DoctorUni varchar(25), primary key(DoctorID, DoctorDegree), foreign key(DoctorID) references Doctor(DoctorID));
 
 select * from Hospital;
 -- Your code here!
