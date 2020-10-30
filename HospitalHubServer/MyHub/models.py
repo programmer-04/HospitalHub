@@ -32,7 +32,7 @@ class Doctor(models.Model):
         return reverse('doctor-detail', args=[str(self.doctorid)])
 
 class Doctoredu(models.Model):
-    doctorid = models.OneToOneField(Doctor, models.DO_NOTHING, db_column='DoctorID', primary_key=True)  # Field name made lowercase.
+    doctorid = models.ForeignKey(Doctor, models.DO_NOTHING, db_column='DoctorID', primary_key=True)  # Field name made lowercase.
     doctordegree = models.CharField(db_column='DoctorDegree', max_length=25)  # Field name made lowercase.
     doctoruni = models.CharField(db_column='DoctorUni', max_length=25, blank=True, null=True)  # Field name made lowercase.
 

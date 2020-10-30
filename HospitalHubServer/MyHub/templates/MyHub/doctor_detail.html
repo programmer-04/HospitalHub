@@ -2,11 +2,16 @@
 
 {% block content %}
   <h1>Name: {{ doctor.doctorfirstname }} {{ doctor.doctorlastname }}</h1>
-
+  
  <!-- <p><strong>Author:</strong> <a href="">{{ book.author }}</a></p>--> <!-- author detail link not yet defined -->
   <!--<p><strong>Education:</strong> {{ doctor.hospbeds }}</p>
-  <p><strong>Availbeds:</strong> {{ doctor.hospavailbed }}</p> -->
-  
+  <p><strong>Availbeds:</strong> {{ doctor.hospavailbed }}</p> --> 
+  <p>{{ doctor.doctorfirstname }} is a </p><br>  
+  {% for degree in doctor.Doctoredu_set.all %}
+  <hr>
+  <p><strong>{{degree.doctordegree}}</strong></p>
+  </p>
+  {% endfor %}
 
 <!-- <div style="margin-left:20px;margin-top:20px">
     <h4>Copies</h4>
