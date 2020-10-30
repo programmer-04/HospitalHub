@@ -35,3 +35,9 @@ class hospitalListView(generic.ListView):
 
 class hospitalDetailView(generic.DetailView):
     model = hospital    
+
+class doctorListView(generic.ListView):
+    model = Doctor    
+
+class doctorDetailView(generic.DetailView):
+    model = Doctor 
