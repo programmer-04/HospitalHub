@@ -39,4 +39,13 @@ class hospitalListView(generic.ListView):
 
 class hospitalDetailView(generic.DetailView):
     model = hospital    
+<<<<<<< HEAD
 >>>>>>> 97969be225cfb49aa6da4c5e428ba1c8b9fd53dd
+=======
+
+class doctorListView(generic.ListView):
+    model = Doctor    
+
+class doctorDetailView(generic.DetailView):
+    model = Doctor 
+>>>>>>> 3a6dc714066642d44e9ecf7fa1f23b462ed79b70

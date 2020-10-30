@@ -52,4 +52,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+<<<<<<< HEAD
 >>>>>>> 97969be225cfb49aa6da4c5e428ba1c8b9fd53dd
+=======
+
+#Add Django site authentication urls (for login, logout, password management)
+
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
+]
+>>>>>>> 3a6dc714066642d44e9ecf7fa1f23b462ed79b70

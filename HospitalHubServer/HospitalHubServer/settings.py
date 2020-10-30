@@ -49,10 +49,14 @@ SECRET_KEY = 'wv^sbd434msg)&z+jg+$11**g1n1695*+ozwfqg$xk8h)sk_x_'
 DEBUG = True
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ALLOWED_HOSTS = []
 =======
 ALLOWED_HOSTS = ['0.0.0.0']
 >>>>>>> 97969be225cfb49aa6da4c5e428ba1c8b9fd53dd
+=======
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
+>>>>>>> 3a6dc714066642d44e9ecf7fa1f23b462ed79b70
 
 
 # Application definition
@@ -89,8 +93,12 @@ import os
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': [os.path.join(BASE_DIR, 'templates'),],
 >>>>>>> 97969be225cfb49aa6da4c5e428ba1c8b9fd53dd
+=======
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+>>>>>>> 3a6dc714066642d44e9ecf7fa1f23b462ed79b70
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,6 +110,9 @@ TEMPLATES = [
         },
     },
 ]
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'HospitalHubServer.wsgi.application'
 

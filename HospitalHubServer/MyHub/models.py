@@ -33,6 +33,8 @@ class Doctor(models.Model):
         managed = False
         db_table = 'Doctor'
 
+    def get_absolute_url(self):
+        return reverse('doctor-detail', args=[str(self.doctorid)])
 
 class Doctoredu(models.Model):
     doctorid = models.OneToOneField(Doctor, models.DO_NOTHING, db_column='DoctorID', primary_key=True)  # Field name made lowercase.
