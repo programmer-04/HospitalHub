@@ -2,8 +2,8 @@ from .models import Amb, Doctor, Doctoredu, Doctorspeciality, Hosppaymode, Hospp
 from django.contrib import admin
 
 admin.site.register(Amb)
-admin.site.register(Doctor)
-admin.site.register(Doctoredu)
+#admin.site.register(Doctor)
+#admin.site.register(Doctoredu)
 admin.site.register(Doctorspeciality)
 admin.site.register(Hosppaymode)
 admin.site.register(Hospphoneno)
@@ -13,3 +13,10 @@ admin.site.register(User)
 admin.site.register(Usercomplaint)
 admin.site.register(Usergender)
 admin.site.register(Vehicletype)
+
+class DoctorEduInline(admin.TabularInline):
+    model = Doctoredu
+
+class DoctorAdmin(admin.ModelAdmin):
+    inlines = [DoctorEduInline]
+admin.site.register(Doctor, DoctorAdmin)
