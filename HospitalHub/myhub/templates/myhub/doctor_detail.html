@@ -1,0 +1,37 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Name: {{ doctor.first_name }} {{ doctor.last_name }}</h1>
+    <br><br>
+  <p>Education:  {{ doctor.edu.all|join:"; " }}</p>
+  <p>Doctor : {{ doctor.hospital.all|join:", "}}</p>
+  <p>{{ doctor.review_set.count }} reviews ({{ doctor.average_rating | floatformat }} average rating)</p>
+  <br>
+  <br>
+  {% if doctor.review_set.all %}
+  <div>
+    {% for review in doctor.review_set.all %}
+    <div>
+        <em>{{ review.comment }}</em>
+        <h6>Rated {{ review.rating }} of 5 by {{ review.user_name }}</h6>
+        <h5><a href="{{ review.get_absolute_url }}">
+        Read more
+        </a></h5>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No reviews for this doctor yet</p>
+{% endif %}
+
+<h3>Add your review</h3>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'add_review' doctor.id %}"  method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add" />
+</form>
+
+{% endblock %}
+
