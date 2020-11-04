@@ -13,6 +13,7 @@ urlpatterns = [
     path('doctors/<int:doctor_id>/add_review', views.add_review, name='add_review'),
     url(r'^review/user/(?P<username>\w+)/$', views.user_review_list, name='user_review_list'),
     url(r'^review/user/$', views.user_review_list, name='user_review_list'),
+    url('search', views.search, name="search")
 ]
 '''urlpatterns += [   
     url(r'^doctors/(?P<doctor_id>[0-9]+)/add_review/$', views.add_review, name='add_review'),

@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -81,3 +82,22 @@ def user_review_list(request, username=None):
     latest_review_list = review.objects.filter(user_name=username).order_by('-pub_date')
     context = {'review_list':latest_review_list, 'username':username}
     return render(request, 'myhub/user_review_list.html', context)
+
+from itertools import chain
+from functools import reduce
+import operator
+from django.db.models import Q
+def search(request):        
+    if request.method == 'GET': # this will be GET now      
+        rawname =  request.GET.get('search') # do some research what it does       
+        names = rawname.split()
+        print(names)
+        '''firstnamematch = doctor.objects.filter(first_name__icontains=name for name in names)
+        lastnamematch = doctor.objects.filter(last_name__icontains=name)
+        status=list(chain(firstnamematch, lastnamematch))
+        '''
+        qset1 =  reduce(operator.__or__, [Q(first_name__icontains=name) | Q(last_name__icontains=name) for name in names])
+        status = doctor.objects.filter(qset1).distinct()
+        # doctor.objects.filter(last_name__icontains=name) # filter returns a list so you might consider skip except part
+        return render(request,"myhub/doctor_list.html",{"doctor_list":status})
+    return render(request,"myhub/doctor_list.html",{})

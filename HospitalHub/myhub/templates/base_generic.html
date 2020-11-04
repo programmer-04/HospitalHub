@@ -1,7 +1,7 @@
-<!DOCTYPE html>
++<!DOCTYPE html>
 <html lang="en">
 <head>
-  {% block title %}<title>Local Library</title>{% endblock %}
+  {% block title %}<title>HospitalHub</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -18,6 +18,9 @@
           <li><a href="{% url 'index' %}">Home</a></li>
           <li><a href="{% url 'hospitals' %}">All Hospitals</a></li>
           <li><a href="{% url 'doctors' %}">All Doctors</a></li>
+          <form name="searchform" method="GET" action="{% url 'search' %}"> 
+              <input type="text" name="search" placeholder="Search" />
+          </form> 
           {% if user.is_authenticated %}
           <li><a href="{% url 'user_review_list' user.username %}">User: {{ user.get_username }}</a></li>
           <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
