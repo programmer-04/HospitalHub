@@ -1,13 +1,23 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>HospitalHub Home</h1>
-  <p>Welcome to <em>HospitalHub!</em></p>
-  <h2>Dynamic content</h2>
-  <p>We have the following counts:</p>
-  <ul>
+
+
+        
+  
+                <!--<h1>HospitalHub Home</h1>-->
+                <p style="font-size: 80px;">Welcome to <em>HospitalHub!</em></p>
+              
+               <!-- <h2>Dynamic content</h2>-->
+                <p style="font-size: 30px">We have the following counts:</p>
+  <ul style="font-size: 20px">
     <li><strong>Hospitals:</strong> {{ num_hospitals }}</li>
     <li><strong>Doctors:</strong> {{ num_doctors }}</li>
+    
     <!--<li><strong>Copies available:</strong> {{ num_instances_available }}</li>-->
   </ul>
+
+
+
+
 {% endblock %}
