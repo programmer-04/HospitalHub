@@ -3,10 +3,16 @@
 {% block content %}
   <h1>HospitalHub Home</h1>
   <p>Welcome to <em>HospitalHub!</em></p>
+  <form action="{% url 'search_hub'  %}"  method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add" />
+</form>
+
   <h2>Dynamic content</h2>
   <p>We have the following counts:</p>
   <ul>
-    <li><strong>Hospitals:</strong> {{ num_hospitalss }}</li>
+    <li><strong>Hospitals:</strong> {{ num_hospitals }}</li>
     <li><strong>Doctors:</strong> {{ num_doctors }}</li>
     <!--<li><strong>Copies available:</strong> {{ num_instances_available }}</li>-->
   </ul>
