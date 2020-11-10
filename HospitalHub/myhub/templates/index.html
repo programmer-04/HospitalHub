@@ -6,18 +6,34 @@
         
   
                 <!--<h1>HospitalHub Home</h1>-->
-                <p style="font-size: 80px;">Welcome to <em>HospitalHub!</em></p>
+                
               
                <!-- <h2>Dynamic content</h2>-->
-                <p style="font-size: 30px">We have the following counts:</p>
-  <ul style="font-size: 20px">
-    <li><strong>Hospitals:</strong> {{ num_hospitals }}</li>
-    <li><strong>Doctors:</strong> {{ num_doctors }}</li>
+   <p style="font-size: 30px;text-align: center;">We have the following counts:</p>
+ 
+    
+   
     
     <!--<li><strong>Copies available:</strong> {{ num_instances_available }}</li>-->
-  </ul>
+  
+
+  <div class="row">
+    <div class="col">
+    <div class="counter">
+      <i class="fa fa-hospital-o fa-2x" style='font-size:60px;'></i>
+<h1>{{num_hospitals}}</h1>
+ <p class="count-text ">Hospitals</p>
+</div>
+    </div>
 
 
-
+  <div class="col">
+  <div class="counter">
+<i class="fa fa-stethoscope fa-2x" style='font-size:60px;'></i>
+<h1>{{num_doctors}}</h1>
+<p class="count-text ">Doctors</p>
+</div>
+  </div>
+  </div>
 
 {% endblock %}
