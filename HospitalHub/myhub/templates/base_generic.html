@@ -1,10 +1,13 @@
+
+
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
    <!-- Add additional CSS in static file -->
-  {% load static %}
+
   <link rel="stylesheet" href="{% static 'myhub/style.css' %}">
-  
+
    {% block title %}<title>HospitalHub!</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -52,7 +55,9 @@
        
       </nav>
      {% endblock %}
+
       
+
       <div class="col-sm-10 ">{% block content %}{% endblock %}</div>
    
 
