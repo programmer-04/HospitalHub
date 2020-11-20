@@ -1,8 +1,9 @@
 .counter {
-    background-color:#50e764;
+    background-color:white;
     padding: 30px 30px;
     border-radius: 5px;
     text-align: center;
+    padding-left: 500px;
    
 }
 .count-title {
@@ -19,11 +20,12 @@
     margin-top: 10px;
     margin-bottom: 0;
     text-align: center;
+    font-weight: bolder;
 }
 
 .fa-2x {
     margin: 0 auto;
-    font-size: 60px;
+    font-size: 30px;
     float: none;
     display: table;
     color: #1a0a75;
@@ -40,7 +42,5 @@
   background-color: darkviolet;
 }
 
-.table{
-    background-color: #1a0a75;
-}
- 
+
+
