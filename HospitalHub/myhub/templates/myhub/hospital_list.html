@@ -1,15 +1,29 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1 style="text-align:left;font-size: 30px;">Hospital List</h1>
+ <p> <h1>Hospital List</h1></p>
   {% if hospital_list %}
-  <ul>
-    {% for hosp in hospital_list %}
-      <li>
-        <a href="{{ hosp.get_absolute_url }}">{{ hosp.name }}</a> 
-      </li>
+  
+  
+
+    <table class="table" style="border: none;">
+      <tbody>
+        {% for hosp in hospital_list %}
+        
+        <tr style="border: none;">
+     <td style="border: none;font-size:30px;"> {{ hosp.name }}</td>
+
+ <td style="border: none;">    
+        <button type="button">
+        <a href="{{ hosp.get_absolute_url }}">View Details</a>
+      </button>
+      </td>
+  </tr>
+   
     {% endfor %}
-  </ul>
+    </tbody>
+    </table>
+  
   {% else %}
     <p>No hospitals presently listed.</p>
   {% endif %}       
