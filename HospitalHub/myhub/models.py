@@ -53,10 +53,17 @@ class ambulance(models.Model):
      class Meta:
       unique_together  = (('key1', 'key2'),)
 
-     key1 = models.ForeignKey(doctor, on_delete=models.CASCADE,)
+     key1 = models.ForeignKey(hospital, on_delete=models.CASCADE,)
      key2 = models.IntegerField(primary_key =True)
      ambvehicletype =models.CharField(max_length=25, blank=True, null=True)
      vehiclecapacity =models.IntegerField(blank=True, null=True)
+     
+class  hospphoneno(models.Model):
+      class Meta:
+        unique_together  = (('key1', 'phonenumber'),)
+
+      key1 = models.ForeignKey(hospital, on_delete=models.CASCADE,)
+      phonenumber= models.CharField(max_length = 10, primary_key =True)
       
 class review(models.Model):
     RATING_CHOICES = (
@@ -77,3 +84,7 @@ class review(models.Model):
 
     def get_absolute_url(self):
         return reverse('reviews-detail', args=[str(self.id)])
+        
+ 
+        
+

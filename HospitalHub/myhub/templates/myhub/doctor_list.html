@@ -1,15 +1,31 @@
 {% extends "base_generic.html" %}
-
+{% load static %}
+<link rel="stylesheet" href="{% static 'myhub/style.css' %}">
 {% block content %}
-  <h1>Doctor List</h1>
+ <p> <h1>Doctor List</h1></p>
   {% if doctor_list %}
-  <ul>
-    {% for doc in doctor_list %}
-      <li>
-        <a href="{{ doc.get_absolute_url }}">{{ doc.first_name }} {{doc.last_name}}</a>
-      </li>
-    {% endfor %}
-  </ul>
+  
+    
+      <table class="table" style="border: none;">
+        <tbody>
+          {% for doc in doctor_list %}
+          
+          <tr style="border: none;">
+       <td style=" border: none; font-size:30px;"> {{ doc.first_name }} {{doc.last_name}}</td>
+
+   <td style="border: none;">    
+          <button type="button">
+          <a href="{{ doc.get_absolute_url }}">View Details</a>
+        </button>
+        </td>
+    </tr>
+     
+      {% endfor %}
+      </tbody>
+      </table>
+      
+   
+  
   {% else %}
     <p>No doctors presently available.</p>
   {% endif %}       

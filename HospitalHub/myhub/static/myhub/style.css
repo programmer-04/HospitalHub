@@ -1,0 +1,46 @@
+.counter {
+    background-color:white;
+    padding: 30px 30px;
+    border-radius: 5px;
+    text-align: center;
+    padding-left: 500px;
+   
+}
+.count-title {
+    font-size: 60px;
+    font-weight:bold;
+    margin-top: 10px;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.count-text {
+    font-size: 30px;
+    font-weight: normal;
+    margin-top: 10px;
+    margin-bottom: 0;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.fa-2x {
+    margin: 0 auto;
+    font-size: 30px;
+    float: none;
+    display: table;
+    color: #1a0a75;
+}
+    
+    .navbar-nav > li{
+  padding-left:10px;
+  padding-right:10px;
+  padding-top: 4px;
+  
+  font-size: larger;
+}
+.navbar-custom{
+  background-color: darkviolet;
+}
+
+
+

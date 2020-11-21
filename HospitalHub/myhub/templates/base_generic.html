@@ -1,34 +1,65 @@
+
+
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
-  {% block title %}<title>Local Library</title>{% endblock %}
+   <!-- Add additional CSS in static file -->
+
+  <link rel="stylesheet" href="{% static 'myhub/style.css' %}">
+
+   {% block title %}<title>HospitalHub!</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <!-- Add additional CSS in static file -->
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+ 
+  
 </head>
 <body>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-2">
+  
       {% block sidebar %}
-        <ul class="sidebar-nav">
-          <li><a href="{% url 'index' %}">Home</a></li>
-          <li><a href="{% url 'hospitals' %}">All Hospitals</a></li>
-          <li><a href="{% url 'doctors' %}">All Doctors</a></li>
+       
+          <nav class="navbar navbar-custom navbar-expand-md navbar-dark">
+            
+          
+        
+        <ul class="navbar-nav">
+          <li class="nav-item">
+          <p style="font-size: x-large;color: black;font-weight: bold;">HOSPITALHUB!</p>
+          </li>  
+          <li class="nav-item">
+            <a style="color: black;"href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+          <a style="color: black;"href="{% url 'hospitals' %}">All Hospitals</a>
+          </li>
+          <li class="nav-item"> 
+          <a style="color: black;"href="{% url 'doctors' %}">All Doctors</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto px-2">
+            <form name="searchform" method="GET" action="{% url 'search' %}"> 
+              <input type="text" name="search" placeholder="Search" />
+          </form> 
+          
+           
           {% if user.is_authenticated %}
-          <li><a href="{% url 'user_review_list' user.username %}">User: {{ user.get_username }}</a></li>
-          <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
+          <li class="nav-item"><a style="color: black;" href="{% url 'user_review_list' user.username %}">User: {{ user.get_username }}</a></li>
+          <li><a style="color: black;"href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
           {% else %}
-          <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
+          <li class="nav-item"><a style="color: black;"href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
           {% endif %}
         </ul>
+     
+       
+      </nav>
      {% endblock %}
-      </div>
+
+      
+
       <div class="col-sm-10 ">{% block content %}{% endblock %}</div>
-    </div>
-  </div>
+   
+
 </body>
 </html>

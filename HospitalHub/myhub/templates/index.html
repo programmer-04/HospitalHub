@@ -1,13 +1,30 @@
 {% extends "base_generic.html" %}
+{% load static %}
 
 {% block content %}
-  <h1>HospitalHub Home</h1>
-  <p>Welcome to <em>HospitalHub!</em></p>
-  <h2>Dynamic content</h2>
-  <p>We have the following counts:</p>
-  <ul>
-    <li><strong>Hospitals:</strong> {{ num_hospitalss }}</li>
-    <li><strong>Doctors:</strong> {{ num_doctors }}</li>
-    <!--<li><strong>Copies available:</strong> {{ num_instances_available }}</li>-->
-  </ul>
+<img src="{%static 'myhub/images/review.png'%}" style="width: 1860px;height: 750px;" >
+
+
+  
+   <p style="font-size: 50px;text-align: center;">Counts</p>
+ 
+  <div class="row">
+    <div class="row">
+    <div class="counter">
+      <i class="fa fa-hospital-o fa-2x" style='font-size:90px;'></i>
+<p><h1 style="font-weight: bolder;">{{num_hospitals}}</h1></p>
+ <p class="count-text ">Hospitals</p>
+</div>
+    </div>
+
+
+  <div class="row">
+  <div class="counter">
+<i class="fa fa-stethoscope fa-2x" style='font-size:90px;'></i>
+<p><h1 style="font-weight: bolder;">{{num_doctors}}</h1></p>
+<p class="count-text ">Doctors</p>
+</div>
+  </div>
+  </div>
+
 {% endblock %}
