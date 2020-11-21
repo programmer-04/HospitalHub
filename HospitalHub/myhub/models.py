@@ -17,6 +17,7 @@ class doctor(models.Model):
     last_name = models.CharField(max_length=100, blank=True, null=True)  # Field name made lowercase.
     edu = models.ManyToManyField(doctoredu, help_text="Select an education")
     hospital = models.ManyToManyField('hospital', help_text="Select hospital(s):")
+    profile= models.ImageField(upload_to = 'media',default ='default.jpg') 
 
     def get_absolute_url(self):
         return reverse('doctors-detail', args=[str(self.id)])
@@ -48,6 +49,15 @@ class hospital(models.Model):
     def get_absolute_url(self):
         return reverse('hospitals-detail', args=[str(self.id)])
 
+class ambulance(models.Model):
+     class Meta:
+      unique_together  = (('key1', 'key2'),)
+
+     key1 = models.ForeignKey(doctor, on_delete=models.CASCADE,)
+     key2 = models.IntegerField(primary_key =True)
+     ambvehicletype =models.CharField(max_length=25, blank=True, null=True)
+     vehiclecapacity =models.IntegerField(blank=True, null=True)
+      
 class review(models.Model):
     RATING_CHOICES = (
         (1, '1'),

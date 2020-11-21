@@ -3,9 +3,20 @@
 {% block content %}
   <h1>Name: {{ doctor.first_name }} {{ doctor.last_name }}</h1>
     <br><br>
+  
+{% ifequal doctor.profile None %}
+
+    <img src="default" />
+{% else %}
+    <img src="{{ doctor.profile.url}}">
+{% endifequal %}
   <p>Education:  {{ doctor.edu.all|join:"; " }}</p>
-  <p>Doctor : {{ doctor.hospital.all|join:", "}}</p>
+  <p>Hospital: {{ doctor.hospital.all|join:", "}}</p>
   <p>{{ doctor.review_set.count }} reviews ({{ doctor.average_rating | floatformat }} average rating)</p>
+ 
+  
+
+  
   <br>
   <br>
   {% if doctor.review_set.all %}
