@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 
 # Create your views here.
-from .models import doctor, doctoredu, hospital, review,ambulance
+from .models import doctor, doctoredu, hospital, hospital_review, doctor_review, ambulance
 
 def index(request):
     """View function for home page of site."""
@@ -21,6 +21,8 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 from django.views import generic
+from .forms import DoctorReviewForm, HospitalReviewForm
+from django.shortcuts import get_object_or_404
 
 class DoctorListView(generic.ListView):
     model = doctor
@@ -28,26 +30,33 @@ class DoctorListView(generic.ListView):
 class HospitalListView(generic.ListView):
     model = hospital
 
-class HospitalDetailView(generic.DetailView):
-    model = hospital
-
-from .forms import ReviewForm
-from django.shortcuts import get_object_or_404
+def HospitalDetailView(request, hospital_id):
+    Hospital = get_object_or_404(hospital, pk=hospital_id)
+    form = DoctorReviewForm()
+    return render(request, 'myhub/hospital_detail.html', {'hospital': Hospital, 'form': form})
 
 def DoctorDetailView(request, doctor_id):
     Doctor = get_object_or_404(doctor, pk=doctor_id)
-    form = ReviewForm()
+    form = DoctorReviewForm()
     return render(request, 'myhub/doctor_detail.html', {'doctor': Doctor, 'form': form})
 
 
-class ReviewListView(generic.ListView):
-    model = review
+class DoctorReviewListView(generic.ListView):
+    model = doctor_review
     #template_name = '/myhub/review_list.html'  # Specify your own template name/location
-    queryset = review.objects.order_by('-pub_date')[:9]
+    queryset = doctor_review.objects.order_by('-pub_date')[:9]
+
+class HospitalReviewListView(generic.ListView):
+    model = hospital_review
+    #template_name = '/myhub/review_list.html'  # Specify your own template name/location
+    queryset = hospital_review.objects.order_by('-pub_date')[:9]
+
+class DoctorReviewDetailView(generic.DetailView):
+    model=doctor_review
 
 
-class ReviewDetailView(generic.DetailView):
-    model=review
+class HospitalReviewDetailView(generic.DetailView):
+    model=hospital_review
 
 import datetime
 from django.http import HttpResponseRedirect
@@ -55,15 +64,15 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 @login_required
-def add_review(request, doctor_id):
+def doctor_add_review(request, doctor_id):
     Doctor = get_object_or_404(doctor, pk=doctor_id)
-    form = ReviewForm(request.POST)
+    form = DoctorReviewForm(request.POST)
     if form.is_valid():
         rating = form.cleaned_data['rating']
         comment = form.cleaned_data['comment']
         #user_name = form.cleaned_data['user_name']
         user_name = request.user.username
-        Review = review()
+        Review = doctor_review()
         Review.doctor = Doctor
         Review.user_name = user_name
         Review.rating = rating
@@ -76,6 +85,29 @@ def add_review(request, doctor_id):
         return HttpResponseRedirect(reverse('doctors-detail', args=(Doctor.id,)))
 
     return render(request, 'myhub/doctor_detail.html', {'doctor': Doctor, 'form': form})
+
+@login_required
+def hospital_add_review(request, hospital_id):
+    Hospital = get_object_or_404(hospital, pk=hospital_id)
+    form = HospitalReviewForm(request.POST)
+    if form.is_valid():
+        rating = form.cleaned_data['rating']
+        comment = form.cleaned_data['comment']
+        #user_name = form.cleaned_data['user_name']
+        user_name = request.user.username
+        Review = hospital_review()
+        Review.hospital = Hospital
+        Review.user_name = user_name
+        Review.rating = rating
+        Review.comment = comment
+        Review.pub_date = datetime.datetime.now()
+        Review.save()
+        # Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+        return HttpResponseRedirect(reverse('hospitals-detail', args=(Hospital.id,)))
+
+    return render(request, 'myhub/hospital_detail.html', {'hospital': Hospital, 'form': form})
 
 def user_review_list(request, username=None):
     if not username:
@@ -98,10 +130,12 @@ def search(request):
         status=list(chain(firstnamematch, lastnamematch))
         '''
         qset1 =  reduce(operator.__or__, [Q(first_name__icontains=name) | Q(last_name__icontains=name) for name in names])
-        status = doctor.objects.filter(qset1).distinct()
+        doctor_list = doctor.objects.filter(qset1).distinct()
+        qset2 = reduce(operator.__or__, [Q(name__icontains=hospname) for hospname in names])
+        hospital_list = hospital.objects.filter(qset2).distinct()
         # doctor.objects.filter(last_name__icontains=name) # filter returns a list so you might consider skip except part
-        return render(request,"myhub/doctor_list.html",{"doctor_list":status})
-    return render(request,"myhub/doctor_list.html",{})
+        return render(request,"myhub/search_list.html",{"doctor_list":doctor_list, "hospital_list":hospital_list})
+    return render(request,"myhub/search_list.html",{})
     
 #class ambulanceListView(generic.ListView):
      # model = ambulance

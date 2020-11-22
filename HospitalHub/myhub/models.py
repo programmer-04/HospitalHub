@@ -12,7 +12,6 @@ class doctoredu(models.Model):
         return self.degree + "," + self.uni
 
 class doctor(models.Model):
-    id = models.IntegerField(primary_key=True)  # Field name made lowercase.
     first_name = models.CharField(max_length=100, blank=True, null=True)  # Field name made lowercase.
     last_name = models.CharField(max_length=100, blank=True, null=True)  # Field name made lowercase.
     edu = models.ManyToManyField(doctoredu, help_text="Select an education")
@@ -27,7 +26,7 @@ class doctor(models.Model):
         return f'{self.last_name}, {self.first_name}'
 
     def average_rating(self):
-        all_ratings = map(lambda x: x.rating, self.review_set.all())
+        all_ratings = map(lambda x: x.rating, self.doctor_review_set.all())
         return np.mean(list(all_ratings))
 
     class Meta:
@@ -42,12 +41,17 @@ class hospital(models.Model):
     pincode = models.IntegerField(unique=True, blank=True, null=True)  # Field name made lowercase.
     beds = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
     hospambid = models.IntegerField(unique=True, blank=True, null=True)  # Field name made lowercase.
+    profile= models.ImageField(upload_to = 'media',default ='default.jpg') 
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('hospitals-detail', args=[str(self.id)])
+
+    def average_rating(self):
+        all_ratings = map(lambda x: x.rating, self.hospital_review_set.all())
+        return np.mean(list(all_ratings))
 
 class ambulance(models.Model):
      class Meta:
@@ -65,7 +69,7 @@ class  hospphoneno(models.Model):
       key1 = models.ForeignKey(hospital, on_delete=models.CASCADE,)
       phonenumber= models.CharField(max_length = 10, primary_key =True)
       
-class review(models.Model):
+class doctor_review(models.Model):
     RATING_CHOICES = (
         (1, '1'),
         (2, '2'),
@@ -83,7 +87,27 @@ class review(models.Model):
         return self.user_name
 
     def get_absolute_url(self):
-        return reverse('reviews-detail', args=[str(self.id)])
+        return reverse('doctors-reviews-detail', args=[str(self.id)])
+
+class hospital_review(models.Model):
+    RATING_CHOICES = (
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+    )
+    hospital = models.ForeignKey(hospital, on_delete=models.CASCADE,)
+    pub_date = models.DateTimeField('date published')
+    user_name = models.CharField(max_length=100)
+    comment = models.CharField(max_length=200)
+    rating = models.IntegerField(choices=RATING_CHOICES)
+
+    def __str__(self):
+        return self.user_name
+
+    def get_absolute_url(self):
+        return reverse('hospitals-reviews-detail', args=[str(self.id)])
         
  
         

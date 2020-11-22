@@ -30,6 +30,36 @@
       <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>
     {% endfor %}
   </div>-->
+  {% if hospital.hospital_review_set.all %}
 
+  <p>{{ hospital.hospital_review_set.count }} reviews ({{ hospital.average_rating | floatformat }} average rating)</p>
+ 
+  
+
+  
+  <br>
+  <br>
+  <div>
+    {% for review in hospital.hospital_review_set.all %}
+    <div>
+        <em>{{ review.comment }}</em>
+        <h6>Rated {{ review.rating }} of 5 by {{ review.user_name }}</h6>
+        <h5><a href="{{ review.get_absolute_url }}">
+        Read more
+        </a></h5>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No reviews for this hospital yet</p>
+{% endif %}
+  <h3>Add your review</h3>
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+  
+  <form action="{% url 'hospital_add_review' hospital.id %}"  method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Add" />
+  </form>
  
 {% endblock %}
