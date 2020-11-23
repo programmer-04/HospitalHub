@@ -84,7 +84,4 @@ class review(models.Model):
 
     def get_absolute_url(self):
         return reverse('reviews-detail', args=[str(self.id)])
-        
- 
-        
 
