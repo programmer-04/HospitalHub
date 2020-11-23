@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myhub',
-    'registration'
+    #'registration'
+    'django.contrib.sites',
     ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,5 +129,5 @@ STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
 
 
 #LOGIN_REDIRECT_URL = '/myhub/review/user'
-REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
-ACCOUNT_ACTIVATION_DAYS = 7
+#REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
+#ACCOUNT_ACTIVATION_DAYS = 7

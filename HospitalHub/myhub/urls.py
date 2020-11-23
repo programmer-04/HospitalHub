@@ -6,14 +6,20 @@ urlpatterns = [
     path('doctors/', views.DoctorListView.as_view(), name='doctors'),
     path('hospitals/', views.HospitalListView.as_view(), name='hospitals'),
     path('doctors/<int:doctor_id>', views.DoctorDetailView, name='doctors-detail'),
-    path('hospitals/<int:pk>', views.HospitalDetailView.as_view(), name='hospitals-detail'),
-    path('reviews/<int:pk>', views.ReviewDetailView.as_view(), name='reviews-detail'),
-    path('reviews/', views.ReviewListView.as_view(), name='reviews',),
+    path('hospitals/<int:hospital_id>', views.HospitalDetailView, name='hospitals-detail'),
+    path('doctors/reviews/<int:pk>', views.DoctorReviewDetailView.as_view(), name='doctors-reviews-detail'),
+    path('hospitals/reviews/<int:pk>', views.HospitalReviewDetailView.as_view(), name='hospitals-reviews-detail'),
+   # path('ambulance/', views.ambulanceListView.as_view(), name='doctors'),
+    path('doctors/reviews/', views.DoctorReviewListView.as_view()),
+    path('hospitals/reviews/', views.HospitalReviewListView.as_view()),
     #path(r'^doctors/(?P<doctor_id>[0-9]+)/add_review/$', views.add_review, name='add_review')
-    path('doctors/<int:doctor_id>/add_review', views.add_review, name='add_review'),
+    path('doctors/<int:doctor_id>/add_review', views.doctor_add_review, name='doctor_add_review'),
+    path('hospitals/<int:hospital_id>/add_review', views.hospital_add_review, name='hospital_add_review'),
+
     url(r'^review/user/(?P<username>\w+)/$', views.user_review_list, name='user_review_list'),
     url(r'^review/user/$', views.user_review_list, name='user_review_list'),
-    url('search', views.search, name="search")
+    url('search', views.search, name="search"),
+    path("register/", views.register, name="register"),
 ]
 '''urlpatterns += [   
     url(r'^doctors/(?P<doctor_id>[0-9]+)/add_review/$', views.add_review, name='add_review'),

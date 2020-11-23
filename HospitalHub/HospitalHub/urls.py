@@ -46,6 +46,16 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
-    url(r'^accounts/', include('registration.backends.default.urls')),
+    #url(r'^accounts/', include('registration.backends.default.urls')),
 
+]
+
+from django.contrib.auth.views import LoginView
+from myhub.forms import CustomAuthForm
+urlpatterns += [
+    url('login/', 
+        LoginView.as_view(
+        ), 
+        name="login",kwargs={"authentication_form":CustomAuthForm}
+    ),
 ]
