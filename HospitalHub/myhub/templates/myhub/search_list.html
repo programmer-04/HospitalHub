@@ -3,6 +3,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'myhub/style.css' %}">
 {% block content %}
+<body style="background: linear-gradient(to right,white,blue);">
  <p> <h1>Doctor List</h1></p>
   {% if doctor_list %}
   
@@ -57,4 +58,5 @@
   {% else %}
     <p>No hospitals presently listed.</p>
   {% endif %}
+</body>
 {% endblock %}
