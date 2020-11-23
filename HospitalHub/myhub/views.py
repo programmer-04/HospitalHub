@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 
 # Create your views here.
-from .models import doctor, doctoredu, hospital, hospital_review, doctor_review, ambulance
+from .models import doctor, doctoredu, hospital, hospital_review, doctor_review, ambulance, doctoruni
 
 def index(request):
     """View function for home page of site."""
@@ -154,3 +154,151 @@ def register(request):
                 return render(request = request, template_name = "registration.html",context={"form":form})
     form = UserCreationForm
     return render(request = request, template_name = "registration.html",context={"form":form})
+
+from .forms import EnlistDoctorForm, EnlistHospitalForm, AddDegreeForm, AddUniForm
+from django.contrib import messages
+
+def enlist(request):
+    '''if request.method == "POST":
+        if 'doctorform' in request.POST:
+            form = EnlistDoctorForm(request.POST, prefix='doctor')
+            if form.is_valid():
+                first_name = form.cleaned_data['first_name']
+                last_name = form.cleaned_data['last_name']
+                hospital = form.cleaned_data['hospital']
+                profile = form.cleaned_data['profile']
+                edu = form.cleaned_data['edu']
+                Doctor = doctor()
+                Doctor.first_name = first_name
+                Doctor.last_name = last_name
+                Doctor.profile = profile
+                Doctor.save()
+                Doctor.edu.set(edu)
+                Doctor.hospital.set(hospital)
+                return HttpResponseRedirect(reverse('doctors-detail', args=(Doctor.id,)))
+            else:
+                for field, items in form.errors.items():
+                    for item in items:
+                        messages.error(request, '{}: {}'.format(field, item))
+                return render(request = request, template_name = "enlist.html",context={"form":form})
+        elif 'hospitalform' in request.POST:
+            formhospital = EnlistHospitalForm(request.POST, prefix='hospital')   
+            if formhospital.is_valid():
+                name = formhospital.cleaned_data['name']
+                desc = formhospital.cleaned_data['desc']
+                building = formhospital.cleaned_data['building']
+                street = formhospital.cleaned_data['street']
+                pincode = formhospital.cleaned_data['pincode']
+                beds = formhospital.cleaned_data['beds']
+                profile = formhospital.cleaned_data['profile']
+                Hospital = hospital()
+                Hospital.name = name
+                Hospital.desc = desc
+                Hospital.building = building
+                Hospital.street = street
+                Hospital.pincode = pincode
+                Hospital.beds = beds
+                Hospital.profile = profile
+                Hospital.save()
+                return HttpResponseRedirect(reverse('hospitals-detail', args=(Hospital.id,)))
+            else:
+                for field, items in formhospital.errors.items():
+                    for item in items:
+                        messages.error(request, '{}: {}'.format(field, item))
+                return render(request = request, template_name = "enlist.html",context={"formhospital":formhospital})
+    form = EnlistDoctorForm()
+    formhospital = EnlistHospitalForm'''
+    return render(request = request, template_name = "enlist.html")
+
+def enlistdoctor(request):
+    if request.method == "POST":
+        form = EnlistDoctorForm(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            hospital = form.cleaned_data['hospital']
+            profile = form.cleaned_data['profile']
+            edu = form.cleaned_data['edu']
+            Doctor = doctor()
+            Doctor.first_name = first_name
+            Doctor.last_name = last_name
+            Doctor.profile = profile
+            Doctor.save()
+            Doctor.edu.set(edu)
+            Doctor.hospital.set(hospital)
+            return HttpResponseRedirect(reverse('doctors-detail', args=(Doctor.id,)))
+        else:
+            for field, items in form.errors.items():
+                for item in items:
+                    messages.error(request, '{}: {}'.format(field, item))
+                    print('{}: {}'.format(field, item))
+            return render(request = request, template_name = "enlistdoctor.html",context={"form":form})
+    form = EnlistDoctorForm(request.POST)
+    return render(request = request, template_name = "enlistdoctor.html",context={"form":form})
+
+def enlisthospital(request):
+    if request.method == "POST":
+        formhospital = EnlistHospitalForm(request.POST)   
+        if formhospital.is_valid():
+            name = formhospital.cleaned_data['name']
+            desc = formhospital.cleaned_data['desc']
+            building = formhospital.cleaned_data['building']
+            street = formhospital.cleaned_data['street']
+            pincode = formhospital.cleaned_data['pincode']
+            beds = formhospital.cleaned_data['beds']
+            profile = formhospital.cleaned_data['profile']
+            Hospital = hospital()
+            print(name)
+            Hospital.name = name
+            Hospital.desc = desc
+            Hospital.building = building
+            Hospital.street = street
+            Hospital.pincode = pincode
+            Hospital.beds = beds
+            Hospital.profile = profile
+            Hospital.save()
+            return HttpResponseRedirect(reverse('hospitals-detail', args=(Hospital.id,)))
+        else:
+            for field, items in formhospital.errors.items():
+                for item in items:
+                    messages.error(request, '{}: {}'.format(field, item))
+                    print('{}: {}'.format(field, item))
+            return render(request = request, template_name = "enlisthospital.html",context={"formhospital":formhospital})
+    formhospital = EnlistHospitalForm(request.POST)
+    return render(request = request, template_name = "enlisthospital.html",context={"formhospital":formhospital})
+
+def enlistdegree(request):
+    if request.method == "POST":
+        form = AddDegreeForm(request.POST)
+        if form.is_valid():
+            degree =form.cleaned_data['degree']
+            uni = form.cleaned_data['uni']
+            Newdegree = doctoredu()
+            Newdegree.degree = degree
+            Newdegree.uni = uni
+            Newdegree.save()
+            return HttpResponseRedirect(reverse('enlist'))
+        else:
+            for msg in form.error_messages:
+                print(form.error_messages[msg])
+                return render(request = request, template_name = "enlistdegree.html",context={"form":form})
+    form = AddDegreeForm
+    return render(request = request, template_name = "enlistdegree.html",context={"form":form})
+
+def enlistuni(request):
+    if request.method == "POST":
+        form = AddUniForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            NewUni = doctoruni()
+            NewUni.name = name  
+            NewUni.save()
+            return HttpResponseRedirect(reverse('enlist'))
+        else:
+            for field, items in form.errors.items():
+                for item in items:
+                    messages.error(request, '{}: {}'.format(field, item))
+                    print('{}: {}'.format(field, item))
+            return render(request = request, template_name = "enlistuni.html",context={"form":form})
+    form = AddUniForm
+    return render(request = request, template_name = "enlistuni.html",context={"form":form})

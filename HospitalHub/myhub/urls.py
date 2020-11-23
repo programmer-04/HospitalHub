@@ -20,6 +20,12 @@ urlpatterns = [
     url(r'^review/user/$', views.user_review_list, name='user_review_list'),
     url('search', views.search, name="search"),
     path("register/", views.register, name="register"),
+    path("enlist/", views.enlist, name = "enlist"),
+    path("enlist/doctor", views.enlistdoctor, name="enlistdoctor"),
+    path("enlist/hospital", views.enlisthospital, name="enlisthospital"),
+    path("enlist/newdegree", views.enlistdegree, name="enlistdegree"),
+    path("enlist/newuni", views.enlistuni, name="enlistuni"),
+
 ]
 '''urlpatterns += [   
     url(r'^doctors/(?P<doctor_id>[0-9]+)/add_review/$', views.add_review, name='add_review'),

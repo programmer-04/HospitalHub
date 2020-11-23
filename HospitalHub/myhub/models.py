@@ -3,13 +3,20 @@ from django.urls import reverse
 import numpy as np
 
 
+class doctoruni(models.Model):
+    name = models.CharField(max_length=200, help_text='Enter your Uni', unique=True)
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.name
+
 # Create your models here.
 class doctoredu(models.Model):
     degree = models.CharField(max_length=200, help_text='Enter degree')
-    uni = models.CharField(max_length=200, help_text='Enter your Uni')
+    uni = models.ForeignKey(doctoruni, help_text='Select a uni for this degree', on_delete=models.CASCADE)
     def __str__(self):
         """String for representing the Model object."""
-        return self.degree + "," + self.uni
+        return self.degree + ", " + str(self.uni)
 
 class doctor(models.Model):
     first_name = models.CharField(max_length=100, blank=True, null=True)  # Field name made lowercase.
@@ -41,14 +48,12 @@ class doctor(models.Model):
         ordering = ['last_name', 'first_name']
 
 class hospital(models.Model):
-    id = models.IntegerField(primary_key=True)  # Field name made lowercase.
     name = models.CharField(max_length=100, null=True)  # Field name made lowercase.
     desc = models.CharField(max_length=10000, help_text='Enter Hospital Description')
     building = models.CharField(max_length=25, blank=True, null=True)  # Field name made lowercase.
     street = models.CharField(max_length=25, blank=True, null=True)  # Field name made lowercase.
-    pincode = models.IntegerField(unique=True, blank=True, null=True)  # Field name made lowercase.
+    pincode = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
     beds = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
-    hospambid = models.IntegerField(unique=True, blank=True, null=True)  # Field name made lowercase.
     profile= models.ImageField(upload_to = 'media',default ='default.jpg') 
 
     def __str__(self):

@@ -1,5 +1,5 @@
 from django.forms import ModelForm, Textarea
-from .models import doctor_review, hospital_review
+from .models import doctor_review, hospital_review, doctor, doctoredu, hospital, doctoruni
 
 class DoctorReviewForm(ModelForm):
     class Meta:
@@ -26,3 +26,23 @@ from django.forms.widgets import PasswordInput, TextInput
 class CustomAuthForm(AuthenticationForm):
     username = forms.CharField(widget=TextInput(attrs={'class':'validate','placeholder': 'Email'}))
     password = forms.CharField(widget=PasswordInput(attrs={'placeholder':'Password'}))
+
+class EnlistDoctorForm(ModelForm):
+    class Meta:
+        model = doctor
+        fields = ['first_name', 'last_name', 'edu', 'hospital', 'profile']
+
+class EnlistHospitalForm(ModelForm):
+    class Meta:
+        model = hospital
+        fields = ['name', 'desc', 'building', 'street', 'pincode', 'beds', 'profile']
+
+class AddDegreeForm(ModelForm):
+    class Meta:
+        model = doctoredu
+        fields = ['degree', 'uni']
+
+class AddUniForm(ModelForm):
+    class Meta:
+        model = doctoruni
+        fields = ['name']
