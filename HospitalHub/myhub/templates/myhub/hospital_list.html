@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+<body style="background: linear-gradient(to right,white,blue);">
  <p> <h1>Hospital List</h1></p>
   {% if hospital_list %}
   
@@ -26,5 +27,6 @@
   
   {% else %}
     <p>No hospitals presently listed.</p>
-  {% endif %}       
+  {% endif %}   
+</body>    
 {% endblock %}

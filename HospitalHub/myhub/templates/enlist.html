@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+<a style="color: black;"href="{% url 'enlistdoctor'%}?next={{request.path}}">Enlist Doctors</a></li>
+<a style="color: black;"href="{% url 'enlisthospital' %}?next={{request.path}}">Enlist Hospitals</a></li>
+<a style="color: black;"href="{% url 'enlistdegree' %}?next={{request.path}}">Add a degree</a></li>
+<a style="color: black;"href="{% url 'enlistuni' %}?next={{request.path}}">Add a Uni</a></li>
+
+{% endblock %}

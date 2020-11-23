@@ -53,6 +53,9 @@
           {% else %}
           <li class="nav-item"><a style="color: black;"href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
           {% endif %}
+          <li class="nav-item"><a style="color: black;"href="{% url 'enlist' %}">Enlist your service!</a></li> 
+          <li class="nav-item"><a style="color: black;"href="{% url 'register' %}?next={{request.path}}">New? Register now!</a></li>   
+
         </ul>
      
        

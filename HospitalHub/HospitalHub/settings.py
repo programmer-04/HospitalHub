@@ -14,7 +14,8 @@ from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -38,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myhub',
-    'registration'
+    #'registration'
+    'django.contrib.sites',
     ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,5 +130,5 @@ STATIC_ROOT = os.path.join(VENV_PATH, 'static_root')
 
 
 #LOGIN_REDIRECT_URL = '/myhub/review/user'
-REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
-ACCOUNT_ACTIVATION_DAYS = 7
+#REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
+#ACCOUNT_ACTIVATION_DAYS = 7

@@ -15,11 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from . import  settings
+from myhub import views
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+ 
+ 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
-
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # Use include() to add paths from the catalog application 
 from django.urls import include
 
@@ -46,6 +53,16 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
-    url(r'^accounts/', include('registration.backends.default.urls')),
+    #url(r'^accounts/', include('registration.backends.default.urls')),
 
+]
+
+from django.contrib.auth.views import LoginView
+from myhub.forms import CustomAuthForm
+urlpatterns += [
+    url('login/', 
+        LoginView.as_view(
+        ), 
+        name="login",kwargs={"authentication_form":CustomAuthForm}
+    ),
 ]

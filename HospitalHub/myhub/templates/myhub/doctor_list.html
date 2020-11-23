@@ -2,17 +2,20 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'myhub/style.css' %}">
 {% block content %}
+<body style="background: linear-gradient(to right,white,blue);">
  <p> <h1>Doctor List</h1></p>
   {% if doctor_list %}
   
     
-      <table class="table" style="border: none;">
+      <table class="table" style="border: none; margin-left: auto; margin-right: auto;">
         <tbody>
           {% for doc in doctor_list %}
           
-          <tr style="border: none;">
+          <tr style="border-bottom: 4px solid grey">
        <td style=" border: none; font-size:30px;"> {{ doc.first_name }} {{doc.last_name}}</td>
-
+       <td style=" border: none; font-size:20px;"> {% if doc.intaverage_rating %} {% for star in doc.intaverage_rating %} ⭐ {% endfor %} from {% endif %} {{doc.doctor_review_set.all.count}} reviews  </td>
+       <td style=" border: none; font-size:20px;"> {{ doc.edu.all|join:"; " }}</td>
+       <td style=" border: none; font-size:20px;"> {{ doc.hospital.all|join:"; " }}</td>
    <td style="border: none;">    
           <button type="button">
           <a href="{{ doc.get_absolute_url }}">View Details</a>
@@ -28,5 +31,7 @@
   
   {% else %}
     <p>No doctors presently available.</p>
-  {% endif %}       
+  {% endif %}    
+  
+</body>
 {% endblock %}

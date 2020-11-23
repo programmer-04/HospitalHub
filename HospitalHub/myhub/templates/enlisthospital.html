@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {{formhospital.as_p}}
+    <button style="background-color:#F4EB16; color:blue" class="btn btn-outline-info" type="submit" name="hospitalform">Enlist</button>
+</form>
+{% endblock %}
