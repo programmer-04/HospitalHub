@@ -2,9 +2,122 @@
 {% load static %}
 
 {% block content %}
-<a style="color: black;"href="{% url 'enlistdoctor'%}?next={{request.path}}">Enlist Doctors</a></li>
-<a style="color: black;"href="{% url 'enlisthospital' %}?next={{request.path}}">Enlist Hospitals</a></li>
-<a style="color: black;"href="{% url 'enlistdegree' %}?next={{request.path}}">Add a degree</a></li>
-<a style="color: black;"href="{% url 'enlistuni' %}?next={{request.path}}">Add a Uni</a></li>
-
+<head>
+    <style>
+        #content1 {
+            margin-bottom:70px;
+        }
+    
+        .col-md-3 {
+            margin-left: 5%;
+        }
+    
+        button {
+            margin: 30px 50%;
+            line-height: 70px;
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+            outline: none !important;
+            width: 100%;
+            text-align: center;
+            color: black;
+        }
+    
+        button:active {
+            outline: none;
+        }
+    
+        h2 {
+            display: block;
+            font-size: 2em;
+            margin-top: 0.67em;
+            margin-bottom: 0.67em;
+            margin-right: 0;
+            font-weight: bold;
+        }
+    
+        button.ribbon {
+            outline: none;
+            outline-color: transparent;
+            font-size: larger;
+            text-align: center;
+        }
+    
+        button.ribbon:before, button.ribbon:after {
+            top: 15px;
+            z-index: -10;
+        }
+    
+        button.ribbon:before {
+            border-color: #53dab6 #53dab6 #53dab6 transparent;
+            left: -25px;
+            top: -10px;
+            border-width: 15px;
+        }
+    
+        button.ribbon:after {
+            border-color: #53dab6 transparent #53dab6 #53dab6;
+            right: -25px;
+            top: 10px;
+            border-width: 15px;
+        }
+    
+        button:before, button:after {
+            content: '';
+            position: absolute;
+            height: 0;
+            width: 0;
+            border-style: solid;
+            border-width: 0;
+            outline: none;
+        }
+    
+        button.btn-primary:before {
+            border-color: #2e6da4 #2e6da4 #2e6da4 transparent;
+        }
+    
+        button.btn-primary:after {
+            border-color: #2e6da4 transparent #2e6da4 #2e6da4;
+        }
+    
+        button.btn-success:before {
+            border-color: #66CC66 #66CC66 #66CC66 transparent;
+        }
+    
+        button.btn-success:after {
+            border-color: #66CC66 transparent #66CC66 #66CC66;
+        }
+    
+        button.btn-info:before {
+            border-color: #66CCCC #66CCCC #66CCCC transparent;
+        }
+    
+        button.btn-info:after {
+            border-color: #66CCCC transparent #66CCCC #66CCCC;
+        }
+       
+        button.btn-danger:before {
+            border-color: #CC3333 #CC3333 #CC3333 transparent;
+        }
+    
+        button.btn-danger:after {
+            border-color: #CC3333 transparent #CC3333 #CC3333;
+        }
+    </style>
+    
+</head>
+<body style="background: linear-gradient(to right,white,blue);">
+<div class="container">
+    
+    <div id="content1" class="row text-center">
+        <div class="col-md-6">
+<a href="{% url 'enlistdoctor'%}?next={{request.path}}"><button style="color: black;" type="button" class="btn btn-primary ribbon">Enlist Doctors</button></a>
+<a href="{% url 'enlisthospital' %}?next={{request.path}}"><button style="color: black;" type="button" class="btn btn-success ribbon">Enlist Hospitals </button></a>
+<a href="{% url 'enlistdegree' %}?next={{request.path}}"><button style="color: black;" type="button" class="btn btn-info ribbon">Add a degree</button></a>
+<a href="{% url 'enlistuni' %}?next={{request.path}}"><button style="color: black;" type="button" class="btn btn-danger ribbon">Add a Uni</button></a>
+</div>
+</div>
+</div>
+</body>
 {% endblock %}
