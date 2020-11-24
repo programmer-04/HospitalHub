@@ -10,18 +10,19 @@
     <table class="table" style="border: none;">
       <tbody>
         {% for hosp in hospital_list %}
-        
-        <tr style="border-bottom: 4px solid grey">
-     <td style="border: none;font-size:30px;"> {{ hosp.name }}</td>
-
- <td style="border: none;">    
-        <button type="button">
-        <a href="{{ hosp.get_absolute_url }}">View Details</a>
-      </button>
-      </td>
-  </tr>
-   
-    {% endfor %}
+          
+          <tr style="border-bottom: 4px solid grey">
+       <td style=" border: none; font-size:30px;"> {{ hosp.name }}</td>
+       <td style=" border: none; font-size:20px;"> {% if hosp.intaverage_rating %} {% for star in hosp.intaverage_rating %} ⭐ {% endfor %} from {% endif %} {{hosp.hospital_review_set.all.count}} reviews  </td>
+       <td style=" border: none; font-size:20px;"> {{ hosp.city }}</td>
+   <td style="border: none;">    
+          <button type="button">
+          <a href="{{ hosp.get_absolute_url }}">View Details</a>
+        </button>
+        </td>
+    </tr>
+     
+      {% endfor %}
     </tbody>
     </table>
   

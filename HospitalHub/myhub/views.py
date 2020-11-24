@@ -253,6 +253,7 @@ def enlisthospital(request):
             pincode = formhospital.cleaned_data['pincode']
             beds = formhospital.cleaned_data['beds']
             profile = formhospital.cleaned_data['profile']
+            city = formhospital.cleaned_data['city']
             Hospital = hospital()
             print(name)
             Hospital.name = name
