@@ -1,22 +1,76 @@
+<!DOCTYPE html>
+<html>
 {% extends "base_generic.html" %}
 
 {% block content %}
- <meta charset="utf-8">
+
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(181, 224, 61, 0.2);
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  font-family: arial; 
+  background:url(/HospitalHub/doctorbackground.jpg);
+  background-size: cover;
+  overflow: hidden;
+}
+	
+ 
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0; 
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: white;
+  font-size: 22px;
+  color: white;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
+<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
+</head>
+
+ 
+
+<body  style="background: linear-gradient(to right,white,blue);">
+
+<h2 style="text-align:center">Doctor Profile Card</h2>
+<div class="card">
+<div class="card-header heading-footer"></div>
 <div class="row">
 <div class="col">
   <img src="{{doctor.profile.url}}"class="img-circle">
-  <h1 class="display-4">Name: <small class="font-weight-bold">{{ doctor.first_name }} {{ doctor.last_name }}<small></h1>
+  <h1 class="display-4" >Name: <small class="font-weight-bold">{{ doctor.first_name }} {{ doctor.last_name }}<small></h1>
   
    <h1 class="display-4">Education:<small class="font-weight-bold">{{ doctor.edu.all|join:"; " }}</small></h1>
   
   <h1 class="display-4">Hospital:<small class="font-weight-bold">{{ doctor.hospital.all|join:", "}}</small></h1>
  
- 
+</div>
 
 
 
@@ -60,6 +114,5 @@
 </div>
 </div>
 {% endblock %}
-
-
-
+</body>
+</html>

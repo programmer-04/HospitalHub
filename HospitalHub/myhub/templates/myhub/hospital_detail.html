@@ -1,6 +1,56 @@
+<!DOCTYPE html>
+<html>
 {% extends "base_generic.html" %}
 
 {% block content %}
+
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(181, 224, 61, 0.2);
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  font-family: arial; 
+  background:url(/HospitalHub/doctorbackground.jpg);
+  background-size: cover;
+  overflow: hidden;
+}
+	
+ 
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0; 
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: white;
+  font-size: 22px;
+  color: white;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
+</head>
+<body  style="background: linear-gradient(to right,white,blue);"></body>
+<div class="card">
+  <div class="card-header heading-footer"></div>
   <h1>Title: {{ hospital.name }}</h1>
   
  <!-- <p><strong>Author:</strong> <a href="">{{ book.author }}</a></p>--> <!-- author detail link not yet defined -->
@@ -63,3 +113,6 @@
   </form>
  
 {% endblock %}
+</div>
+</body>
+</html>
