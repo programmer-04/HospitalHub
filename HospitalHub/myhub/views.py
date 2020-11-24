@@ -51,8 +51,12 @@ class HospitalReviewListView(generic.ListView):
     #template_name = '/myhub/review_list.html'  # Specify your own template name/location
     queryset = hospital_review.objects.order_by('-pub_date')[:9]
 
-class DoctorReviewDetailView(generic.DetailView):
-    model=doctor_review
+'''class DoctorReviewDetailView(generic.DetailView):
+    model=doctor_review'''
+def DoctorReviewDetailView(request, pk):
+    Doctor_review = get_object_or_404(doctor_review, pk=pk)
+    return render(request, 'myhub/doctor_review_detail.html', {'doctor_review': Doctor_review})
+
 
 
 class HospitalReviewDetailView(generic.DetailView):
@@ -112,8 +116,10 @@ def hospital_add_review(request, hospital_id):
 def user_review_list(request, username=None):
     if not username:
         username = request.user.username
-    latest_review_list = review.objects.filter(user_name=username).order_by('-pub_date')
-    context = {'review_list':latest_review_list, 'username':username}
+    latest_review_list = doctor_review.objects.filter(user_name=username).order_by('-pub_date')
+    hospital_review_list = hospital_review.objects.filter(user_name=username).order_by('-pub_date')
+    print(username)
+    context = {'review_list':latest_review_list, 'username':username, 'hospital_review_list':hospital_review_list}
     return render(request, 'myhub/user_review_list.html', context)
 
 from itertools import chain
