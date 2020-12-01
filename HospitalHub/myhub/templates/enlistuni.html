@@ -1,10 +1,38 @@
 {% extends "base_generic.html" %}
 {% load static %}
 
-{% block content %}
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button style="background-color:#F4EB16; color:blue" class="btn btn-outline-info" type="submit">Enlist</button>
-</form>
+{%block content%}
+
+<head>
+    <link rel="stylesheet" href="{% static 'forms.css' %}">
+
+  </head>
+<body style="background: linear-gradient(to right, #b92b27, #1565c0);">
+    
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <form class="box" method="post" action="{% url 'enlistuni' %}">
+                        {% csrf_token %}
+                       <p> <h1>Enlist UNI</h1></p>
+                        {%for fields in form%}
+                        <p style="color: white;">{{fields.label_tag}}</p>
+                        <p>{{fields}}</p>
+                        {%endfor%}
+                        <button style="background-color:#F4EB16; color:blue" class="btn btn-outline-info" type="submit">Sign Up</button>
+
+                   
+                
+                   
+                                           
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
 {% endblock %}

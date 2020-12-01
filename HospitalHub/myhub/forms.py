@@ -37,7 +37,7 @@ class EnlistDoctorForm(ModelForm):
 class EnlistHospitalForm(ModelForm):
     class Meta:
         model = hospital
-        fields = ['name', 'desc', 'building', 'street', 'pincode', 'beds', 'profile']
+        fields = ['name', 'desc', 'building', 'street', 'pincode', 'beds', 'city', 'profile']
 
 class AddDegreeForm(ModelForm):
     class Meta:

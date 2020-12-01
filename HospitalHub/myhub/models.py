@@ -52,6 +52,7 @@ class hospital(models.Model):
     desc = models.CharField(max_length=10000, help_text='Enter Hospital Description')
     building = models.CharField(max_length=25, blank=True, null=True)  # Field name made lowercase.
     street = models.CharField(max_length=25, blank=True, null=True)  # Field name made lowercase.
+    city = models.CharField(max_length=25, null=True)  # Field name made lowercase.
     pincode = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
     beds = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
     profile= models.ImageField(default ='default.jpg') 
@@ -65,6 +66,14 @@ class hospital(models.Model):
     def average_rating(self):
         all_ratings = map(lambda x: x.rating, self.hospital_review_set.all())
         return np.mean(list(all_ratings))
+
+    def intaverage_rating(self):
+        all_ratings = map(lambda x: x.rating, self.hospital_review_set.all())
+        roundedratings = round(np.mean(list(all_ratings)),0).astype(np.int)
+        stars = ""
+        for i in range(0,roundedratings):
+            stars += "*"
+        return stars
 
 class ambulance(models.Model):
      class Meta:

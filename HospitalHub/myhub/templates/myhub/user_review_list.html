@@ -1,5 +1,36 @@
-{% extends 'myhub/review_list.html' %}
+{% extends "base_generic.html" %}
+{% block content %}
 
-{% block title %}
-<h2>Reviews by {{ user.username }}</h2>
+<h2>Latest reviews by {{ username }}</h2>
+
+{% if review_list %}
+<div>
+    {% for review in review_list %}
+    <div>
+        <h4><a href="{{ review.doctor.get_absolute_url }}">
+        {{ review.doctor.first_name }}
+        </a></h4>
+        <h6>rated {{ review.rating }} of 5 by {{ review.user_name }}</h6>
+        <p>{{ review.comment }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No doctor reviews are available.</p>
+{% endif %}
+{% if hospital_review_list %}
+<div>
+    {% for review in hospital_review_list %}
+    <div>
+        <h4><a href="{{ review.hospital.get_absolute_url }}">
+        {{ review.hospital.first_name }}
+        </a></h4>
+        <h6>rated {{ review.rating }} of 5 by {{ review.user_name }}</h6>
+        <p>{{ review.comment }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No hospital reviews are available.</p>
+{% endif %}
 {% endblock %}
