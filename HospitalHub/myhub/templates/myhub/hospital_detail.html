@@ -7,6 +7,7 @@
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+
 .card {
   box-shadow: 0 4px 8px 0 rgba(181, 224, 61, 0.2);
   max-width: 600px;
@@ -48,10 +49,12 @@ button:hover, a:hover {
 }
 </style>
 </head>
-<body  style="background: linear-gradient(to right,white,blue);"></body>
+<body  style="background: linear-gradient(to right,white,blue);">
+</body>
+<h2 style="text-align:center">Hospital Details Card</h2>
 <div class="card">
   <div class="card-header heading-footer"></div>
-  <h1>Title: {{ hospital.name }}</h1>
+  <h1>Name: {{ hospital.name }}</h1>
   
  <!-- <p><strong>Author:</strong> <a href="">{{ book.author }}</a></p>--> <!-- author detail link not yet defined -->
   <p><strong>Beds:</strong> {{ hospital.beds }}</p>
@@ -80,6 +83,15 @@ button:hover, a:hover {
       <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>
     {% endfor %}
   </div>-->
+ 
+  <h3>Add your review</h3>
+  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+  
+  <form action="{% url 'hospital_add_review' hospital.id %}"  method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Add" />
+  </form>
   {% if hospital.hospital_review_set.all %}
 
   <p>{{ hospital.hospital_review_set.count }} reviews ({{ hospital.average_rating | floatformat }} average rating)</p>
@@ -103,15 +115,6 @@ button:hover, a:hover {
 {% else %}
 <p>No reviews for this hospital yet</p>
 {% endif %}
-  <h3>Add your review</h3>
-  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-  
-  <form action="{% url 'hospital_add_review' hospital.id %}"  method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit" value="Add" />
-  </form>
- 
 {% endblock %}
 </div>
 </body>
