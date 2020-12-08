@@ -7,13 +7,14 @@
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+
 .card {
   box-shadow: 0 4px 8px 0 rgba(181, 224, 61, 0.2);
   max-width: 600px;
   margin: auto;
   text-align: center;
   font-family: arial; 
-  background:url(/HospitalHub/doctorbackground.jpg);
+  background :black;
   background-size: cover;
   overflow: hidden;
 }
@@ -48,23 +49,31 @@ button:hover, a:hover {
 }
 </style>
 </head>
-<body  style="background: linear-gradient(to right,white,blue);"></body>
+<body  style="background: linear-gradient(to right, #b92b27, #1565c0);">
+<h2 style="text-align:center ;color: white;">Hospital Details Card</h2>
 <div class="card">
-  <div class="card-header heading-footer"></div>
-  <h1>Title: {{ hospital.name }}</h1>
+  <div class="card-header heading-footer">
+
+
+  <h1 style="color: white;">Name: {{ hospital.name }}</h1>
   
  <!-- <p><strong>Author:</strong> <a href="">{{ book.author }}</a></p>--> <!-- author detail link not yet defined -->
-  <p><strong>Beds:</strong> {{ hospital.beds }}</p>
-  <h3> ambulance details</h>
+  <p style="color: white;"> <strong>Beds:</strong> {{ hospital.beds }}</p>
+
+
+  <h3 style="color: white;"> ambulance details</h>
 {% for amb in hospital.ambulance_set.all %}
   
-  <h5>{{ amb.key2}})ambulance type: {{ amb.ambvehicletype}}</h5>
-  <h5> capcity:{{ amb.vehiclecapacity}}</h5>
+  <h5 style="color: white;">{{ amb.key2}})ambulance type: {{ amb.ambvehicletype}}</h5>
+  <h5 style="color: white;"> capcity:{{ amb.vehiclecapacity}}</h5>
   {% endfor %}
-<h3> Hospital contact details</h>
+
+
+<h3 style="color: white;"> Hospital contact details</h>
 {% for phone in hospital.hospphoneno_set.all %}
-       <h5> {{phone.phonenumber}}</h5>
+       <h5 style="color: white;"> {{phone.phonenumber}}</h5>
       {% endfor %}
+
 <!-- <div style="margin-left:20px;margin-top:20px">
     <h4>Copies</h4>
 
@@ -80,38 +89,38 @@ button:hover, a:hover {
       <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>
     {% endfor %}
   </div>-->
+ 
+  <h3 style="color: white;">Add your review</h3>
+  {% if error_message %}<p style="color: white;"><strong>{{ error_message }}</strong></p>{% endif %}
+  
+  <form action="{% url 'hospital_add_review' hospital.id %}"  method="post" style="color: white;">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Add" />
+  </form>
   {% if hospital.hospital_review_set.all %}
 
-  <p>{{ hospital.hospital_review_set.count }} reviews ({{ hospital.average_rating | floatformat }} average rating)</p>
+  <p style="color: white;">{{ hospital.hospital_review_set.count }} reviews ({{ hospital.average_rating | floatformat }} average rating)</p>
  
   
 
   
   <br>
   <br>
-  <div>
+  <div > 
     {% for review in hospital.hospital_review_set.all %}
     <div>
-        <em>{{ review.comment }}</em>
-        <h6>Rated {{ review.rating }} of 5 by {{ review.user_name }}</h6>
-        <h5><a href="{{ review.get_absolute_url }}">
+        <em style="color: white;">{{ review.comment }}</em>
+        <h6 style="color: white;"> Rated {{ review.rating }} of 5 by {{ review.user_name }}</h6>
+        <h5 style="color: white;"><a href="{{ review.get_absolute_url }}">
         Read more
         </a></h5>
     </div>
     {% endfor %}
 </div>
 {% else %}
-<p>No reviews for this hospital yet</p>
+<p style="color: white;">No reviews for this hospital yet</p>
 {% endif %}
-  <h3>Add your review</h3>
-  {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-  
-  <form action="{% url 'hospital_add_review' hospital.id %}"  method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit" value="Add" />
-  </form>
- 
 {% endblock %}
 </div>
 </body>

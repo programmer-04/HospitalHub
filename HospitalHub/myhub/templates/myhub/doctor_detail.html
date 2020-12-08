@@ -11,13 +11,17 @@
   box-shadow: 0 4px 8px 0 rgba(181, 224, 61, 0.2);
   max-width: 600px;
   margin: auto;
+  background:black;
   text-align: center;
   font-family: arial; 
-  background:url(/HospitalHub/doctorbackground.jpg);
-  background-size: cover;
+}
+.wrapper {
+  position: relative;
+  width: 280px;
+  height: 350px;
+ 
   overflow: hidden;
 }
-	
  
 .title {
   color: grey;
@@ -56,32 +60,32 @@ button:hover, a:hover {
 
  
 
-<body  style="background: linear-gradient(to right,white,blue);">
+<body  style="background: linear-gradient(to right, #b92b27, #1565c0);">
 
-<h2 style="text-align:center">Doctor Profile Card</h2>
+<h2 style="text-align:center ;color: white;" >Doctor Profile Card</h2>
 <div class="card">
 <div class="card-header heading-footer"></div>
 <div class="row">
 <div class="col">
+
   <img src="{{doctor.profile.url}}"class="img-circle">
-  <h1 class="display-4" >Name: <small class="font-weight-bold">{{ doctor.first_name }} {{ doctor.last_name }}<small></h1>
+
+  <h1  style="color: white;"class="display-4" >Name: <small  style="color: white;"class="font-weight-bold">{{ doctor.first_name }} {{ doctor.last_name }}<small></h1>
   
-   <h1 class="display-4">Education:<small class="font-weight-bold">{{ doctor.edu.all|join:"; " }}</small></h1>
+   <h1 style="color: white;" class="display-4">Education:<small  style="color: white;" class="font-weight-bold">{{ doctor.edu.all|join:"; " }}</small></h1>
   
-  <h1 class="display-4">Hospital:<small class="font-weight-bold">{{ doctor.hospital.all|join:", "}}</small></h1>
+  <h1  style="color: white;"class="display-4">Hospital:<small  style="color: white;"class="font-weight-bold">{{ doctor.hospital.all|join:", "}}</small></h1>
  
 </div>
 
 
-
-
- 
  </div> 
 <div class="col">
-<h3>Add your review</h3>
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url 'doctor_add_review' doctor.id %}"  method="post">
+<h3 style="color: white;">Add your review</h3>
+{% if error_message %}<p style="color: white;"><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'doctor_add_review' doctor.id %}"  method="post" style="color: white;">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Add" />
@@ -92,23 +96,23 @@ button:hover, a:hover {
 <div class="col">
   {% if doctor.doctor_review_set.all %}
 
-  <p>{{ doctor.doctor_review_set.count }} reviews ({{ doctor.average_rating | floatformat }} average rating)</p>
+  <p style="color: white;">{{ doctor.doctor_review_set.count }} reviews ({{ doctor.average_rating | floatformat }} average rating)</p>
  
   <br>
   <br>
   <div>
     {% for review in doctor.doctor_review_set.all %}
     <div>
-        <em>{{ review.comment }}</em>
-        <h3>Rated {{ review.rating }} of 5 by {{ review.user_name }}</h3>
-        <h3><a href="{{ review.get_absolute_url }}">
+        <em style="color: white;">{{ review.comment }}</em>
+        <h3 style="color: white;">Rated {{ review.rating }} of 5 by {{ review.user_name }}</h3>
+        <h3 style="color: white;"><a href="{{ review.get_absolute_url }}">
         Read more
         </a></h3>
     </div>
     {% endfor %}
     </div>
 {% else %}
-<p>No reviews for this doctor yet</p>
+<p style="color: white;">No reviews for this doctor yet</p>
 {% endif %}
 
 </div>
