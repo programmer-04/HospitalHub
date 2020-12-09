@@ -19,8 +19,8 @@ class doctoredu(models.Model):
         return self.degree + ", " + str(self.uni)
 
 class doctor(models.Model):
-    first_name = models.CharField(max_length=100, blank=True, null=True)  # Field name made lowercase.
-    last_name = models.CharField(max_length=100, blank=True, null=True)  # Field name made lowercase.
+    first_name = models.CharField(max_length=100, blank=False, null=True)  # Field name made lowercase.
+    last_name = models.CharField(max_length=100, blank=False, null=True)  # Field name made lowercase.
     edu = models.ManyToManyField(doctoredu, help_text="Select an education")
     hospital = models.ManyToManyField('hospital', help_text="Select hospital(s):")
     profile= models.ImageField(default ='default.jpg') 
@@ -50,10 +50,10 @@ class doctor(models.Model):
 class hospital(models.Model):
     name = models.CharField(max_length=100, null=True)  # Field name made lowercase.
     desc = models.CharField(max_length=10000, help_text='Enter Hospital Description')
-    building = models.CharField(max_length=25, blank=True, null=True)  # Field name made lowercase.
-    street = models.CharField(max_length=25, blank=True, null=True)  # Field name made lowercase.
+    building = models.CharField(max_length=25, blank=False, null=True)  # Field name made lowercase.
+    street = models.CharField(max_length=25, blank=False, null=True)  # Field name made lowercase.
     city = models.CharField(max_length=25, null=True)  # Field name made lowercase.
-    pincode = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
+    pincode = models.IntegerField(blank=False, null=True)  # Field name made lowercase.
     beds = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
     profile= models.ImageField(default ='default.jpg') 
 
