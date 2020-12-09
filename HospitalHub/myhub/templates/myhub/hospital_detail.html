@@ -101,7 +101,7 @@ button:hover, a:hover {
   <form action="{% url 'hospital_add_review' hospital.id %}"  method="post" style="color: white;">
       {% csrf_token %}
       {{ form.as_p }}
-      <input type="submit" value="Add" />
+      <input type="submit" value="Add"  style="color:black"/>
   </form>
   {% if hospital.hospital_review_set.all %}
 
