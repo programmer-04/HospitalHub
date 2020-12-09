@@ -111,6 +111,13 @@ class doctor_review(models.Model):
     def get_absolute_url(self):
         return reverse('doctors-reviews-detail', args=[str(self.id)])
 
+    def get_rating(self):
+        roundedratings = round(self.rating)
+        stars = ""
+        for i in range(0,roundedratings):
+            stars += "*"
+        return stars
+
 class hospital_review(models.Model):
     RATING_CHOICES = (
         (1, '1'),
@@ -131,6 +138,11 @@ class hospital_review(models.Model):
     def get_absolute_url(self):
         return reverse('hospitals-reviews-detail', args=[str(self.id)])
         
- 
+    def get_rating(self):
+        roundedratings = round(self.rating)
+        stars = ""
+        for i in range(0,roundedratings):
+            stars += "*"
+        return stars
         
 
