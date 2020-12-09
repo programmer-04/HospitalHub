@@ -1,12 +1,11 @@
+
+
 {% extends "base_generic.html" %}
 
 {% block content %}
-<div>
-    <h4><a href="{{ hospital_review.doctor.get_absolute_url }}">
-    {{ hospital_review.doctor.first_name }}
-    </a></h4>
-    <h6>rated {{ hospital_review.rating }} of 5 by <a href="{% url 'user_review_list' hospital_review.user_name %}">{{ hospital_review.user_name }}</a></h6>
-    <p>{{ hospital_review.comment }}</p>
-</div>
+<body style="background: linear-gradient(to right,white,blue);">
+<h4><a href="{{ hospital_review.doctor.get_absolute_url }}">
+        {{ hospital_review.hospital.name }}</a>{% for star in hospital_review.get_rating %} ⭐ {% endfor %} by <a href="{% url 'user_review_list' hospital_review.user_name %}">{{ hospital_review.user_name }}</a></h4>
+    <h5>Comment :{{ hospital_review.comment }}</h5>
+</body>
 {% endblock %}
-

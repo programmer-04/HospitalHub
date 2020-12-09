@@ -1,36 +1,51 @@
 {% extends "base_generic.html" %}
 {% block content %}
-
+<body style="background: linear-gradient(to right,white,blue);">
 <h2>Latest reviews by {{ username }}</h2>
-
+<br>
 {% if review_list %}
+<table class="table" style="border: none;">
+    <h1>Doctor Review</h1>
 <div>
     {% for review in review_list %}
-    <div>
-        <h4><a href="{{ review.doctor.get_absolute_url }}">
-        {{ review.doctor.first_name }}
-        </a></h4>
-        <h6>rated {{ review.rating }} of 5 by {{ review.user_name }}</h6>
-        <p>{{ review.comment }}</p>
-    </div>
+    
+    
+    <tr style="border-bottom: 4px solid grey">
+        <td style=" border: none; font-size:30px;"><a href="{{ review.doctor.get_absolute_url }}">
+            {{ review.doctor.first_name }}
+            </a></td>
+        <td style=" border: none; font-size:20px;">{% for star in review.get_rating %} ⭐ {% endfor %}</td>
+        <td style=" border: none; font-size:20px;">{{ review.comment }}</td>
+    
+     </tr>
+
     {% endfor %}
 </div>
+</table>
 {% else %}
 <p>No doctor reviews are available.</p>
+
 {% endif %}
 {% if hospital_review_list %}
+<table class="table" style="border: none;">
+    <h1>Hospital Review</h1>
 <div>
     {% for review in hospital_review_list %}
-    <div>
-        <h4><a href="{{ review.hospital.get_absolute_url }}">
-        {{ review.hospital.first_name }}
-        </a></h4>
-        <h6>rated {{ review.rating }} of 5 by {{ review.user_name }}</h6>
-        <p>{{ review.comment }}</p>
-    </div>
+    
+   
+    <tr style="border-bottom: 4px solid grey">
+        <td style=" border: none; font-size:30px;"><a href="{{ review.hospital.get_absolute_url }}">
+            {{ review.hospital.name }} </a></td>
+        <td style=" border: none; font-size:20px;">{% for star in review.get_rating %} ⭐ {% endfor %}</td>
+        <td style=" border: none; font-size:20px;">{{ review.comment }}</td>
+    
+    </tr>
+
     {% endfor %}
 </div>
+</table>
 {% else %}
 <p>No hospital reviews are available.</p>
 {% endif %}
+</body>
 {% endblock %}

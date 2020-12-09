@@ -1,12 +1,17 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<div>
-    <h4><a href="{{ doctor_review.doctor.get_absolute_url }}">
-    {{ doctor_review.doctor.first_name }}
-    </a></h4>
-    <h6>rated {{ doctor_review.rating }} of 5 by <a href="{% url 'user_review_list' doctor_review.user_name %}">{{ doctor_review.user_name }}</a></h6>
-    <p>{{ doctor_review.comment }}</p>
-</div>
+<body style="background: linear-gradient(to right,white,blue);">
+<table class="table" style="border: none;">
+<tr style="border-bottom: 4px solid grey">
+    <td style=" border: none; font-size:30px;"><a href="{{ doctor_review.doctor.get_absolute_url }}">
+        {{ doctor_review.doctor.first_name }}
+        </a></td>
+    <td style=" border: none; font-size:20px;">{% for star in doctor_review.get_rating %} ⭐ {% endfor %} by <a href="{% url 'user_review_list' doctor_review.user_name %}">{{ doctor_review.user_name }}</a></td>
+    <td style=" border: none; font-size:20px;">{{ doctor_review.comment }}</td>
+
+</tr>
+</table>
+</body>
 {% endblock %}
 
