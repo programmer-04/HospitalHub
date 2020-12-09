@@ -1,10 +1,11 @@
 {% extends "base_generic.html" %}
 {% load static %}
-
+<link rel="stylesheet" href="{% static 'myhub/style.css' %}">
 {% block content %}
-<img src="{%static 'images/review.png'%}" style="width: 1860px;height: 750px;" >
+<!--<img src="{%static 'images/review.png'%}" style="width: 1860px;height: 750px;" >-->
+<body style="background-image: url({%static 'images/doctor.jpg'%});"
 
-
+<div class="background">
   
    <p style="font-size: 50px;text-align: center;">Counts</p>
  
@@ -26,5 +27,5 @@
 </div>
   </div>
   </div>
-
+</div>
 {% endblock %}

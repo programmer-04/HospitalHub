@@ -1,5 +1,4 @@
 .counter {
-    background-color:white;
     padding: 30px 30px;
     border-radius: 5px;
     text-align: center;
@@ -40,6 +39,10 @@
 }
 .navbar-custom{
   background-color: darkviolet;
+}
+
+.background {
+    background-color: #cccccc;
 }
 
 
