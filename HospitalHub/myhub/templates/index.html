@@ -6,26 +6,30 @@
 <body style="background-image: url({%static 'images/doctor.jpg'%}); background-size:100% auto"
 
 <div class="background">
-  
-   <p style="font-size: 50px;text-align: center;">Counts</p>
- 
+   
   <div class="row">
     <div class="row">
-    <div class="counter">
-      <i class="fa fa-hospital-o fa-2x" style='font-size:90px;'></i>
-<p><h1 style="font-weight: bolder;">{{num_hospitals}}</h1></p>
- <p class="count-text ">Hospitals</p>
-</div>
+      <div class="counter">
+        <i class="fa fa-hospital-o fa-2x" style="font-style: 'Montserrat', sans-serif; font-size:90px;"></i>
+        <p><h1 style="font-weight: bolder;">{{num_hospitals}}</h1></p>
+        <p class="count-text ">Hospitals</p>
+      </div>
     </div>
 
 
-  <div class="row">
-  <div class="counter">
-<i class="fa fa-stethoscope fa-2x" style='font-size:90px;'></i>
-<p><h1 style="font-weight: bolder;">{{num_doctors}}</h1></p>
-<p class="count-text ">Doctors</p>
-</div>
+      <div class="row">
+        <div class="counter">
+          <i class="fa fa-stethoscope fa-2x" style="font-style: 'Montserrat', sans-serif; font-size:90px;"></i>
+          <p><h1 style="font-weight: bolder;">{{num_doctors}}</h1></p>
+          <p class="count-text ">Doctors</p>
+      </div>
+    </div>
   </div>
-  </div>
+  <br>
+  <br>
+  <form name="searchform" method="GET" action="{% url 'search' %}" class="searchfield"> 
+    <input type="text" name="search" placeholder="Search your hospital/doctor here!" style="width:750px;"/>
+    <p style="font-size: 25px; font-family: 'Rubik', sans-serif;">Learn more about your favourite healthcare service!</p>
+  </form>
 </div>
 {% endblock %}
