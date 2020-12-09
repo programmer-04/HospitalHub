@@ -7,7 +7,6 @@
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-<<<<<<< HEAD
 .card {
   box-shadow: 0 4px 8px 0 rgba(181, 224, 61, 0.2);
   max-width: 600px;
@@ -45,49 +44,6 @@ a {
 
 
 </style>
-=======
-
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(181, 224, 61, 0.2);
-    max-width: 600px;
-    margin: auto;
-    text-align: center;
-    font-family: 'Rubik', Arial;
-    background :black;
-    background-size: cover;
-    overflow: hidden;
-  }
-    
-   
-  .title {
-    color: grey;
-    font-size: 18px;
-  }
-  
-  button {
-    border: none;
-    outline: 0; 
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-  }
-  
-  a {
-    text-decoration: white;
-    font-size: 22px;
-    color: white;
-  }
-  
-  button:hover, a:hover {
-    opacity: 0.7;
-  }
-  </style>>
->>>>>>> 98ed481f19bd00d1d8a76669000b2177bd695a2d
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -123,11 +79,7 @@ a {
 <form action="{% url 'doctor_add_review' doctor.id %}"  method="post" style="color: white;">
     {% csrf_token %}
     {{ form.as_p }}
-<<<<<<< HEAD
-    <input type="submit" value="Add"  style="color:black"/>
-=======
     <input type="submit" value="Add" style="color: black;"/>
->>>>>>> 98ed481f19bd00d1d8a76669000b2177bd695a2d
 </form>
 
 
