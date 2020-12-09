@@ -3,6 +3,9 @@
 <link rel="stylesheet" href="{% static 'myhub/style.css' %}">
 {% block content %}
 <body style="background: linear-gradient(to right,white,blue);">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
  <p> <h1>Doctor List</h1></p>
   {% if doctor_list %}
   
@@ -12,6 +15,7 @@
           {% for doc in doctor_list %}
           
           <tr style="border-bottom: 4px solid grey">
+       <td style=" border: none; font-size:30px;"> <img src="{{doc.profile.url}}"class="img-circle"></td>
        <td style=" border: none; font-size:30px;"> {{ doc.first_name }} {{doc.last_name}}</td>
        <td style=" border: none; font-size:20px;"> {% if doc.intaverage_rating %} {% for star in doc.intaverage_rating %} ⭐ {% endfor %} from {% endif %} {{doc.doctor_review_set.all.count}} reviews  </td>
        <td style=" border: none; font-size:20px;"> {{ doc.edu.all|join:"; " }}</td>

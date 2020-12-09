@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 {% extends "base_generic.html" %}
+{% load static %}
 
 {% block content %}
 
 <head>
+  
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'detailforms.css' %}">
 <style>
 
 .card {
@@ -63,9 +66,9 @@ button:hover, a:hover {
   <h1 style="color: white;">Name: {{ hospital.name }}</h1>
   
  <!-- <p><strong>Author:</strong> <a href="">{{ book.author }}</a></p>--> <!-- author detail link not yet defined -->
-  <p style="color: white;"> <strong>Beds:</strong> {{ hospital.beds }}</p>
-
-
+  <p style="color: white;"> <strong>About:</strong> {{ hospital.desc }}</p>
+  <p style="color: white;"> <strong>Address:</strong> {{ hospital.building }}, {{ hospital.street }}, {{ hospital.city }}, {{ hospital.pincode }}</p>
+<!--
   <h3 style="color: white;"> ambulance details</h>
 {% for amb in hospital.ambulance_set.all %}
   
@@ -77,7 +80,7 @@ button:hover, a:hover {
 <h3 style="color: white;"> Hospital contact details</h>
 {% for phone in hospital.hospphoneno_set.all %}
        <h5 style="color: white;"> {{phone.phonenumber}}</h5>
-      {% endfor %}
+      {% endfor %}-->
 
 <!-- <div style="margin-left:20px;margin-top:20px">
     <h4>Copies</h4>
@@ -98,7 +101,7 @@ button:hover, a:hover {
   <h3 style="color: white;">Add your review</h3>
   {% if error_message %}<p style="color: white;"><strong>{{ error_message }}</strong></p>{% endif %}
   
-  <form action="{% url 'hospital_add_review' hospital.id %}"  method="post" style="color: white;">
+  <form action="{% url 'hospital_add_review' hospital.id %}"  method="post" style="color: black;">
       {% csrf_token %}
       {{ form.as_p }}
       <input type="submit" value="Add"  style="color:black"/>

@@ -263,6 +263,7 @@ def enlisthospital(request):
             Hospital.pincode = pincode
             Hospital.beds = beds
             Hospital.profile = profile
+            Hospital.city=city
             Hospital.save()
             return HttpResponseRedirect(reverse('hospitals-detail', args=(Hospital.id,)))
         else:

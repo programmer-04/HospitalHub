@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                    <form class="box" method="post" action="{% url 'register' %}">
+                    <form class="box" method="post" action="{% url 'enlistdegree' %}">
                         {% csrf_token %}
                        <p> <h1>Enlist Degree</h1></p>
                         {%for fields in form%}
