@@ -53,10 +53,26 @@ class HospitalReviewListView(generic.ListView):
 
 '''class DoctorReviewDetailView(generic.DetailView):
     model=doctor_review'''
-def DoctorReviewDetailView(request, pk):
-    Doctor_review = get_object_or_404(doctor_review, pk=pk)
-    return render(request, 'myhub/doctor_review_detail.html', {'doctor_review': Doctor_review})
 
+from django.db import connection
+def DoctorReviewDetailView(request, pk):
+    'Doctor_review = get_object_or_404(doctor_review, pk=pk)'
+    with connection.cursor() as cursor:
+            '''cursor.callproc('getdetaildoctor', [1])'''
+            cursor.execute("call getdetaildoctor(%s);",[pk])
+            Doctor_review = cursor.fetchone()
+            username = Doctor_review[2]
+            comment = Doctor_review[3]
+            starcount = Doctor_review[-2]
+            print(Doctor_review)
+            stars = ""
+            for i in range(0, starcount):
+                stars = stars + "*"
+            cursor.execute("Select first_name from myhub_doctor where myhub_doctor.id = %s", [Doctor_review[-1]])
+            firstname = cursor.fetchone()[0]
+            doctorlink = reverse('doctors-detail', args=[Doctor_review[-1]])
+            '''return render(request, 'myhub/doctor_review_detail.html', {'doctor_review': Doctor_review})'''
+            return render(request, 'myhub/doctor_review_detail.html', {'username': username, 'comment':comment, 'firstname':firstname, 'stars': stars, 'doctorlink':doctorlink})
 
 
 class HospitalReviewDetailView(generic.DetailView):
