@@ -7,6 +7,7 @@
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+<<<<<<< HEAD
 .card {
   box-shadow: 0 4px 8px 0 rgba(181, 224, 61, 0.2);
   max-width: 600px;
@@ -44,6 +45,49 @@ a {
 
 
 </style>
+=======
+
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(181, 224, 61, 0.2);
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    font-family: 'Rubik', Arial;
+    background :black;
+    background-size: cover;
+    overflow: hidden;
+  }
+    
+   
+  .title {
+    color: grey;
+    font-size: 18px;
+  }
+  
+  button {
+    border: none;
+    outline: 0; 
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  a {
+    text-decoration: white;
+    font-size: 22px;
+    color: white;
+  }
+  
+  button:hover, a:hover {
+    opacity: 0.7;
+  }
+  </style>>
+>>>>>>> 98ed481f19bd00d1d8a76669000b2177bd695a2d
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -54,8 +98,6 @@ a {
  
 
 <body  style="background: linear-gradient(to right,white,blue);">
-
-<h2 style="text-align:center ;color: white;" >Doctor Profile Card</h2>
 <div class="card">
 <div class="card-header heading-footer">
 <div class="row">
@@ -81,7 +123,11 @@ a {
 <form action="{% url 'doctor_add_review' doctor.id %}"  method="post" style="color: white;">
     {% csrf_token %}
     {{ form.as_p }}
+<<<<<<< HEAD
     <input type="submit" value="Add"  style="color:black"/>
+=======
+    <input type="submit" value="Add" style="color: black;"/>
+>>>>>>> 98ed481f19bd00d1d8a76669000b2177bd695a2d
 </form>
 
 
@@ -89,18 +135,19 @@ a {
 <div class="col">
   {% if doctor.doctor_review_set.all %}
 
-  <p style="color: white;">{{ doctor.doctor_review_set.count }} reviews ({{ doctor.average_rating | floatformat }} average rating)</p>
+  <p style="color: white;">{% if doctor.intaverage_rating %} {% for star in doctor.intaverage_rating %} ⭐ {% endfor %} ({{doctor.doctor_review_set.all.count}} reviews) {% endif %} </p>
  
   <br>
   <br>
   <div>
     {% for review in doctor.doctor_review_set.all %}
     <div>
-        <em style="color: white;">{{ review.comment }}</em>
-        <h3 style="color: white;">Rated {{ review.rating }} of 5 by {{ review.user_name }}</h3>
-        <h3 style="color: white;"><a href="{{ review.get_absolute_url }}">
-        Read more
-        </a></h3>
+      <h6 style="color: white;">{{ review.user_name }}</h6>
+      <h6>{% for star in review.get_rating %} ⭐ {% endfor %}</h6>
+      <h6 style="color: white;">{{ review.comment }}</em>
+      <h5 style="color: white;"><a href="{{ review.get_absolute_url }}">
+      Read more
+      </a></h5>
     </div>
     {% endfor %}
     </div>
