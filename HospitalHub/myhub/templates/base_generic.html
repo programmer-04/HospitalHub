@@ -30,13 +30,13 @@
         
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a style="color: black;"href="{% url 'index' %}"><p style="font-size: x-large;color: black;font-weight: bold;">HOSPITALHUB!</p></a>
+            <a style="color: whitesmoke;"href="{% url 'index' %}"><p style="font-size: x-large;color: whitesmoke;font-weight: bold;">HOSPITALHUB!</p></a>
           </li> 
           <li class="nav-item">
-          <a style="color: black;"href="{% url 'hospitals' %}">All Hospitals</a>
+          <a style="color: whitesmoke;"href="{% url 'hospitals' %}">All Hospitals</a>
           </li>
           <li class="nav-item"> 
-          <a style="color: black;"href="{% url 'doctors' %}">All Doctors</a>
+          <a style="color: whitesmoke;"href="{% url 'doctors' %}">All Doctors</a>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto px-2">
@@ -46,13 +46,13 @@
           
            
           {% if user.is_authenticated %}
-          <li class="nav-item"><a style="color: black;" href="{% url 'user_review_list' user.username %}">User: {{ user.get_username }}</a></li>
-          <li><a style="color: black;"href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
+          <li class="nav-item"><a style="color: whitesmoke;" href="{% url 'user_review_list' user.username %}">User: {{ user.get_username }}</a></li>
+          <li><a style="color: whitesmoke;"href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
           {% else %}
-          <li class="nav-item"><a style="color: black;"href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
+          <li class="nav-item"><a style="color: whitesmoke;"href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
           {% endif %}
-          <li class="nav-item"><a style="color: black;"href="{% url 'enlist' %}">Enlist your service!</a></li> 
-          <li class="nav-item"><a style="color: black;"href="{% url 'register' %}?next={{request.path}}">New? Register now!</a></li>   
+          <li class="nav-item"><a style="color: whitesmoke;"href="{% url 'enlist' %}">Enlist your service!</a></li> 
+          <li class="nav-item"><a style="color: whitesmoke;"href="{% url 'register' %}?next={{request.path}}">New? Register now!</a></li>   
 
         </ul>
      
