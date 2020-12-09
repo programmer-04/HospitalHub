@@ -7,8 +7,8 @@
    <!-- Add additional CSS in static file -->
 
   <link rel="stylesheet" href="{% static 'style.css' %}">
-
-   {% block title %}<title>HospitalHub!</title>{% endblock %}
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">   {% block title %}<title>HospitalHub!</title>{% endblock %}
 
  
 
@@ -29,11 +29,8 @@
         
         <ul class="navbar-nav">
           <li class="nav-item">
-          <p style="font-size: x-large;color: black;font-weight: bold;">HOSPITALHUB!</p>
-          </li>  
-          <li class="nav-item">
-            <a style="color: black;"href="{% url 'index' %}">Home</a>
-          </li>
+            <a style="color: black;"href="{% url 'index' %}"><p style="font-size: x-large;color: black;font-weight: bold;">HOSPITALHUB!</p></a>
+          </li> 
           <li class="nav-item">
           <a style="color: black;"href="{% url 'hospitals' %}">All Hospitals</a>
           </li>
