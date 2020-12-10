@@ -1,69 +1,41 @@
-
-
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <!-- Add additional CSS in static file -->
-
-  <link rel="stylesheet" href="{% static 'style.css' %}">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">   {% block title %}<title>HospitalHub!</title>{% endblock %}
-  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
-
- 
-
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
- 
-  
+  <title>HospitalHub</title>
+  {% include 'partials/_css.html' %}
+
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-  
-      {% block sidebar %}
-       
-          <nav class="navbar navbar-custom navbar-expand-md navbar-dark">
-            
-          
-        
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a style="color: whitesmoke;"href="{% url 'index' %}"><p style="font-size: x-large;color: whitesmoke;font-weight: bold;">HOSPITALHUB!</p></a>
-          </li> 
-          <li class="nav-item">
-          <a style="color: whitesmoke;"href="{% url 'hospitals' %}">All Hospitals</a>
-          </li>
-          <li class="nav-item"> 
-          <a style="color: whitesmoke;"href="{% url 'doctors' %}">All Doctors</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto px-2">
-            <form name="searchform" method="GET" action="{% url 'search' %}"> 
-              <input type="text" name="search" placeholder="Search" />
-          </form> 
-          
-           
-          {% if user.is_authenticated %}
-          <li class="nav-item"><a style="color: whitesmoke;" href="{% url 'user_review_list' user.username %}">User: {{ user.get_username }}</a></li>
-          <li><a style="color: whitesmoke;"href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
-          {% else %}
-          <li class="nav-item"><a style="color: whitesmoke;"href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
-          {% endif %}
-          <li class="nav-item"><a style="color: whitesmoke;"href="{% url 'enlist' %}">Enlist your service!</a></li> 
-          <li class="nav-item"><a style="color: whitesmoke;"href="{% url 'register' %}?next={{request.path}}">New? Register now!</a></li>   
+  <!--Wrapper Start-->
+  <div class="wrapper">
 
-        </ul>
-     
-       
-      </nav>
-     {% endblock %}
+    <!--Header Start-->
+    {% include 'partials/_header.html' %}
+    <!--Header End-->
+    <!--Main Slider-->
+    {% include 'partials/_slider.html' with sliders=sliders %}
+    <!--Main Slider End-->
 
-      
+    <!-- Main Content Start -->
+    {% block content %}
 
-      <div class="container-fluid main_container">{% block content %}{% endblock %}</div>
-   
+    {% endblock content %}
+    <!-- Main content End -->
+
+    <!--Footer Start-->
+    {% include 'partials/_footer.html' %}
+    <!--Footer End-->
+    {% include 'partials/_js.html' %}
 
 </body>
+
 </html>

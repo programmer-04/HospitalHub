@@ -1,36 +1,123 @@
 {% extends "base_generic.html" %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'myhub/style.css' %}">
 {% block content %}
 <!--<img src="{%static 'images/review.png'%}" style="width: 1860px;height: 750px;" >-->
-<body style="background-image: url({%static 'images/doctor.jpg'%}); background-size:100% auto"
 
-<div class="background">
-   
-  <div class="row">
-    <div class="row">
-      <div class="counter">
-        <i class="fa fa-hospital-o fa-2x" style="font-style: 'Montserrat', sans-serif; font-size:90px;"></i>
-        <p><h1 style="font-weight: bolder;">{{num_hospitals}}</h1></p>
-        <p class="count-text ">Hospitals</p>
-      </div>
-    </div>
-
-
+<div class="main-content">
+  <!--Welcome Section-->
+  <section class="welcome-section">
+    <div class="container">
       <div class="row">
-        <div class="counter">
-          <i class="fa fa-stethoscope fa-2x" style="font-style: 'Montserrat', sans-serif; font-size:90px;"></i>
-          <p><h1 style="font-weight: bolder;">{{num_doctors}}</h1></p>
-          <p class="count-text ">Doctors</p>
+        <div class="welcome-box">
+          <div class="col-md-6 col-sm-6">
+            <div class="welcome-text">
+              <div class="sectio-title-2"> <strong>Welcome to your</strong>
+                <h2>HospitalHub</h2>
+              </div>
+              <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <form name="searchform" method="GET" action="{% url 'search' %}"> 
+                <input type="text" name="search" placeholder="Search your hospital/doctor here!" style="width: 500px;"/>
+                <p>Learn more about your favourite healthcare service!</p>
+              </form>
+              <strong class="signature">Adam Johns</strong>
+              <h6 class="designation">MS Heart Care Hospital</h6>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <div class="welcome-img"> <img src="{% static 'heartcare/images/welcome.jpg' %}" alt=""> </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <br>
-  <br>
-  <form name="searchform" method="GET" action="{% url 'search' %}" class="searchfield"> 
-    <input type="text" name="search" placeholder="Search your hospital/doctor here!" style="width:750px;"/>
-    <p style="font-size: 25px; font-family: 'Rubik', sans-serif;">Learn more about your favourite healthcare service!</p>
-  </form>
-</div>
-</body>
+  </section>
+
+    <!--Home Services Start-->
+    <section class="home-features">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-4">
+            <div class="features-box">
+              <h3>Hospitals</h3>
+              <p>{{num_hospitals}}</p>
+              <a href="appointment.html">Get Free Appointment</a>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            <div class="features-box">
+              <h3>Doctors</h3>
+              <p>{{num_doctors}}</p>
+              <a href="contact-2.html">Contact Us</a>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            <div class="features-box">
+              <h3>Doctors</h3>
+              <p>{{num_doctors}}</p>
+              <a href="contact-2.html">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testi-faq">
+      <div class="container">
+        <div class="row">
+  
+          <!--Testimonials Start-->
+          <div class="col-md-6">
+            <div class="home-testimonials">
+              <div class="sectio-title-2"> <strong>Read What Says Our</strong>
+                <h2>Happy Patients</h2>
+              </div>
+              <div id="testimonial-slider" class="owl-carousel owl-theme">
+  
+                <!--Slider Start-->
+                <div class="item">
+                  <div class="testimonial-holder">
+                    <div class="user-thumb"> <img src="{% static 'heartcare/images/tuser.jpg' %}" alt=""> <strong>Anna
+                        Anderson</strong>
+                      <i>A heart patient</i> </div>
+                    <div class="test-text">
+                      <p>An exellent hospital and a Cardiologists. Quisque egestas libero vitae lacus sagittis, eget
+                        viverra tellus vehicula. Aenean efficitur faucibus felis, non laoreet nisl congue non. In quis
+                        pharetra urna. Aliquam in enim efficitur, bibendum dolor eu, elementum turpis.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="testimonial-holder">
+                    <div class="user-thumb"> <img src="{% static 'heartcare/images/tuser-2.jpg' %}" alt=""> <strong>Anna
+                        Anderson</strong>
+                      <i>A heart patient</i> </div>
+                    <div class="test-text">
+                      <p>An exellent hospital and a Cardiologists. Quisque egestas libero vitae lacus sagittis, eget
+                        viverra tellus vehicula. Aenean efficitur faucibus felis, non laoreet nisl congue non. In quis
+                        pharetra urna. Aliquam in enim efficitur, bibendum dolor eu, elementum turpis.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="testimonial-holder">
+                    <div class="user-thumb"> <img src="{% static 'heartcare/images/tuser.jpg' %}" alt=""> <strong>Anna
+                        Anderson</strong>
+                      <i>A heart patient</i> </div>
+                    <div class="test-text">
+                      <p>An exellent hospital and a Cardiologists. Quisque egestas libero vitae lacus sagittis, eget
+                        viverra tellus vehicula. Aenean efficitur faucibus felis, non laoreet nisl congue non. In quis
+                        pharetra urna. Aliquam in enim efficitur, bibendum dolor eu, elementum turpis.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+  
+                <!--Slider End-->
+  
+              </div>
+            </div>
+          </div>
+          <!--Testimonials End-->
+  
 {% endblock %}

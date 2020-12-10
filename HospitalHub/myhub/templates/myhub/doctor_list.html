@@ -1,41 +1,44 @@
 {% extends "base_generic.html" %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'myhub/style.css' %}">
 {% block content %}
-<body style="background: linear-gradient(to right,white,blue);">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
- <p> <h1>Doctor List</h1></p>
-  {% if doctor_list %}
-  
-    
-      <table class="table" style="border: none; margin-left: auto; margin-right: auto;">
-        <tbody>
-          {% for doc in doctor_list %}
-          
-          <tr style="border-bottom: 4px solid grey">
-       <td style=" border: none; font-size:30px;"> <img src="{{doc.profile.url}}"class="img-circle"></td>
-       <td style=" border: none; font-size:30px;"> {{ doc.first_name }} {{doc.last_name}}</td>
-       <td style=" border: none; font-size:20px;"> {% if doc.intaverage_rating %} {% for star in doc.intaverage_rating %} ⭐ {% endfor %} from {% endif %} {{doc.doctor_review_set.all.count}} reviews  </td>
-       <td style=" border: none; font-size:20px;"> {{ doc.edu.all|join:"; " }}</td>
-       <td style=" border: none; font-size:20px;"> {{ doc.hospital.all|join:"; " }}</td>
-   <td style="border: none;">    
-          <button type="button">
-          <a href="{{ doc.get_absolute_url }}">View Details</a>
-        </button>
-        </td>
-    </tr>
-     
-      {% endfor %}
-      </tbody>
-      </table>
-      
-   
-  
-  {% else %}
-    <p>No doctors presently available.</p>
-  {% endif %}    
-  
-</body>
-{% endblock %}
+
+<!--inner banner-->
+<div class="inner-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Doctors</h1>
+      </div>
+      <div class="col-md-5">
+        <ol class="breadcrumb">
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li class="active">Doctors</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Main Content Start-->
+<div class="main-content">
+  <div class="team-page">
+    <div class="container">
+      <div class="row">
+        {% for doc in doctor_list %}
+        <div class="col-md-3 col-sm-6">
+          <div class="team-box mb50">
+            <div class="team-thumb"> <a href="{{ doc.get_absolute_url }}" class="view"><i class="fa fa-Heart"
+                  aria-hidden="true"></i></a> <img src="{{ doc.profile.url }}" alt=""></div>
+            <div class="team-text">
+              <h5><a href="{{ doc.get_absolute_url }}">{{ doc.first_name }} {{doc.last_name}}</a></h5>
+              <br><strong>{{ doc.edu.all|join:"; " }}</strong>
+              <br><strong>{{ doc.hospital.all|join:"; " }}</strong>
+              <br><strong>{% if doc.intaverage_rating %} {% for star in doc.intaverage_rating %} ⭐ {% endfor %} {% endif %} ({{doc.doctor_review_set.all.count}} reviews)</strong>
+          </div>
+        </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content%}

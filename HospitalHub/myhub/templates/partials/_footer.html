@@ -1,0 +1,44 @@
+{% load static %}
+<footer class="footer">
+  <div class="footer-widgets">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-6">
+          <div class="widget"> <img class="ft-logo" src="{% static 'heartcare/images/footer-logo.png' %}" alt="">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="widget">
+            <h3>COMPANY</h3>
+            <ul>
+              <li><a href="">About Us</a></li>
+              <li><a href="">Privacy</a></li>
+              <li><a href="">Help</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="widget">
+            <h3>ENLIST YOURSELF</h3>
+            <ul>
+                <li><a href="{% url 'enlistdoctor' %}">Doctor</a></li>
+                <li><a href="{% url 'enlisthospital' %}">Hospital</a></li>
+                <li><a href="{% url 'enlistdegree' %}">Medical Degree</a></li>
+                <li><a href="{% url 'enlistuni' %}">Medical University</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-cr">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>HospitalHub!</strong> © All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
