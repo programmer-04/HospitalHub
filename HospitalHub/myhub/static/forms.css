@@ -1,18 +1,11 @@
-body
-{
-    background: linear-gradient(to right,white,blue);
-}
       .box {
       width: 500px;
       padding: 40px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      background: #191919;
+      border: 2px solid #bf0311;
+      background: white;
       text-align: center;
       transition: 0.25s;
-      margin-top: 100px;
-      font-family: 'Rubik', sans-serif;
+      justify-content:center;align-items:center;width:500px;
     }
   
     .box input[type="text"], .box input[type="password"] {
@@ -21,17 +14,17 @@ body
       display: block;
       margin: 20px auto;
       text-align: center;
-      border: 2px solid #3498db;
+      border: 2px solid #bf0311;
       padding: 10px 10px;
       width: 250px;
       outline: none;
-      color: white;
+      color:#bf0311;
       border-radius: 24px;
       transition: 0.25s
   }
   
   .box h1 {
-      color: white;
+      color: #bf0311;
       text-transform: uppercase;
       font-family: 'Rubik', sans-serif;
 
@@ -40,7 +33,7 @@ body
   .box input[type="text"]:focus,
   .box input[type="password"]:focus{
       width: 300px;
-      border-color: #2ecc71
+      border-color: #bf0311;
   }
   
   .box input[type="submit"] {
@@ -49,10 +42,10 @@ body
       display: block;
       margin: 20px auto;
       text-align: center;
-      border: 2px solid #2ecc71;
+      border: 2px solid #bf0311;
       padding: 14px 40px;
       outline: none;
-      color: white;
+      color:#bf0311;
       border-radius: 24px;
       transition: 0.25s;
       cursor: pointer
@@ -63,7 +56,14 @@ body
   }
   
   button {
-      background-color:#F4EB16; 
-      color:blue;
+      background-color:#bf0311; 
+      color:white;
+  }
+
+  .text-muted{
+      color:#bf0311;
   }
   
+  label{
+      color:#bf0311;
+  }

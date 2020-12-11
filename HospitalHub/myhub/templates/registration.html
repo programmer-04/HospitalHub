@@ -2,37 +2,74 @@
 {% load static %}
 
 {% block content %}
-<head>
-    <link rel="stylesheet" href="{% static 'forms.css' %}">
-  </head>
-<body>
-    
 
+
+<!--inner banner-->
+<div class="inner-banner">
     <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <form class="box" method="post" action="{% url 'register' %}">
-                        {{% csrf_token %}
-                        <h1>Register</h1>
-                        <p style="color: white;">{{ form.username.label_tag }}</p>
-                        <p>{{form.username}}</p>
-                        <p style="color: white;">{{ form.password1.label_tag }}</p>
-                        <p>{{form.password1}}</p>
-                        <p style="color: white;">{{ form.password2.label_tag }}</p>
-                        <p>{{form.password2}}</p>
-                        <button style="background-color:#F4EB16; color:blue" class="btn btn-outline-info" type="submit">Sign Up</button>
-
-                   
-                
-                    <p style="color: white;">If you already have an account <a href="{% url 'login'%}?next={{request.path}}" target="blank"><strong>login</strong></a> instead.</p>
-                                           
-                    </form>
-                </div>
-            </div>
+      <div class="row">
+        <div class="col-md-7">
+          <h1>Register</h1>
         </div>
+        <div class="col-md-5">
+          <ol class="breadcrumb">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li class="active">Register</li>
+          </ol>
+        </div>
+      </div>
     </div>
+  </div>
+  <!--inner banner End-->
 
-
-</body>
+  <!--Main Content Start-->
+  <div class="main-content">
+    <div class="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            {% if messages %}
+            <div class="alert alert-success" id="alert-msg">
+              {% for message in messages %}
+              <p>{{ message }}</p>
+              {% endfor %}
+            </div>
+            {% endif %}
+            <form action="{% url 'register' %}" method="post">
+              {% csrf_token %}
+              <div class="contact-form">
+                <div class="col-md-12">
+                  <h3>Register yourself!</h3>
+                </div>
+                <div class="col-md-12">
+                  <div class="input-group">
+                    <p>{{ form.username.label_tag }}</p>
+                    <p>{{form.username}}</p>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <p>{{ form.password1.label_tag }}</p>
+                        <p>{{form.password1}}</p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <p>{{ form.password2.label_tag }}</p>
+                        <p>{{form.password2}}</p>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                  <div class="input-group text-center">
+                    <input type="submit" class="submit-btn" value="Sign Up Now!">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Main Content End-->
 {% endblock %}

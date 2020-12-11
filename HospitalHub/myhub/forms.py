@@ -6,7 +6,7 @@ class DoctorReviewForm(ModelForm):
         model = doctor_review
         fields = ['rating', 'comment']
         widgets = {
-            'comment': Textarea(attrs={'cols': 40, 'rows': 15})
+            'comment': Textarea(attrs={'cols': 128, 'rows': 3})
         }
 
 class HospitalReviewForm(ModelForm):
@@ -14,7 +14,7 @@ class HospitalReviewForm(ModelForm):
         model = hospital_review
         fields = ['rating', 'comment']
         widgets = {
-            'comment': Textarea(attrs={'cols': 40, 'rows': 15})
+            'comment': Textarea(attrs={'cols': 128, 'rows': 3})
         }
 
 

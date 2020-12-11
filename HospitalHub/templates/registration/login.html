@@ -5,11 +5,30 @@
 {% block content %}
 <head>
   <link rel="stylesheet" href="{% static 'forms.css' %}">
-
-
 </head>
 <body>
-  {% if form.errors %}
+<!--inner banner-->
+<!--inner banner-->
+<div class="inner-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Register</h1>
+      </div>
+      <div class="col-md-5">
+        <ol class="breadcrumb">
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li class="active">Register</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<!--inner banner End-->
+<!--inner banner End-->
+
+
+{% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
   {% endif %}
   
@@ -21,13 +40,14 @@
      
    
  
-  
+<div class="main-content">
+  <div class="team-details">
   <div class="container">
     <div class="row">
         <div class="col-md-6">
             <div class="card">
                 <form class="box" method="post" action="{% url 'login' %}">
-                    {{% csrf_token %}
+                    {% csrf_token %}
                     <h1>Login</h1>
                     <p class="text-muted"> Please enter your login and password!</p> 
                     <p style="color: white;">{{ form.username.label_tag }}</p>
@@ -42,13 +62,13 @@
         </div>
     </div>
 </div>
-
+</div></div>
 {% endif %}
 {% endif %}
-
+</body>
 <!--
   {# Assumes you setup the password_reset view in your URLconf #}
   <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 -->
-</body>
+
 {% endblock %}
