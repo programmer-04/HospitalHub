@@ -33,10 +33,11 @@
               </ul>
 
               <ul class="nav navbar-nav navbar-right">
-                {% if user.is_authenticated %}
+               
                 <li><form name="searchform" method="GET" action="{% url 'search' %}"> 
                   <input type="text" name="search" placeholder="Search" />
               </form></li>
+              {% if user.is_authenticated %}
                 <li ><a href="{% url 'user_review_list' user.username %}">User: {{ user.get_username }}</a></li>
                 <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
                 {% else %}

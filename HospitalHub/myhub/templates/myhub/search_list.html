@@ -2,6 +2,7 @@
 
 {% load static %}
 {% block content %}
+
 <!--Main Content Start-->
 <div class="main-content">
   <div class="team-page">
@@ -46,8 +47,10 @@
   </div>
 </div> 
 {% if not doctor_list and not hospital_list %}
+<h2 style="text-align: center; "><span style='font-size:150px; align-self:auto;' >&#9785;</span></h2>
 <div class="col-md-12 col-sm-12">
-  <h2>No results found for your query. You may want to enlist your query.</2>
+  
+  <h2 style="text-align: center; color: black;">No results found for your query. You may want to enlist your query.</h2>
   </div>
 {% endif %}
 {% endblock %}

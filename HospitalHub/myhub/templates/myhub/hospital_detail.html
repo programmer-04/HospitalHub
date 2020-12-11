@@ -4,8 +4,9 @@
 {% load static %}
 
 {% block content %}
-
-
+<head>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
 
 <!--inner banner-->
 <div class="inner-banner">
@@ -77,7 +78,7 @@
           {% for review in hospital.hospital_review_set.all %}
           <div class="item">
             <div class="testimonial-holder">
-              <div class="user-thumb"> <img src="" alt=""> <strong>{{ review.user_name }}</strong>
+              <div class="user-thumb"> <img src="" alt=""> <h3>{{ review.user_name }}</h3>
                 <i>{% for star in review.get_rating %} ⭐ {% endfor %}</i><br><i>{{ review.get_date }}</i> </div>
               <div class="test-text">
                 <p>{{ review.comment }}</p>

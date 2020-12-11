@@ -56,6 +56,18 @@ font-family: 'Rubik', sans-serif;
 
     
 }
-.
-
-
+h3
+{
+    color:black;
+    font-size: medium;
+}
+.fontSize span {
+    display: inline-block;
+    font-size: 26px;
+  }
+  
+  
+  /*BOX*/
+  .gridGroup {display:flex; margin-bottom:10px;}
+  .grid {position:relative; width:100px; height:50px; margin:0 10px 10px 0; border:1px solid blue; text-align:center;}
+  .grid:before {content:""; position:absolute; top:0; left:50%; transform:translateX(-50%); width:2px; height:100%; background:red;}
