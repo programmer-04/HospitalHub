@@ -1,0 +1,281 @@
+<h3 >Add your review</h3>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'doctor_add_review' doctor.id %}"  method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add"/>
+</form>
+
+
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'detailforms.css' %}">
+    <style>
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(181, 224, 61, 0.2);
+      max-width: 600px;
+      margin: auto;
+      background: rgb(10, 11, 71);
+      
+      text-align: center;
+      font-family: arial; 
+    }
+    
+     
+    .title {
+      color: grey;
+      font-size: 18px;
+    }
+    
+    button {
+      border: none;
+      outline: 0; 
+      display: inline-block;
+      padding: 8px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+    }
+    
+    a {
+      text-decoration: white;
+      font-size: 22px;
+      color: white;
+    }
+    
+    
+    </style>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      
+     
+    </head>
+    
+     
+    
+    <body  style="background: linear-gradient(to right,white,blue);">
+    <div class="card">
+    <div class="card-header heading-footer">
+    <div class="row">
+    <div class="col">
+    
+      <img src="{{doctor.profile.url}}"class="img-circle">
+    
+      <h1  style="color: white;"class="display-4" >Name: <small  style="color: white;"class="font-weight-bold">{{ doctor.first_name }} {{ doctor.last_name }}<small></h1>
+      
+       <h1 style="color: white;" class="display-4">Education:<small  style="color: white;" class="font-weight-bold">{{ doctor.edu.all|join:"; " }}</small></h1>
+      
+      <h1  style="color: white;"class="display-4">Hospital:<small  style="color: white;"class="font-weight-bold">{{ doctor.hospital.all|join:", "}}</small></h1>
+     
+    </div>
+    
+    
+     </div> 
+    <div class="col">
+    
+    <h3 style="color: white;">Add your review</h3>
+    {% if error_message %}<p style="color: white;"><strong>{{ error_message }}</strong></p>{% endif %}
+    
+    <form action="{% url 'doctor_add_review' doctor.id %}"  method="post" style="color:black">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Add" style="color: black;"/>
+    </form>
+    
+    
+    </div>
+    <div class="col">
+      {% if doctor.doctor_review_set.all %}
+    
+      <p style="color: white;">{% if doctor.intaverage_rating %} {% for star in doctor.intaverage_rating %} ⭐ {% endfor %} ({{doctor.doctor_review_set.all.count}} reviews) {% endif %} </p>
+     
+      <br>
+      <br>
+      <div>
+        {% for review in doctor.doctor_review_set.all %}
+        <div>
+          <h6 style="color: white;">{{ review.user_name }}</h6>
+          <h6>{% for star in review.get_rating %} ⭐ {% endfor %}</h6>
+          <h6 style="color: white;">{{ review.comment }}</em>
+          <h5 style="color: white;"><a href="{{ review.get_absolute_url }}">
+          Read more
+          </a></h5>
+        </div>
+        {% endfor %}
+        </div>
+    {% else %}
+    <p style="color: white;">No reviews for this doctor yet</p>
+    {% endif %}
+    
+    </div>
+    </div>
+    </div>
+
+    ---
+    Hospital!!
+
+    <head>
+  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{% static 'detailforms.css' %}">
+        <style>
+        
+        .card {
+          box-shadow: 0 4px 8px 0 rgba(181, 224, 61, 0.2);
+          max-width: 600px;
+          margin: auto;
+          text-align: center;
+          font-family: 'Rubik', Arial;
+          background :rgb(10, 11, 71);;
+          background-size: cover;
+          overflow: hidden;
+        }
+            
+         
+        .title {
+          color: grey;
+          font-size: 18px;
+        }
+        
+        button {
+          border: none;
+          outline: 0; 
+          display: inline-block;
+          padding: 8px;
+          color: white;
+          background-color: #000;
+          text-align: center;
+          cursor: pointer;
+          width: 100%;
+          font-size: 18px;
+        }
+        
+        a {
+          text-decoration: white;
+          font-size: 22px;
+          color: white;
+        }
+        
+        button:hover, a:hover {
+          opacity: 0.7;
+        }
+        </style>
+        <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        
+        </head>
+        <body  style="background: linear-gradient(to right,white,blue);">
+        <div class="card">
+          <div class="card-header heading-footer">
+        
+        
+          <h1 style="color: white;">Name: {{ hospital.name }}</h1>
+          
+         <!-- <p><strong>Author:</strong> <a href="">{{ book.author }}</a></p>--> <!-- author detail link not yet defined -->
+          <p style="color: white;"> <strong>About:</strong> {{ hospital.desc }}</p>
+          <p style="color: white;"> <strong>Address:</strong> {{ hospital.building }}, {{ hospital.street }}, {{ hospital.city }}, {{ hospital.pincode }}</p>
+        <!--
+          <h3 style="color: white;"> ambulance details</h>
+        {% for amb in hospital.ambulance_set.all %}
+          
+          <h5 style="color: white;">{{ amb.key2}})ambulance type: {{ amb.ambvehicletype}}</h5>
+          <h5 style="color: white;"> capcity:{{ amb.vehiclecapacity}}</h5>
+          {% endfor %}
+        
+        
+        <h3 style="color: white;"> Hospital contact details</h>
+        {% for phone in hospital.hospphoneno_set.all %}
+               <h5 style="color: white;"> {{phone.phonenumber}}</h5>
+              {% endfor %}-->
+        
+        <!-- <div style="margin-left:20px;margin-top:20px">
+            <h4>Copies</h4>
+        
+            {% for copy in book.bookinstance_set.all %}
+              <hr>
+              <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">
+                {{ copy.get_status_display }}
+              </p>
+              {% if copy.status != 'a' %}
+                <p><strong>Due to be returned:</strong> {{ copy.due_back }}</p>
+              {% endif %}
+              <p><strong>Imprint:</strong> {{ copy.imprint }}</p>
+              <p class="text-muted"><strong>Id:</strong> {{ copy.id }}</p>
+            {% endfor %}
+          </div>-->
+         
+          <h3 style="color: white;">Add your review</h3>
+          {% if error_message %}<p style="color: white;"><strong>{{ error_message }}</strong></p>{% endif %}
+          
+          <form action="{% url 'hospital_add_review' hospital.id %}"  method="post" style="color: black;">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <input type="submit" value="Add"  style="color:black"/>
+          </form>
+          {% if hospital.hospital_review_set.all %}
+        
+          <p style="color: white;">{% if hospital.intaverage_rating %} {% for star in hospital.intaverage_rating %} ⭐ {% endfor %} ({{hospital.hospital_review_set.all.count}} reviews){% endif %}</p>
+         
+          
+        
+          
+          <br>
+          <br>
+          <div > 
+            {% for review in hospital.hospital_review_set.all %}
+            <div>
+                <h6 style="color: white;">{{ review.user_name }}</h6>
+                <h6>{% for star in review.get_rating %} ⭐ {% endfor %}</h6>
+                <h6 style="color: white;">{{ review.comment }}</em>
+                <h5 style="color: white;"><a href="{{ review.get_absolute_url }}">
+                Read more
+                </a></h5>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p style="color: white;">No reviews for this hospital yet</p>
+        {% endif %}
+    
+        <head>
+            <link rel="stylesheet" href="{% static 'forms.css' %}">
+          </head>
+        <body>
+            
+        
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <form class="box" method="post" action="{% url 'register' %}">
+                                {{% csrf_token %}
+                                <h1>Register</h1>
+                                <p style="color: white;">{{ form.username.label_tag }}</p>
+                                <p>{{form.username}}</p>
+                                <p style="color: white;">{{ form.password1.label_tag }}</p>
+                                <p>{{form.password1}}</p>
+                                <p style="color: white;">{{ form.password2.label_tag }}</p>
+                                <p>{{form.password2}}</p>
+                                <button style="background-color:#F4EB16; color:blue" class="btn btn-outline-info" type="submit">Sign Up</button>
+        
+                           
+                        
+                            <p style="color: white;">If you already have an account <a href="{% url 'login'%}?next={{request.path}}" target="blank"><strong>login</strong></a> instead.</p>
+                                                   
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        
+        </body>

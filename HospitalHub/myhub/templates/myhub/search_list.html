@@ -1,65 +1,53 @@
 {% extends "base_generic.html" %}
 
 {% load static %}
-<link rel="stylesheet" href="{% static 'myhub/style.css' %}">
 {% block content %}
-<body style="background: linear-gradient(to right,white,blue);">
-  <p> <h1>Doctor List</h1></p>
-  {% if doctor_list %}
-  
-    
-      <table class="table" style="border: none; margin-left: auto; margin-right: auto;">
-        <tbody>
-          {% for doc in doctor_list %}
-          
-          <tr style="border-bottom: 4px solid grey">
-       <td style=" border: none; font-size:30px;"> {{ doc.first_name }} {{doc.last_name}}</td>
-       <td style=" border: none; font-size:20px;"> {% if doc.intaverage_rating %} {% for star in doc.intaverage_rating %} ⭐ {% endfor %} from {% endif %} {{doc.doctor_review_set.all.count}} reviews  </td>
-       <td style=" border: none; font-size:20px;"> {{ doc.edu.all|join:"; " }}</td>
-       <td style=" border: none; font-size:20px;"> {{ doc.hospital.all|join:"; " }}</td>
-   <td style="border: none;">    
-          <button type="button">
-          <a href="{{ doc.get_absolute_url }}">View Details</a>
-        </button>
-        </td>
-    </tr>
-     
-      {% endfor %}
-      </tbody>
-      </table>
-      
-   
-  
-  {% else %}
-    <p>No doctors presently available.</p>
-  {% endif %}
-  
-  <p> <h1>Hospital List</h1></p>
-  {% if hospital_list %}
-  
-  
-
-    <table class="table" style="border: none;">
-      <tbody>
+<!--Main Content Start-->
+<div class="main-content">
+  <div class="team-page">
+    <div class="container">
+      <div class="row">
+        {% for doc in doctor_list %}
+        <div class="col-md-3 col-sm-6">
+          <div class="team-box mb50">
+            <div class="team-thumb"> <a href="{{ doc.get_absolute_url }}" class="view"><i class="fa fa-Heart"
+                  aria-hidden="true"></i></a> <img src="{{ doc.profile.url }}" alt=""></div>
+            <div class="team-text">
+              <h5><a href="{{ doc.get_absolute_url }}">{{ doc.first_name }} {{doc.last_name}}</a></h5>
+              <br><strong>{{ doc.edu.all|join:"; " }}</strong>
+              <br><strong>{{ doc.hospital.all|join:"; " }}</strong>
+              <br><strong>{% if doc.intaverage_rating %} {% for star in doc.intaverage_rating %} ⭐ {% endfor %} {% endif %} ({{doc.doctor_review_set.all.count}} reviews)</strong>
+          </div>
+        </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+  <!--Main Content Start-->
+<div class="main-content">
+  <div class="team-page">
+    <div class="container">
+      <div class="row">
         {% for hosp in hospital_list %}
-          
-          <tr style="border-bottom: 4px solid grey">
-       <td style=" border: none; font-size:30px;"> {{ hosp.name }}</td>
-       <td style=" border: none; font-size:20px;"> {% if hosp.intaverage_rating %} {% for star in hosp.intaverage_rating %} ⭐ {% endfor %} from {% endif %} {{hosp.hospital_review_set.all.count}} reviews  </td>
-       <td style=" border: none; font-size:20px;"> {{ hosp.city }}</td>
-   <td style="border: none;">    
-          <button type="button">
-          <a href="{{ hosp.get_absolute_url }}">View Details</a>
-        </button>
-        </td>
-    </tr>
-     
-      {% endfor %}
-    </tbody>
-    </table>
-  
-  {% else %}
-    <p>No hospitals presently listed.</p>
-  {% endif %}   
-</body>
+        <div class="col-md-3 col-sm-6">
+          <div class="team-box mb50">
+            <div class="team-text">
+              <h5><a href="{{ hosp.get_absolute_url }}">{{ hosp.name }}</a></h5>
+              <br><strong>{{ hosp.city }}</strong>
+              <br><strong>{% if hosp.intaverage_rating %} {% for star in hosp.intaverage_rating %} ⭐ {% endfor %} from {% endif %} {{hosp.hospital_review_set.all.count}} reviews</strong>
+          </div>
+        </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div> 
+{% if not doctor_list and not hospital_list %}
+<div class="col-md-12 col-sm-12">
+  <h2>No results found for your query. You may want to enlist your query.</2>
+  </div>
+{% endif %}
 {% endblock %}

@@ -4,113 +4,93 @@
 {% load static %}
 {% block content %}
 
-<head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="{% static 'detailforms.css' %}">
-<style>
-.card {
-  box-shadow: 0 4px 8px 0 rgba(181, 224, 61, 0.2);
-  max-width: 600px;
-  margin: auto;
-  background: rgb(10, 11, 71);
-  
-  text-align: center;
-  font-family: arial; 
-}
 
- 
-.title {
-  color: grey;
-  font-size: 18px;
-}
-
-button {
-  border: none;
-  outline: 0; 
-  display: inline-block;
-  padding: 8px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
-}
-
-a {
-  text-decoration: white;
-  font-size: 22px;
-  color: white;
-}
-
-
-</style>
-<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  
- 
-</head>
-
- 
-
-<body  style="background: linear-gradient(to right,white,blue);">
-<div class="card">
-<div class="card-header heading-footer">
-<div class="row">
-<div class="col">
-
-  <img src="{{doctor.profile.url}}"class="img-circle">
-
-  <h1  style="color: white;"class="display-4" >Name: <small  style="color: white;"class="font-weight-bold">{{ doctor.first_name }} {{ doctor.last_name }}<small></h1>
-  
-   <h1 style="color: white;" class="display-4">Education:<small  style="color: white;" class="font-weight-bold">{{ doctor.edu.all|join:"; " }}</small></h1>
-  
-  <h1  style="color: white;"class="display-4">Hospital:<small  style="color: white;"class="font-weight-bold">{{ doctor.hospital.all|join:", "}}</small></h1>
- 
-</div>
-
-
- </div> 
-<div class="col">
-
-<h3 style="color: white;">Add your review</h3>
-{% if error_message %}<p style="color: white;"><strong>{{ error_message }}</strong></p>{% endif %}
-
-<form action="{% url 'doctor_add_review' doctor.id %}"  method="post" style="color:black">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Add" style="color: black;"/>
-</form>
-
-
-</div>
-<div class="col">
-  {% if doctor.doctor_review_set.all %}
-
-  <p style="color: white;">{% if doctor.intaverage_rating %} {% for star in doctor.intaverage_rating %} ⭐ {% endfor %} ({{doctor.doctor_review_set.all.count}} reviews) {% endif %} </p>
- 
-  <br>
-  <br>
-  <div>
-    {% for review in doctor.doctor_review_set.all %}
-    <div>
-      <h6 style="color: white;">{{ review.user_name }}</h6>
-      <h6>{% for star in review.get_rating %} ⭐ {% endfor %}</h6>
-      <h6 style="color: white;">{{ review.comment }}</em>
-      <h5 style="color: white;"><a href="{{ review.get_absolute_url }}">
-      Read more
-      </a></h5>
+<!--inner banner-->
+<div class="inner-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Doctors Details</h1>
+      </div>
+      <div class="col-md-5">
+        <ol class="breadcrumb">
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li class="active">Doctors Details</li>
+        </ol>
+      </div>
     </div>
-    {% endfor %}
-    </div>
-{% else %}
-<p style="color: white;">No reviews for this doctor yet</p>
-{% endif %}
+  </div>
+</div>
+<!--inner banner End-->
 
+<!--Main Content Start-->
+<div class="main-content">
+  <div class="team-details">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-sm-6">
+          <div class="team-detail-img"> <img src="{{doctor.profile.url}}" alt=""> </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <div class="team-details-text">
+            <div class="sectio-title-2"> <strong>{{ doctor.edu.all|join:"; " }}</strong>
+            <div class="sectio-title-2"> <strong>{{ doctor.hospital.all|join:", "}}</strong>
+              <h2>{{ doctor.first_name }} {{ doctor.last_name }}</h2>
+              <h4>{% if doctor.doctor_review_set.all %}{% if doctor.intaverage_rating %} {% for star in doctor.intaverage_rating %} ⭐ {% endfor %} ({{doctor.doctor_review_set.all.count}} reviews) {% endif %}{% endif %}</h2>
+            </div>
+            <p>(Doctor Details)</p>
+          </div>
+        </div>
+      </div>
+      <!--
+      <div class="row">
+        <div class="col-md-12">
+          <div class="team-exp">
+            <div class="sectio-title-2"> <strong>{{ object.speciality }}</strong>
+              <h2>Experiences</h2>
+            </div>
+            {{ object.experience}}
+          </div>
+        </div>
+      </div>-->
+
+    <!--Testimonials Start-->
+    <div class="col-md-12">
+      <div class="home-testimonials">
+        <div class="sectio-title-2"> <h3>Reviews</h3>
+        </div>
+        <div class="item">
+          <div class="testimonial-holder">
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            <div class="sectio-title-2"> <strong>Review your experience!</strong></div>
+
+            <form action="{% url 'doctor_add_review' doctor.id %}"  method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input class="book-app" type="submit" value="Add"/>
+            </form>
+          </div>
+        </div>
+              <!--Slider Start-->
+          {% for review in doctor.doctor_review_set.all %}
+          <div class="item">
+            <div class="testimonial-holder">
+              <div class="user-thumb"> <img src="" alt=""> <strong>{{ review.user_name }}</strong>
+                <i>{% for star in review.get_rating %} ⭐ {% endfor %}</i><br><i>{{ review.get_date }}</i> </div>
+              <div class="test-text">
+                <p>{{ review.comment }}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+          <!--Slider End-->
+
+      </div>
+    </div>
+    <!--Testimonials End-->
+    </div>
+  </div>
 </div>
-</div>
-</div>
+<!--Main Content End-->
 {% endblock %}
-</body>
-</html>

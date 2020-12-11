@@ -118,6 +118,9 @@ class doctor_review(models.Model):
             stars += "*"
         return stars
 
+    def get_date(self):
+        return self.pub_date.date()
+
 class hospital_review(models.Model):
     RATING_CHOICES = (
         (1, '1'),
