@@ -38,6 +38,7 @@ def HospitalDetailView(request, hospital_id):
 def DoctorDetailView(request, doctor_id):
     Doctor = get_object_or_404(doctor, pk=doctor_id)
     form = DoctorReviewForm()
+    print(Doctor.edu)
     return render(request, 'myhub/doctor_detail.html', {'doctor': Doctor, 'form': form})
 
 
@@ -82,6 +83,7 @@ import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 @login_required
 def doctor_add_review(request, doctor_id):
@@ -91,7 +93,8 @@ def doctor_add_review(request, doctor_id):
         rating = form.cleaned_data['rating']
         comment = form.cleaned_data['comment']
         #user_name = form.cleaned_data['user_name']
-        user_name = request.user.username
+        print(request.user.username)
+        user_name = User.objects.get(username=request.user.username)
         Review = doctor_review()
         Review.doctor = Doctor
         Review.user_name = user_name
@@ -114,7 +117,7 @@ def hospital_add_review(request, hospital_id):
         rating = form.cleaned_data['rating']
         comment = form.cleaned_data['comment']
         #user_name = form.cleaned_data['user_name']
-        user_name = request.user.username
+        user_name = User.objects.get(username=request.user.username)
         Review = hospital_review()
         Review.hospital = Hospital
         Review.user_name = user_name
@@ -152,9 +155,9 @@ def search(request):
         status=list(chain(firstnamematch, lastnamematch))
         '''
         if names:
-            qset1 =  reduce(operator.__or__, [Q(first_name__icontains=name) | Q(last_name__icontains=name) for name in names])
+            qset1 =  reduce(operator.__or__, [Q(first_name__icontains=name) | Q(last_name__icontains=name) | Q(edu__degree__icontains=name) for name in names])
             doctor_list = doctor.objects.filter(qset1).distinct()
-            qset2 = reduce(operator.__or__, [Q(name__icontains=hospname) for hospname in names])
+            qset2 = reduce(operator.__or__, [Q(name__icontains=hospname) | Q(city__icontains=hospname) for hospname in names])
             hospital_list = hospital.objects.filter(qset2).distinct()
             # doctor.objects.filter(last_name__icontains=name) # filter returns a list so you might consider skip except part
             return render(request,"myhub/search_list.html",{"doctor_list":doctor_list, "hospital_list":hospital_list})

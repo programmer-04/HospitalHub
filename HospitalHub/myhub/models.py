@@ -14,6 +14,7 @@ class doctoruni(models.Model):
 class doctoredu(models.Model):
     degree = models.CharField(max_length=200, help_text='Enter degree')
     uni = models.ForeignKey(doctoruni, help_text='Select a uni for this degree', on_delete=models.CASCADE)
+    
     def __str__(self):
         """String for representing the Model object."""
         return self.degree + ", " + str(self.uni)
@@ -23,7 +24,9 @@ class doctor(models.Model):
     last_name = models.CharField(max_length=100, blank=False, null=True)  # Field name made lowercase.
     edu = models.ManyToManyField(doctoredu, help_text="Select an education")
     hospital = models.ManyToManyField('hospital', help_text="Select hospital(s):")
-    profile= models.ImageField(default ='default.jpg') 
+    profile= models.ImageField(default ='default.jpg')
+    desc = models.CharField(max_length=10000, help_text='Enter Doctor Description', default="No description available for this doctor.")
+    speciality = models.CharField(max_length=1000, help_text='Enter Doctor Speciality', default=edu) 
 
     def get_absolute_url(self):
         return reverse('doctors-detail', args=[str(self.id)])
@@ -90,7 +93,8 @@ class  hospphoneno(models.Model):
 
       key1 = models.ForeignKey(hospital, on_delete=models.CASCADE,)
       phonenumber= models.CharField(max_length = 10, primary_key =True)
-      
+from django.contrib.auth.models import User
+    
 class doctor_review(models.Model):
     RATING_CHOICES = (
         (1, '1'),
@@ -101,7 +105,7 @@ class doctor_review(models.Model):
     )
     doctor = models.ForeignKey(doctor, on_delete=models.CASCADE,)
     pub_date = models.DateTimeField('date published')
-    user_name = models.CharField(max_length=100)
+    user_name = models.ForeignKey(User, on_delete=models.CASCADE,)
     comment = models.CharField(max_length=200)
     rating = models.IntegerField(choices=RATING_CHOICES)
 
@@ -131,7 +135,7 @@ class hospital_review(models.Model):
     )
     hospital = models.ForeignKey(hospital, on_delete=models.CASCADE,)
     pub_date = models.DateTimeField('date published')
-    user_name = models.CharField(max_length=100)
+    user_name = models.ForeignKey(User, on_delete=models.CASCADE,)
     comment = models.CharField(max_length=200)
     rating = models.IntegerField(choices=RATING_CHOICES)
 
@@ -149,3 +153,6 @@ class hospital_review(models.Model):
         return stars
         
 
+class UserProfile(models.Model):
+    user   = models.OneToOneField(User, on_delete=models.CASCADE,)
+    profile = models.ImageField(default ='default.jpg')
