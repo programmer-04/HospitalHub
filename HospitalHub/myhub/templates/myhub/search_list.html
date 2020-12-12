@@ -2,7 +2,7 @@
 
 {% load static %}
 {% block content %}
-
+{% if doctor_list %}
 <!--Main Content Start-->
 <div class="main-content">
   <div class="team-page">
@@ -26,6 +26,9 @@
     </div>
   </div>
 </div>
+{% endif %}
+
+{% if hospital_list %}
   <!--Main Content Start-->
 <div class="main-content">
   <div class="team-page">
@@ -45,7 +48,8 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
+{% endif %} 
 {% if not doctor_list and not hospital_list %}
 <h2 style="text-align: center; "><span style='font-size:150px; align-self:auto;' >&#9785;</span></h2>
 <div class="col-md-12 col-sm-12">

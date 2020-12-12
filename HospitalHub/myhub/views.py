@@ -151,12 +151,13 @@ def search(request):
         lastnamematch = doctor.objects.filter(last_name__icontains=name)
         status=list(chain(firstnamematch, lastnamematch))
         '''
-        qset1 =  reduce(operator.__or__, [Q(first_name__icontains=name) | Q(last_name__icontains=name) for name in names])
-        doctor_list = doctor.objects.filter(qset1).distinct()
-        qset2 = reduce(operator.__or__, [Q(name__icontains=hospname) for hospname in names])
-        hospital_list = hospital.objects.filter(qset2).distinct()
-        # doctor.objects.filter(last_name__icontains=name) # filter returns a list so you might consider skip except part
-        return render(request,"myhub/search_list.html",{"doctor_list":doctor_list, "hospital_list":hospital_list})
+        if names:
+            qset1 =  reduce(operator.__or__, [Q(first_name__icontains=name) | Q(last_name__icontains=name) for name in names])
+            doctor_list = doctor.objects.filter(qset1).distinct()
+            qset2 = reduce(operator.__or__, [Q(name__icontains=hospname) for hospname in names])
+            hospital_list = hospital.objects.filter(qset2).distinct()
+            # doctor.objects.filter(last_name__icontains=name) # filter returns a list so you might consider skip except part
+            return render(request,"myhub/search_list.html",{"doctor_list":doctor_list, "hospital_list":hospital_list})
     return render(request,"myhub/search_list.html",{})
     
 #class ambulanceListView(generic.ListView):
