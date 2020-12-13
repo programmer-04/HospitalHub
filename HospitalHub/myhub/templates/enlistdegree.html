@@ -7,9 +7,27 @@
     <link rel="stylesheet" href="{% static 'forms.css' %}">
 
   </head>
-<body style="background: linear-gradient(to right,white,blue);">
-    
+<body >
+     <!--inner banner-->
+<div class="inner-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Enlist Degree!</h1>
+      </div>
+      <div class="col-md-5">
+        <ol class="breadcrumb">
+        <!--  <li><a href="{% url 'index' %}">Home</a></li>
+          <li class="active">Register</li>-->
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<!--inner banner End-->
 
+<div class="main-content">
+  <div class="team-details">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -21,18 +39,14 @@
                         <p style="color: white;">{{fields.label_tag}}</p>
                         <p>{{fields}}</p>
                         {%endfor%}
-                        <button class="btn btn-outline-info" type="submit">Sign Up</button>
-
-                   
-                
-                   
-                                           
+                        <button class="btn btn-outline-info" type="submit">Sign Up</button>          
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
+  </div>
+</div>
 
 </body>
 {% endblock %}

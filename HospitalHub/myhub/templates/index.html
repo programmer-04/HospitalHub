@@ -11,20 +11,25 @@
         <div class="welcome-box">
           <div class="col-md-6 col-sm-6">
             <div class="welcome-text">
-              <div class="sectio-title-2"> <strong>Welcome to your</strong>
+              <div class="sectio-title-2"> <strong>Welcome to</strong>
                 <h2>HospitalHub</h2>
               </div>
-              <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <p> HospitalHub facilitate users/patients who wish to seek state-of-the-art medical
+                treatment through a peer reviewed and rated system.When in times of medical need, we firmly believe that one should not have to
+                exploit what-not(!) helplessly to find the best treatment. There is a prudent
+                requirement of a reliable peer-reviewed and rated system which is designed to
+                be honest and transparent, to allow users to find the best treatment for their
+                need.</p>
               <form name="searchform" method="GET" action="{% url 'search' %}"> 
                 <input type="text" name="search" placeholder="Search your hospital/doctor here!" style="width: 500px;"/>
-                <p>Learn more about your favourite healthcare service!</p>
+                <p>Can search through Name,City or Degree!</p>
               </form>
-              <strong class="signature">Adam Johns</strong>
-              <h6 class="designation">MS Heart Care Hospital</h6>
+              <!--<strong class="signature">Adam Johns</strong>
+              <h6 class="designation">MS Heart Care Hospital</h6>-->
             </div>
           </div>
           <div class="col-md-6 col-sm-6">
-            <div class="welcome-img"> <img src="{% static 'heartcare/images/welcome.jpg' %}" alt=""> </div>
+            <div class="welcome-img"> <img src="{% static 'heartcare/images/homepage.jpg' %}" alt=""> </div>
           </div>
         </div>
       </div>
@@ -39,14 +44,14 @@
             <div class="features-box">
               <h3>Hospitals</h3>
               <p>{{num_hospitals}}</p>
-              <a href="appointment.html">Get Free Appointment</a>
+              <a href="{% url 'hospitals' %}">View Hospitals</a>
             </div>
           </div>
           <div class="col-md-4 col-sm-4">
             <div class="features-box">
               <h3>Doctors</h3>
               <p>{{num_doctors}}</p>
-              <a href="contact-2.html">Contact Us</a>
+              <a href="{% url 'doctors' %}">View Doctors</a>
             </div>
           </div>
           <div class="col-md-4 col-sm-4">

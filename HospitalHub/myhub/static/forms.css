@@ -1,7 +1,7 @@
       .box {
       width: 500px;
       padding: 40px;
-      border: 2px solid #bf0310;
+      border: 2px solid #bf0311;
       background: white;
       text-align: center;
       transition: 0.25s;
@@ -21,13 +21,13 @@
       padding: 10px 10px;
       width: 250px;
       outline: none;
-      color:#bf0311;
+      color:white;
       border-radius: 24px;
       transition: 0.25s;
   }
   
   .box h1 {
-      color: #bf0311;
+      color:#bf0311;
       text-transform: uppercase;
       font-family: 'Rubik', sans-serif;
 
