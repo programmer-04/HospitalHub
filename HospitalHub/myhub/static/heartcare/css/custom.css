@@ -734,6 +734,15 @@ body .tp0 {
 	height: 34px;
 }
 
+.main-content-enlist {
+	width: 100%;
+	float: left;
+	padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /**************  Welcome Section  **************/
 
 .section-title-1 {

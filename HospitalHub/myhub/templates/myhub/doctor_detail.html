@@ -37,18 +37,19 @@
           <div class="team-details-text">
             <div class="sectio-title-2"> <strong>{{ doctor.edu.all|join:"; " }}</strong>
             <div class="sectio-title-2"> <strong>{{ doctor.hospital.all|join:", "}}</strong>
+            <div class="sectio-title-2"> <strong>{{ doctor.speciality}}</strong></div>
               <h2>{{ doctor.first_name }} {{ doctor.last_name }}</h2>
               <h4>{% if doctor.doctor_review_set.all %}{% if doctor.intaverage_rating %} {% for star in doctor.intaverage_rating %} ⭐ {% endfor %} ({{doctor.doctor_review_set.all.count}} reviews) {% endif %}{% endif %}</h2>
             </div>
-            <p>(Doctor Details)</p>
+            <p>{{ doctor.experience}}</p>
           </div>
         </div>
       </div>
-      <!--
-      <div class="row">
+      
+      <!--<div class="row">
         <div class="col-md-12">
           <div class="team-exp">
-            <div class="sectio-title-2"> <strong>{{ object.speciality }}</strong>
+            <div class="sectio-title-2"> <strong>{{ doctor.speciality }}</strong>
               <h2>Experiences</h2>
             </div>
             {{ object.experience}}
@@ -77,7 +78,7 @@
           {% for review in doctor.doctor_review_set.all %}
           <div class="item">
             <div class="testimonial-holder">
-              <div class="user-thumb"> <img src="{{ review.user_name.profile }}" alt=""> <h3>{{ review.user_name }}</h3>
+              <div class="user-thumb"> <img src="{{ review.user_name.user.profile }}" alt=""> <h3>{{ review.user_name }}</h3>
                 <i>{% for star in review.get_rating %} ⭐ {% endfor %}</i><br><i>{{ review.get_date }}</i> </div>
               <div class="test-text">
                 <p>{{ review.comment }}</p>

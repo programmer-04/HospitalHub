@@ -154,5 +154,5 @@ class hospital_review(models.Model):
         
 
 class UserProfile(models.Model):
-    user   = models.OneToOneField(User, on_delete=models.CASCADE,)
+    user   = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user')
     profile = models.ImageField(default ='default.jpg')
