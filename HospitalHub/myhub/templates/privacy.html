@@ -1,0 +1,46 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block content %}
+    <!--inner banner-->
+<div class="inner-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1>Privacy</h1>
+        </div>
+        <div class="col-md-5">
+          <ol class="breadcrumb">
+          <!--  <li><a href="{% url 'index' %}">Home</a></li>
+            <li class="active">Register</li>-->
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--inner banner End-->
+
+  <!--Main Content Start-->
+<div class="main-content">
+    <section class="faqs">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor gravida sapien. Donec id lorem a turpis sodales consectetur tincidunt at metus. Aenean odio ex, consequat vel urna ut, venenatis elementum augue. Vestibulum viverra, dolor ac semper vestibulum, turpis quam consectetur augue, vitae dictum nibh dolor a ex. Praesent quis fringilla lorem, eget gravida nisi. Vivamus eu tortor urna. Mauris quis elit maximus, tempus purus a, cursus sapien. Aliquam ultrices felis facilisis orci rutrum lacinia. Donec semper, nibh vitae volutpat accumsan, diam tortor pulvinar metus, quis tempus mauris nunc venenatis elit. Sed pulvinar urna eget nisi tempus consectetur.
+                </h4>
+                </div>
+                <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse" role="tabpanel"
+                  aria-labelledby="heading{{ forloop.counter }}">
+                  <div class="panel-body">{{ faq.answer }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!--Main Content End-->
+  {% endblock content %}

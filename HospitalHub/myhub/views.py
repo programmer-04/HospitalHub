@@ -11,10 +11,11 @@ def index(request):
     # Generate counts of some of the main objects
     num_doctors = doctor.objects.all().count()
     num_hospitals = hospital.objects.all().count()
-    
+    num_reviews = doctor_review.objects.all().count()+hospital_review.objects.all().count()
     context = {
         'num_hospitals': num_hospitals,
         'num_doctors': num_doctors,
+        'num_reviews': num_reviews,
         }
 
     # Render the HTML template index.html with the data in the context variable
@@ -330,5 +331,8 @@ def enlistuni(request):
             return render(request = request, template_name = "enlistuni.html",context={"form":form})
     form = AddUniForm
     return render(request = request, template_name = "enlistuni.html",context={"form":form})
+
+def privacy(request):
+    return render(request=request, template_name="privacy.html")
 
     

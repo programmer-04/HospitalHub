@@ -26,8 +26,8 @@ urlpatterns = [
     path("enlist/hospital", views.enlisthospital, name="enlisthospital"),
     path("enlist/newdegree", views.enlistdegree, name="enlistdegree"),
     path("enlist/newuni", views.enlistuni, name="enlistuni"),
-
-]
+    path("privacy", views.privacy, name="privacy"),
+    ]
 '''urlpatterns += [   
     url(r'^doctors/(?P<doctor_id>[0-9]+)/add_review/$', views.add_review, name='add_review'),
 ]'''

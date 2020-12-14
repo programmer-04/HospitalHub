@@ -32,7 +32,7 @@ class CustomAuthForm(AuthenticationForm):
 class EnlistDoctorForm(ModelForm):
     class Meta:
         model = doctor
-        fields = ['first_name', 'last_name', 'edu', 'hospital', 'profile']
+        fields = ['first_name', 'last_name', 'edu', 'speciality', 'hospital', 'desc', 'profile']
 
 class EnlistHospitalForm(ModelForm):
     class Meta:

@@ -5,13 +5,10 @@
       <div class="row">
         <div class="col-md-12">
           <nav class="navbar navbar-default">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle
-                  navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                  class="icon-bar"></span> </button>
-              <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'heartcare/images/logo.png' %}"
-                  alt="" width="190px" height="60px"> </div>
+            
+              
+              <div class="navbar-header"><a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'heartcare/images/logo.png' %}"
+                  alt="" width="150px" height="60px"> </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -37,12 +34,12 @@
                   <input type="text" name="search" placeholder="Search" />
               </form></li>
               {% if user.is_authenticated %}
-                <li ><a href="{% url 'user_review_list' user.id %}">User: {{ user.get_username }}</a></li>
+                <li ><a href="{% url 'user_review_list' user.id %}">{{ user.get_username }}</a></li>
                 <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
                 {% else %}
                 <li ><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>    
                 {% endif %}
-                <li><a href="{% url 'register' %}?next={{request.path}}">New? Register now!</a></li>
+                <li><a href="{% url 'register' %}?next={{request.path}}">Register now!</a></li>
               </ul>
             </div>
             <!-- /.navbar-collapse -->
