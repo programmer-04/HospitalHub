@@ -26,7 +26,7 @@ class doctor(models.Model):
     hospital = models.ManyToManyField('hospital', help_text="Select hospital(s):")
     profile= models.ImageField(default ='default.jpg')
     desc = models.CharField(max_length=10000, help_text='Enter Doctor Description', default="No description available for this doctor.")
-    speciality = models.CharField(max_length=1000, help_text='Enter Doctor Speciality', default=edu) 
+    speciality = models.CharField(max_length=1000, help_text='Enter Doctor Speciality', default="No speciality available at this moment.") 
 
     def get_absolute_url(self):
         return reverse('doctors-detail', args=[str(self.id)])
