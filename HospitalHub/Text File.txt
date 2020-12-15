@@ -1,0 +1,56 @@
+
+    {
+      "model": "myhub.doctor_review",
+      "pk": 1,
+      "fields": {
+        "doctor": 1,
+        "pub_date": "2020-12-12T17:47:44.517Z",
+        "user_name": 1,
+        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a",
+        "rating": 3
+      }
+    },
+    {
+      "model": "myhub.doctor_review",
+      "pk": 2,
+      "fields": {
+        "doctor": 1,
+        "pub_date": "2020-12-13T11:40:46.504Z",
+        "user_name": 1,
+        "comment": "tdhjxfyk",
+        "rating": 2
+      }
+    },
+    {
+      "model": "myhub.doctor_review",
+      "pk": 3,
+      "fields": {
+        "doctor": 1,
+        "pub_date": "2020-12-13T12:43:28.481Z",
+        "user_name": 1,
+        "comment": "very good",
+        "rating": 5
+      }
+    },
+    {
+      "model": "myhub.doctor_review",
+      "pk": 4,
+      "fields": {
+        "doctor": 1,
+        "pub_date": "2020-12-15T05:13:49.769Z",
+        "user_name": 1,
+        "comment": ",mnljh;",
+        "rating": 3
+      }
+    },
+    {
+      "model": "myhub.doctor_review",
+      "pk": 5,
+      "fields": {
+        "doctor": 1,
+        "pub_date": "2020-12-15T07:10:14.684Z",
+        "user_name": 1,
+        "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a",
+        "rating": 2
+      }
+    }, 

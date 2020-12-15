@@ -247,11 +247,13 @@ def enlistdoctor(request):
             profile = form.cleaned_data['profile']
             edu = form.cleaned_data['edu']
             speciality = form.cleaned_data['speciality']
+            desc = form.cleaned_data['desc']
             Doctor = doctor()
             Doctor.first_name = first_name
             Doctor.last_name = last_name
             Doctor.profile = profile
             Doctor.speciality = speciality
+            Doctor.desc = desc
             Doctor.save()
             Doctor.edu.set(edu)
             Doctor.hospital.set(hospital)
