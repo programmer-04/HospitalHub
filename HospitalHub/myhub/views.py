@@ -39,6 +39,7 @@ def HospitalDetailView(request, hospital_id):
 def DoctorDetailView(request, doctor_id):
     Doctor = get_object_or_404(doctor, pk=doctor_id)
     form = DoctorReviewForm()
+    #reviewrandomly()
     #print(Doctor.doctor_review_set.all()[0].user_name.user.profile)
     return render(request, 'myhub/doctor_detail.html', {'doctor': Doctor, 'form': form})
 
@@ -341,10 +342,10 @@ def privacy(request):
 
 import random
 def reviewrandomly():
-    for Doctor in doctor.objects.all():
+    for Hospital in hospital.objects.all():
         for user in User.objects.all():
-            Review = doctor_review()
-            Review.doctor = Doctor
+            Review = hospital_review()
+            Review.hospital = Hospital
             Review.user_name = user
             Review.rating = random.randint(1,5)
             Review.comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
