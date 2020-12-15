@@ -339,4 +339,15 @@ def enlistuni(request):
 def privacy(request):
     return render(request=request, template_name="privacy.html")
 
+import random
+def reviewrandomly():
+    for Doctor in doctor.objects.all():
+        for user in User.objects.all():
+            Review = doctor_review()
+            Review.doctor = Doctor
+            Review.user_name = user
+            Review.rating = random.randint(1,5)
+            Review.comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            Review.pub_date = datetime.datetime.now()
+            Review.save()
     
