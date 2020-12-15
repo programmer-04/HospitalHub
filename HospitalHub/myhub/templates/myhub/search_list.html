@@ -37,6 +37,8 @@
         {% for hosp in hospital_list %}
         <div class="col-md-3 col-sm-6">
           <div class="team-box mb50">
+            <div class="team-thumb"> <a href="{{ hosp.get_absolute_url }}" class="view"><i class="fa fa-Heart"
+              aria-hidden="true"></i></a> <img src="{{ hosp.profile.url }}" alt=""></div>
             <div class="team-text">
               <h5><a href="{{ hosp.get_absolute_url }}">{{ hosp.name }}</a></h5>
               <br><strong>{{ hosp.city }}</strong>

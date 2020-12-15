@@ -61,7 +61,7 @@ class hospital(models.Model):
     profile= models.ImageField(default ='default.jpg') 
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     def get_absolute_url(self):
         return reverse('hospitals-detail', args=[str(self.id)])
@@ -110,7 +110,7 @@ class doctor_review(models.Model):
     rating = models.IntegerField(choices=RATING_CHOICES)
 
     def __str__(self):
-        return self.user_name
+        return str(self.user_name)
 
     def get_absolute_url(self):
         return reverse('doctors-reviews-detail', args=[str(self.id)])
@@ -140,7 +140,7 @@ class hospital_review(models.Model):
     rating = models.IntegerField(choices=RATING_CHOICES)
 
     def __str__(self):
-        return self.user_name
+        return str(self.user_name)
 
     def get_absolute_url(self):
         return reverse('hospitals-reviews-detail', args=[str(self.id)])
@@ -156,3 +156,6 @@ class hospital_review(models.Model):
 class UserProfile(models.Model):
     user   = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user')
     profile = models.ImageField(default ='default.jpg')
+
+    def __str__(self):
+        return str(self.user)
