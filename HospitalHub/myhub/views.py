@@ -239,17 +239,19 @@ def enlist(request):
 
 def enlistdoctor(request):
     if request.method == "POST":
-        form = EnlistDoctorForm(request.POST)
+        form = EnlistDoctorForm(request.POST, request.FILES)
         if form.is_valid():
             first_name = form.cleaned_data['first_name']
             last_name = form.cleaned_data['last_name']
             hospital = form.cleaned_data['hospital']
             profile = form.cleaned_data['profile']
             edu = form.cleaned_data['edu']
+            speciality = form.cleaned_data['speciality']
             Doctor = doctor()
             Doctor.first_name = first_name
             Doctor.last_name = last_name
             Doctor.profile = profile
+            Doctor.speciality = speciality
             Doctor.save()
             Doctor.edu.set(edu)
             Doctor.hospital.set(hospital)
@@ -265,7 +267,7 @@ def enlistdoctor(request):
 
 def enlisthospital(request):
     if request.method == "POST":
-        formhospital = EnlistHospitalForm(request.POST)   
+        formhospital = EnlistHospitalForm(request.POST, request.FILES)   
         if formhospital.is_valid():
             name = formhospital.cleaned_data['name']
             desc = formhospital.cleaned_data['desc']
