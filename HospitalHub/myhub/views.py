@@ -306,7 +306,7 @@ def enlistdegree(request):
             Newdegree.degree = degree
             Newdegree.uni = uni
             Newdegree.save()
-            return HttpResponseRedirect(reverse('enlist'))
+            return HttpResponseRedirect(reverse('index'))
         else:
             for msg in form.error_messages:
                 print(form.error_messages[msg])
@@ -322,7 +322,7 @@ def enlistuni(request):
             NewUni = doctoruni()
             NewUni.name = name  
             NewUni.save()
-            return HttpResponseRedirect(reverse('enlist'))
+            return HttpResponseRedirect(reverse('index'))
         else:
             for field, items in form.errors.items():
                 for item in items:
