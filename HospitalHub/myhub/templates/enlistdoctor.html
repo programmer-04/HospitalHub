@@ -28,7 +28,7 @@
   <div class="main-content-enlist">
             <div class="col-md-3">
                 <div class="" card>
-                    <form class="box" method="post" action="{% url 'enlistdoctor' %}">
+                    <form class="box" method="post" action="{% url 'enlistdoctor' %}" enctype="multipart/form-data">
                         {% csrf_token %}
                        <p> <h1>Enlist Doctor</h1></p>
                         {%for fields in form%}
