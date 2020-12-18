@@ -35,6 +35,7 @@
             <div class="sectio-title-2"> <strong>{{ doctor.edu.all|join:"; " }}</strong>
             <div class="sectio-title-2"> <strong>{{ doctor.hospital.all|join:", "}}</strong>
             <div class="sectio-title-2"> <strong>{{ doctor.speciality}}</strong></div>
+            <div class="sectio-title-2"> <strong>{% if doctor.verified %}Verified Account{% endif %} {% if not doctor.verified %} NOT verified {% endif %}</strong></div>
               <h2>{{ doctor.first_name }} {{ doctor.last_name }}</h2>
               <h4>{% if doctor.doctor_review_set.all %}{% if doctor.intaverage_rating %} {% for star in doctor.intaverage_rating %} ⭐ {% endfor %} ({{doctor.doctor_review_set.all.count}} reviews) {% endif %}{% endif %}</h2>
             </div>

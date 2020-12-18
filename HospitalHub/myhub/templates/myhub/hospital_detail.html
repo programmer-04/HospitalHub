@@ -33,15 +33,16 @@
         </div>
         <div class="col-md-6 col-sm-6">
           <div class="team-details-text">
-            <div class="sectio-title-2"> <strong>{{ hospital.city }}</strong>
-              <h2>{{ hospital.name }}</h2>
-              <h4>{% if doctor.doctor_review_set.all %}{% if doctor.intaverage_rating %} {% for star in doctor.intaverage_rating %} ⭐ {% endfor %} ({{doctor.doctor_review_set.all.count}} reviews) {% endif %}{% endif %}</h2>
+              <div class="sectio-title-2"> <strong>{{ hospital.city }}</strong>
+                <div class="sectio-title-2"> <strong>{% if doctor.verified %}Verified Account{% endif %} {% if not doctor.verified %} NOT verified {% endif %}</strong>
+                <h2>{{ hospital.name }}</h2>
+              <h4>{% if hospital.hospital_review_set.all %}{% if hospital.intaverage_rating %} {% for star in hospital.intaverage_rating %} ⭐ {% endfor %} ({{hospital.hospital_review_set.all.count}} reviews) {% endif %}{% endif %}</h2>
             </div>
             <p>{{ hospital.desc }}</p>
             <div> <strong>{{ hospital.building }}, {{ hospital.street }}, {{ hospital.city }}, {{ hospital.pincode }}</strong>
           </div>
         </div>
-      </div>
+      </div></div>
       <!--
       <div class="row">
         <div class="col-md-12">
