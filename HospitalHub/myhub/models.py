@@ -27,6 +27,7 @@ class doctor(models.Model):
     profile= models.ImageField(default ='default.jpg')
     desc = models.CharField(max_length=10000, help_text='Enter Doctor Description', default="No description available for this doctor.")
     speciality = models.CharField(max_length=1000, help_text='Enter Doctor Speciality', default="No speciality available at this moment.") 
+    verified = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return reverse('doctors-detail', args=[str(self.id)])
@@ -59,6 +60,7 @@ class hospital(models.Model):
     pincode = models.IntegerField(blank=False, null=True)  # Field name made lowercase.
     beds = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
     profile= models.ImageField(default ='default.jpg') 
+    verified = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.name)
