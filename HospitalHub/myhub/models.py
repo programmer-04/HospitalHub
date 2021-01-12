@@ -56,8 +56,7 @@ class hospital(models.Model):
     desc = models.CharField(max_length=10000, help_text='Enter Hospital Description')
     building = models.CharField(max_length=25, blank=False, null=True)  # Field name made lowercase.
     street = models.CharField(max_length=25, blank=False, null=True)  # Field name made lowercase.
-    city = models.CharField(max_length=25, null=True)  # Field name made lowercase.
-    pincode = models.IntegerField(blank=False, null=True)  # Field name made lowercase.
+    pincode = models.ForeignKey('Pincode', on_delete=models.CASCADE)  # Field name made lowercase.
     beds = models.IntegerField(blank=True, null=True)  # Field name made lowercase.
     profile= models.ImageField(default ='default.jpg') 
     verified = models.BooleanField(default=False)
@@ -80,14 +79,22 @@ class hospital(models.Model):
             stars += "*"
         return stars
 
+class Pincode(models.Model):
+    pincode = models.IntegerField(blank=False, primary_key=True)
+    city = models.CharField(max_length=100, blank = False)
+    country = models.CharField(max_length=100, blank = False)
+
 class ambulance(models.Model):
      class Meta:
       unique_together  = (('key1', 'key2'),)
 
      key1 = models.ForeignKey(hospital, on_delete=models.CASCADE,)
      key2 = models.IntegerField(primary_key =True)
-     ambvehicletype =models.CharField(max_length=25, blank=True, null=True)
-     vehiclecapacity =models.IntegerField(blank=True, null=True)
+     ambvehicletype =models.ForeignKey('ambvehiclecapacity', on_delete=models.CASCADE)
+
+class ambvehiclecapacity(models.Model):
+     ambvehicletype = models.CharField(max_length=25, blank=True, null=True)
+     vehiclecapacity = models.IntegerField(blank=True, null=True)
      
 class  hospphoneno(models.Model):
       class Meta:
