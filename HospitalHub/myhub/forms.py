@@ -1,5 +1,5 @@
 from django.forms import ModelForm, Textarea
-from .models import doctor_review, hospital_review, doctor, doctoredu, hospital, doctoruni
+from .models import doctor_review, hospital_review, doctor, doctoredu, hospital, doctoruni, Pincode
 
 class DoctorReviewForm(ModelForm):
     class Meta:
@@ -37,7 +37,13 @@ class EnlistDoctorForm(ModelForm):
 class EnlistHospitalForm(ModelForm):
     class Meta:
         model = hospital
-        fields = ['name', 'desc', 'building', 'street', 'city', 'pincode', 'beds','profile']
+        fields = ['name', 'desc', 'building', 'street', 'beds','profile']
+
+class EnlistPincodeForm(ModelForm):
+    class Meta:
+        model = Pincode
+        fields = ['city', 'country', 'pincode']
+
 
 class AddDegreeForm(ModelForm):
     class Meta:

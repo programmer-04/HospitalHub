@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 
 # Create your views here.
-from .models import doctor, doctoredu, hospital, hospital_review, doctor_review, ambulance, doctoruni
+from .models import doctor, doctoredu, hospital, hospital_review, doctor_review, ambulance, doctoruni, Pincode
 
 def index(request):
     """View function for home page of site."""
@@ -183,7 +183,7 @@ def register(request):
     form = UserCreationForm
     return render(request = request, template_name = "registration.html",context={"form":form})
 
-from .forms import EnlistDoctorForm, EnlistHospitalForm, AddDegreeForm, AddUniForm
+from .forms import EnlistDoctorForm, EnlistHospitalForm, AddDegreeForm, AddUniForm, EnlistPincodeForm
 from django.contrib import messages
 
 def enlist(request):
@@ -270,26 +270,45 @@ def enlistdoctor(request):
 
 def enlisthospital(request):
     if request.method == "POST":
-        formhospital = EnlistHospitalForm(request.POST, request.FILES)   
+        formhospital = EnlistHospitalForm(request.POST, request.FILES)
+        formpincode = EnlistPincodeForm(request.POST)
+        pincode = Pincode()
+        if formpincode.is_valid():
+            print('formcode valid')
+            presentcode = formpincode.cleaned_data['pincode']
+            presentcity = formpincode.cleaned_data['city']
+            presentcountry = formpincode.cleaned_data['country']
+            pincode.pincode = presentcode
+            pincode.city = presentcity
+            pincode.country = presentcountry
+            pincode.save()
+            print(str(pincode.pincode) + 'is saved!')
+        elif not formpincode.is_valid():
+            presentcode = request.POST.get('pincode')
+            print(presentcode)
+            try:
+                pincode = Pincode.objects.get(pincode=int(presentcode))
+                print(pincode + 'is already found!')
+            except Exception as e:
+                print(e)
         if formhospital.is_valid():
+            print('formhospital valid')
             name = formhospital.cleaned_data['name']
             desc = formhospital.cleaned_data['desc']
             building = formhospital.cleaned_data['building']
             street = formhospital.cleaned_data['street']
-            pincode = formhospital.cleaned_data['pincode']
             beds = formhospital.cleaned_data['beds']
             profile = formhospital.cleaned_data['profile']
-            city = formhospital.cleaned_data['city']
             Hospital = hospital()
             print(name)
             Hospital.name = name
             Hospital.desc = desc
             Hospital.building = building
             Hospital.street = street
+            print(pincode)
             Hospital.pincode = pincode
             Hospital.beds = beds
             Hospital.profile = profile
-            Hospital.city=city
             Hospital.save()
             return HttpResponseRedirect(reverse('hospitals-detail', args=(Hospital.id,)))
         else:
@@ -297,9 +316,10 @@ def enlisthospital(request):
                 for item in items:
                     messages.error(request, '{}: {}'.format(field, item))
                     print('{}: {}'.format(field, item))
-            return render(request = request, template_name = "enlisthospital.html",context={"formhospital":formhospital})
+            return render(request = request, template_name = "enlisthospital.html",context={"formhospital":formhospital, "formpincode": formpincode})
     formhospital = EnlistHospitalForm(request.POST)
-    return render(request = request, template_name = "enlisthospital.html",context={"formhospital":formhospital})
+    formpincode = EnlistPincodeForm(request.POST)
+    return render(request = request, template_name = "enlisthospital.html",context={"formhospital":formhospital, "formpincode": formpincode})
 
 def enlistdegree(request):
     if request.method == "POST":

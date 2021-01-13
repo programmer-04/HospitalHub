@@ -39,7 +39,7 @@
               <h4>{% if hospital.hospital_review_set.all %}{% if hospital.intaverage_rating %} {% for star in hospital.intaverage_rating %} ⭐ {% endfor %} ({{hospital.hospital_review_set.all.count}} reviews) {% endif %}{% endif %}</h2>
             </div>
             <p>{{ hospital.desc }}</p>
-            <div> <strong>{{ hospital.building }}, {{ hospital.street }}, {{ hospital.city }}, {{ hospital.pincode }}</strong>
+            <div> <strong>{{ hospital.building }}, {{ hospital.street }}, {{ hospital.pincode.city }}, {{ hospital.pincode.country }}, {{ hospital.pincode.pincode }}</strong>
           </div>
         </div>
       </div></div>
