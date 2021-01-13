@@ -104,7 +104,7 @@ class  hospphoneno(models.Model):
       phonenumber= models.CharField(max_length = 10, primary_key =True)
 from django.contrib.auth.models import User
     
-class doctor_review(models.Model):
+class review(models.Model):
     RATING_CHOICES = (
         (1, '1'),
         (2, '2'),
@@ -112,7 +112,7 @@ class doctor_review(models.Model):
         (4, '4'),
         (5, '5'),
     )
-    doctor = models.ForeignKey(doctor, on_delete=models.CASCADE,)
+
     pub_date = models.DateTimeField('date published')
     user_name = models.ForeignKey(User, on_delete=models.CASCADE,)
     comment = models.CharField(max_length=200)
@@ -120,9 +120,6 @@ class doctor_review(models.Model):
 
     def __str__(self):
         return str(self.user_name)
-
-    def get_absolute_url(self):
-        return reverse('doctors-reviews-detail', args=[str(self.id)])
 
     def get_rating(self):
         roundedratings = round(self.rating)
@@ -133,34 +130,22 @@ class doctor_review(models.Model):
 
     def get_date(self):
         return self.pub_date.date()
+    
+    class Meta:
+        abstract = True 
 
-class hospital_review(models.Model):
-    RATING_CHOICES = (
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
-    )
+class doctor_review(review):
+    doctor = models.ForeignKey(doctor, on_delete=models.CASCADE,)
+    
+    def get_absolute_url(self):
+        return reverse('doctors-reviews-detail', args=[str(self.id)])
+
+class hospital_review(review):
     hospital = models.ForeignKey(hospital, on_delete=models.CASCADE,)
-    pub_date = models.DateTimeField('date published')
-    user_name = models.ForeignKey(User, on_delete=models.CASCADE,)
-    comment = models.CharField(max_length=200)
-    rating = models.IntegerField(choices=RATING_CHOICES)
-
-    def __str__(self):
-        return str(self.user_name)
-
+    
     def get_absolute_url(self):
         return reverse('hospitals-reviews-detail', args=[str(self.id)])
-        
-    def get_rating(self):
-        roundedratings = round(self.rating)
-        stars = ""
-        for i in range(0,roundedratings):
-            stars += "*"
-        return stars
-        
+            
 
 class UserProfile(models.Model):
     user   = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user')
