@@ -115,7 +115,7 @@ class review(models.Model):
 
     pub_date = models.DateTimeField('date published')
     user_name = models.ForeignKey(User, on_delete=models.CASCADE,)
-    comment = models.CharField(max_length=200)
+    comment = models.CharField(max_length=200,blank=True)
     rating = models.IntegerField(choices=RATING_CHOICES)
 
     def __str__(self):
