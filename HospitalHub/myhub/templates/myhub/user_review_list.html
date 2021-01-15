@@ -13,7 +13,7 @@
             {% for review in review_list %}
             <div class="item">
               <div class="testimonial-holder">
-                <div class="user-thumb"> <img src="{{review.doctor.profile.url}}" alt=""> 
+                <div class="user-thumb"> <!--<img src="{{review.doctor.profile.url}}" alt="">--> 
                   <i>{% for star in review.get_rating %} ⭐ {% endfor %}</i><br><i>{{ review.doctor.first_name }} {{ review.doctor.last_name }}</i> </div>
                 <div class="test-text">
                   <p>{{ review.comment }}</p>

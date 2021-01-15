@@ -135,12 +135,42 @@ def hospital_add_review(request, hospital_id):
     return render(request, 'myhub/hospital_detail.html', {'hospital': Hospital, 'form': form})
 
 def user_review_list(request, username=None):
-    if not username:
+    '''if not username:
         username = request.user.username
     latest_review_list = doctor_review.objects.filter(user_name=username).order_by('-pub_date')
     hospital_review_list = hospital_review.objects.filter(user_name=username).order_by('-pub_date')
     print(username)
     context = {'review_list':latest_review_list, 'username':username, 'hospital_review_list':hospital_review_list}
+    '''
+    userID = request.user.id
+    with connection.cursor() as cursor:
+            cursor.execute("call getUserDoctorReview(%s);",[userID])
+            Doctor_reviews = cursor.fetchall()
+            Doctor_review_list = list(Doctor_reviews)
+            Doctor_review_list = [list(ele) for ele in Doctor_review_list]
+            for review in Doctor_review_list:
+                rating = review[3]
+                review[3] = ""
+                for star in range(0,rating):
+                    review[3] +=  "*" 
+            Doctor_reviews = tuple(Doctor_review_list)
+            cursor.execute("call getUserHospitalReview(%s);",[userID])
+            Hospital_reviews = cursor.fetchall()
+            '''for review in Doctor_reviews:
+                reviewID = review[0]
+                date = review[1]
+                comment = review[2]
+                rating = review[3]
+                doctor_name = doctor.objects.get(id = review[4])
+                print("review:" + str(reviewID))
+                print("Date:" + str(date))
+                print("Comment:" + str(comment))
+                print("rating" + str(rating))
+                print("doctor name:"+ str(doctor_name))
+            ''''''return render(request, 'myhub/doctor_review_detail.html', {'doctor_review': Doctor_review})'''
+            return render(request, 'myhub/doctor_review_detail.html', {'review_list': Doctor_reviews, 'hospital_review_list': Hospital_reviews})
+
+
     return render(request, 'myhub/user_review_list.html', context)
 
 from itertools import chain
