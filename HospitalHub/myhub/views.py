@@ -134,6 +134,7 @@ def hospital_add_review(request, hospital_id):
 
     return render(request, 'myhub/hospital_detail.html', {'hospital': Hospital, 'form': form})
 
+from PIL import Image
 def user_review_list(request, username=None):
     '''if not username:
         username = request.user.username
@@ -145,17 +146,41 @@ def user_review_list(request, username=None):
     userID = request.user.id
     with connection.cursor() as cursor:
             cursor.execute("call getUserDoctorReview(%s);",[userID])
-            Doctor_reviews = cursor.fetchall()
-            Doctor_review_list = list(Doctor_reviews)
-            Doctor_review_list = [list(ele) for ele in Doctor_review_list]
-            for review in Doctor_review_list:
-                rating = review[3]
-                review[3] = ""
-                for star in range(0,rating):
-                    review[3] +=  "*" 
-            Doctor_reviews = tuple(Doctor_review_list)
+            columns = [col[0] for col in cursor.description]
+            Doctor_review_dict = [dict(zip(columns, row)) for row in cursor.fetchall()]
+            for review in Doctor_review_dict:
+                stars = review['rating']
+                review['rating'] = ""
+                for star in range(0,stars):
+                    review['rating'] +=  "*"
+                review['doctor_name'] = str(doctor.objects.get(id = review['doctor_id']).first_name) + " " + str(doctor.objects.get(id = review['doctor_id']).last_name)
+                review['profileurl'] = doctor.objects.get(id = review['doctor_id']).profile.url
+                '''basewidth = 150
+                img = Image.open(review['profileurl'])
+                wpercent = (basewidth/float(img.size[0]))
+                hsize = int((float(img.size[1])*float(wpercent)))
+                img = img.resize((basewidth,hsize), Image.ANTIALIAS)
+                img.save(review['profileurl']+'-resized.jpg')
+                review['profileurl'] = review['profileurl']+'-resized.jpg'''
+            print(Doctor_review_dict)
             cursor.execute("call getUserHospitalReview(%s);",[userID])
-            Hospital_reviews = cursor.fetchall()
+            columns = [col[0] for col in cursor.description]
+            Hospital_review_dict = [dict(zip(columns, row)) for row in cursor.fetchall()]
+            for review in Hospital_review_dict:
+                stars = review['rating']
+                review['rating'] = ""
+                for star in range(0,stars):
+                    review['rating'] +=  "*"
+                review['hospital_name'] = hospital.objects.get(id = review['hospital_id']).name
+                review['profileurl'] = hospital.objects.get(id = review['hospital_id']).profile.url
+                '''basewidth = 150
+                img = Image.open(review['profileurl'])
+                wpercent = (basewidth/float(img.size[0]))
+                hsize = int((float(img.size[1])*float(wpercent)))
+                img = img.resize((basewidth,hsize), Image.ANTIALIAS)
+                img.save(review['profileurl']+'-resized.jpg')
+                review['profileurl'] = review['profileurl']+'-resized.jpg'''
+            print(Hospital_review_dict)
             '''for review in Doctor_reviews:
                 reviewID = review[0]
                 date = review[1]
@@ -168,7 +193,7 @@ def user_review_list(request, username=None):
                 print("rating" + str(rating))
                 print("doctor name:"+ str(doctor_name))
             ''''''return render(request, 'myhub/doctor_review_detail.html', {'doctor_review': Doctor_review})'''
-            return render(request, 'myhub/doctor_review_detail.html', {'review_list': Doctor_reviews, 'hospital_review_list': Hospital_reviews})
+            return render(request, 'myhub/user_review_list.html', {'review_list': Doctor_review_dict, 'hospital_review_list': Hospital_review_dict})
 
 
     return render(request, 'myhub/user_review_list.html', context)

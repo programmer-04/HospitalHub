@@ -1,20 +1,39 @@
 {% extends "base_generic.html" %}
 {% block content %}
 <body>
-<h2> Latest reviews by {{ user.username }}</h2>
 <br>
+<div class="inner-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <h1>Reviews by {{user.username}}</h1>
+      </div>
+      <div class="col-md-5">
+        <ol class="breadcrumb">
+        <!--  <li><a href="{% url 'index' %}">Home</a></li>
+          <li class="active">Doctors</li>-->
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% if review_list %}
 <!--<table class="table" style="border: none;">-->
     <div class="main-content">
+      
+      <div class="team-details">
+        <div class="container">
+        <div class = "row">
     <div class="col-md-12">
         <div class="home-testimonials">
             <div class="sectio-title-2"> <h3>Doctor Reviews</h3>
             </div>
-            {% for review in review_list %}
+            {% for review in review_list %}            
             <div class="item">
               <div class="testimonial-holder">
-                <div class="user-thumb"> <!--<img src="{{review.doctor.profile.url}}" alt="">--> 
-                  <i>{% for star in review.get_rating %} ⭐ {% endfor %}</i><br><i>{{ review.doctor.first_name }} {{ review.doctor.last_name }}</i> </div>
+                <div class="user-thumb"> <img src="{{review.profileurl}}" alt="" width="150" height="150"> 
+                  <i>{% for star in review.rating %} ⭐ {% endfor %}</i><br><i>{{ review.doctor_name }}</i> </div>
                 <div class="test-text">
                   <p>{{ review.comment }}</p>
                 </div>
@@ -28,7 +47,7 @@
       </div>
       <!--Testimonials End-->
       </div>
-    </div>
+    </div></div></div>
     <!--
 <div>
     {% for review in review_list %}
@@ -53,6 +72,10 @@
 
 <br>
 {% if hospital_review_list %}
+<div class="team-details">
+  <div class="container">
+  <div class = "row">
+
 <div class="col-md-12">
     <div class="home-testimonials">
         <br>
@@ -61,8 +84,8 @@
         {% for review in hospital_review_list %}
         <div class="item">
           <div class="testimonial-holder">
-            <div class="user-thumb"> <img src="{{review.hospital.profile.url}}" alt=""> 
-              <i>{% for star in review.get_rating %} ⭐ {% endfor %}</i><br><i>{{ review.hospital.name }}</i> </div>
+            <div class="user-thumb"> <img src="{{review.profileurl}}" alt="" width="150" height="150"> 
+              <i>{% for star in review.rating %} ⭐ {% endfor %}</i><br><i>{{ review.hospital_name }}</i> </div>
             <div class="test-text">
               <p>{{ review.comment }}</p>
             </div>
@@ -76,7 +99,7 @@
   </div>
   <!--Testimonials End-->
   </div>
-</div>
+</div></div></div>
 
 {% else %}
 <p>No hospital reviews are available.</p>
