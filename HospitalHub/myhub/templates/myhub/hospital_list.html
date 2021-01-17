@@ -31,7 +31,7 @@
               aria-hidden="true"></i></a> <img src="{{ hosp.profile.url }}" alt=""></div>
             <div class="team-text">
               <h5><a href="{{ hosp.get_absolute_url }}">{{ hosp.name }}</a></h5>
-              <br><strong>{{ hosp.city }}</strong>
+              <br><strong>{{ hosp.pincode.city }}</strong>
               <br><strong>{% if hosp.intaverage_rating %} {% for star in hosp.intaverage_rating %} ⭐ {% endfor %} from {% endif %} {{hosp.hospital_review_set.all.count}} reviews</strong>
           </div>
         </div>
