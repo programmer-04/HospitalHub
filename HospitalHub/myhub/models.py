@@ -3,6 +3,7 @@ from django.urls import reverse
 import numpy as np
 
 
+
 class doctoruni(models.Model):
     name = models.CharField(max_length=200, help_text='Enter your Uni', unique=True)
 
@@ -61,6 +62,7 @@ class hospital(models.Model):
     profile= models.ImageField(default ='default.jpg') 
     verified = models.BooleanField(default=False)
 
+   
     def __str__(self):
         return str(self.name)
 
