@@ -78,7 +78,7 @@
           <div class="item">
             <div class="testimonial-holder">
               <div class="user-thumb"> <img src="{{ review.user_name.user.profile }}" alt=""> <h3>{{ review.user_name }}</h3>
-                <i>{% for star in review.get_rating %} ⭐ {% endfor %}</i><br><i>{{ review.get_date }}</i> </div>
+                <p></p><h6>{% for star in review.get_rating %} ⭐ {% endfor %}</h6><br><h6>{{ review.get_date }}</h6> </div>
               <div class="test-text">
                 <p>{{ review.comment }}</p>
               </div>

@@ -156,6 +156,8 @@ def user_review_list(request, username=None):
                     review['rating'] +=  "*"
                 review['doctor_name'] = str(doctor.objects.get(id = review['doctor_id']).first_name) + " " + str(doctor.objects.get(id = review['doctor_id']).last_name)
                 review['profileurl'] = doctor.objects.get(id = review['doctor_id']).profile.url
+                formatteddate = review['pub_date'].strftime("%d-%b-%Y")
+                review['pub_date'] = formatteddate
                 '''basewidth = 150
                 img = Image.open(review['profileurl'])
                 wpercent = (basewidth/float(img.size[0]))
@@ -174,6 +176,8 @@ def user_review_list(request, username=None):
                     review['rating'] +=  "*"
                 review['hospital_name'] = hospital.objects.get(id = review['hospital_id']).name
                 review['profileurl'] = hospital.objects.get(id = review['hospital_id']).profile.url
+                formatteddate = review['pub_date'].strftime("%d-%b-%Y")
+                review['pub_date'] = formatteddate
                 '''basewidth = 150
                 img = Image.open(review['profileurl'])
                 wpercent = (basewidth/float(img.size[0]))

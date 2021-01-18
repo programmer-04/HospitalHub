@@ -131,7 +131,7 @@ class review(models.Model):
         return stars
 
     def get_date(self):
-        return self.pub_date.date()
+        return self.pub_date.strftime("%d-%b-%Y")
     
     class Meta:
         abstract = True 

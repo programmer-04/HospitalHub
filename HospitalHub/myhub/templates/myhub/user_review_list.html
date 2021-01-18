@@ -33,7 +33,7 @@
             <div class="item">
               <div class="testimonial-holder">
                 <div class="user-thumb"> <img src="{{review.profileurl}}" alt="" width="150" height="150"> 
-                  <i>{% for star in review.rating %} ⭐ {% endfor %}</i><br><i>{{ review.doctor_name }}</i> </div>
+                  <p></p><h6>{% for star in review.rating %} ⭐ {% endfor %}</h6<br><h5>{{ review.doctor_name }}</h5><br>{{ review.pub_date }} </div>
                 <div class="test-text">
                   <p>{{ review.comment }}</p>
                 </div>
@@ -85,7 +85,7 @@
         <div class="item">
           <div class="testimonial-holder">
             <div class="user-thumb"> <img src="{{review.profileurl}}" alt="" width="150" height="150"> 
-              <i>{% for star in review.rating %} ⭐ {% endfor %}</i><br><i>{{ review.hospital_name }}</i> </div>
+              <p><h6>{% for star in review.rating %} ⭐ {% endfor %}</h6><br><h5>{{ review.hospital_name }}</h5><br>{{ review.pub_date }} </div>
             <div class="test-text">
               <p>{{ review.comment }}</p>
             </div>
