@@ -8,7 +8,7 @@
             
               
               <div class="navbar-header"><a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'hospitalhub/images/logo.png' %}"
-                  alt="" width="150px" height="60px"> </div>
+                  alt="" width="150px" height="45px"> </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -35,7 +35,7 @@
               </form></li>
               {% if user.is_authenticated %}
                 <li ><a href="{% url 'user_review_list' user.id %}">{{ user.get_username }}</a></li>
-                <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
+                <li><a href="{% url 'logout'%}?next={% url 'index' %}">Logout</a></li>
                 {% else %}
                 <li ><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>    
                 {% endif %}
