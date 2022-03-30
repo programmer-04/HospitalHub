@@ -4,10 +4,13 @@ A peer review and rating system for healthcare services. HospitalHub enables ind
 
 The database used here is SQLlite. You should implement a similar design in MySQL and change the database in `HospitalHub/HospitalHub/settings.py`. You may simply uncomment to change to MySQL. 
 
-![Home][HomeScreen.png]
-![HospitalList][HospitalList.png]
-![HospitalReview][HospitalReview.png]
-![DoctorReview][DoctorReview.png]
+![Home](HomeScreen.png)
+
+![HospitalList](HospitalList.png)
+
+![HospitalReview](HospitalReview.png)
+
+![DoctorReview](DoctorReview.png)
 
 ## To run the server:
 - Install the dependencies.
