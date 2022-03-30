@@ -34,35 +34,27 @@ class HospitalListView(generic.ListView):
 def HospitalDetailView(request, hospital_id):
     Hospital = get_object_or_404(hospital, pk=hospital_id)
     form = DoctorReviewForm()
-    #reviewrandomly()
+    #call reviewrandomly() here to generate dummy objects
     return render(request, 'myhub/hospital_detail.html', {'hospital': Hospital, 'form': form})
 
 def DoctorDetailView(request, doctor_id):
     Doctor = get_object_or_404(doctor, pk=doctor_id)
     form = DoctorReviewForm()
-    #reviewrandomly()
-    #print(Doctor.doctor_review_set.all()[0].user_name.user.profile)
+    #call reviewrandomly() here to generate dummy objects
     return render(request, 'myhub/doctor_detail.html', {'doctor': Doctor, 'form': form})
 
 
 class DoctorReviewListView(generic.ListView):
     model = doctor_review
-    #template_name = '/myhub/review_list.html'  # Specify your own template name/location
     queryset = doctor_review.objects.order_by('-pub_date')[:9]
 
 class HospitalReviewListView(generic.ListView):
     model = hospital_review
-    #template_name = '/myhub/review_list.html'  # Specify your own template name/location
     queryset = hospital_review.objects.order_by('-pub_date')[:9]
-
-'''class DoctorReviewDetailView(generic.DetailView):
-    model=doctor_review'''
 
 from django.db import connection
 def DoctorReviewDetailView(request, pk):
-    'Doctor_review = get_object_or_404(doctor_review, pk=pk)'
     with connection.cursor() as cursor:
-            '''cursor.callproc('getdetaildoctor', [1])'''
             cursor.execute("call getdetaildoctor(%s);",[pk])
             Doctor_review = cursor.fetchone()
             username = Doctor_review[2]
@@ -75,7 +67,6 @@ def DoctorReviewDetailView(request, pk):
             cursor.execute("Select first_name from myhub_doctor where myhub_doctor.id = %s", [Doctor_review[-1]])
             firstname = cursor.fetchone()[0]
             doctorlink = reverse('doctors-detail', args=[Doctor_review[-1]])
-            '''return render(request, 'myhub/doctor_review_detail.html', {'doctor_review': Doctor_review})'''
             return render(request, 'myhub/doctor_review_detail.html', {'username': username, 'comment':comment, 'firstname':firstname, 'stars': stars, 'doctorlink':doctorlink})
 
 
@@ -95,8 +86,6 @@ def doctor_add_review(request, doctor_id):
     if form.is_valid():
         rating = form.cleaned_data['rating']
         comment = form.cleaned_data['comment']
-        #user_name = form.cleaned_data['user_name']
-        print(request.user.username)
         user_name = User.objects.get(username=request.user.username)
         Review = doctor_review()
         Review.doctor = Doctor
@@ -119,7 +108,6 @@ def hospital_add_review(request, hospital_id):
     if form.is_valid():
         rating = form.cleaned_data['rating']
         comment = form.cleaned_data['comment']
-        #user_name = form.cleaned_data['user_name']
         user_name = User.objects.get(username=request.user.username)
         Review = hospital_review()
         Review.hospital = Hospital
@@ -137,13 +125,6 @@ def hospital_add_review(request, hospital_id):
 
 from PIL import Image
 def user_review_list(request, username=None):
-    '''if not username:
-        username = request.user.username
-    latest_review_list = doctor_review.objects.filter(user_name=username).order_by('-pub_date')
-    hospital_review_list = hospital_review.objects.filter(user_name=username).order_by('-pub_date')
-    print(username)
-    context = {'review_list':latest_review_list, 'username':username, 'hospital_review_list':hospital_review_list}
-    '''
     userID = request.user.id
     with connection.cursor() as cursor:
             cursor.execute("call getUserDoctorReview(%s);",[userID])
@@ -158,14 +139,6 @@ def user_review_list(request, username=None):
                 review['profileurl'] = doctor.objects.get(id = review['doctor_id']).profile.url
                 formatteddate = review['pub_date'].strftime("%d-%b-%Y")
                 review['pub_date'] = formatteddate
-                '''basewidth = 150
-                img = Image.open(review['profileurl'])
-                wpercent = (basewidth/float(img.size[0]))
-                hsize = int((float(img.size[1])*float(wpercent)))
-                img = img.resize((basewidth,hsize), Image.ANTIALIAS)
-                img.save(review['profileurl']+'-resized.jpg')
-                review['profileurl'] = review['profileurl']+'-resized.jpg'''
-            print(Doctor_review_dict)
             cursor.execute("call getUserHospitalReview(%s);",[userID])
             columns = [col[0] for col in cursor.description]
             Hospital_review_dict = [dict(zip(columns, row)) for row in cursor.fetchall()]
@@ -178,30 +151,7 @@ def user_review_list(request, username=None):
                 review['profileurl'] = hospital.objects.get(id = review['hospital_id']).profile.url
                 formatteddate = review['pub_date'].strftime("%d-%b-%Y")
                 review['pub_date'] = formatteddate
-                '''basewidth = 150
-                img = Image.open(review['profileurl'])
-                wpercent = (basewidth/float(img.size[0]))
-                hsize = int((float(img.size[1])*float(wpercent)))
-                img = img.resize((basewidth,hsize), Image.ANTIALIAS)
-                img.save(review['profileurl']+'-resized.jpg')
-                review['profileurl'] = review['profileurl']+'-resized.jpg'''
-            print(Hospital_review_dict)
-            '''for review in Doctor_reviews:
-                reviewID = review[0]
-                date = review[1]
-                comment = review[2]
-                rating = review[3]
-                doctor_name = doctor.objects.get(id = review[4])
-                print("review:" + str(reviewID))
-                print("Date:" + str(date))
-                print("Comment:" + str(comment))
-                print("rating" + str(rating))
-                print("doctor name:"+ str(doctor_name))
-            ''''''return render(request, 'myhub/doctor_review_detail.html', {'doctor_review': Doctor_review})'''
             return render(request, 'myhub/user_review_list.html', {'review_list': Doctor_review_dict, 'hospital_review_list': Hospital_review_dict})
-
-
-    return render(request, 'myhub/user_review_list.html', context)
 
 from itertools import chain
 from functools import reduce
@@ -212,22 +162,15 @@ def search(request):
         rawname =  request.GET.get('search') # do some research what it does       
         names = rawname.split()
         print(names)
-        '''firstnamematch = doctor.objects.filter(first_name__icontains=name for name in names)
-        lastnamematch = doctor.objects.filter(last_name__icontains=name)
-        status=list(chain(firstnamematch, lastnamematch))
-        '''
         if names:
             qset1 =  reduce(operator.__or__, [Q(first_name__icontains=name) | Q(last_name__icontains=name) | Q(edu__degree__icontains=name) | Q(speciality__icontains=name ) for name in names])
             doctor_list = doctor.objects.filter(qset1).distinct()
             qset2 = reduce(operator.__or__, [Q(name__icontains=hospname) | Q(pincode__city__icontains=hospname) for hospname in names])
             
             hospital_list = hospital.objects.filter(qset2).distinct()
-            # doctor.objects.filter(last_name__icontains=name) # filter returns a list so you might consider skip except part
             return render(request,"myhub/search_list.html",{"doctor_list":doctor_list, "hospital_list":hospital_list})
     return render(request,"myhub/search_list.html",{})
     
-#class ambulanceListView(generic.ListView):
-     # model = ambulance
 from django.contrib.auth.forms import UserCreationForm
 def register(request):
     if request.method == "POST":
@@ -248,55 +191,6 @@ from .forms import EnlistDoctorForm, EnlistHospitalForm, AddDegreeForm, AddUniFo
 from django.contrib import messages
 
 def enlist(request):
-    '''if request.method == "POST":
-        if 'doctorform' in request.POST:
-            form = EnlistDoctorForm(request.POST, prefix='doctor')
-            if form.is_valid():
-                first_name = form.cleaned_data['first_name']
-                last_name = form.cleaned_data['last_name']
-                hospital = form.cleaned_data['hospital']
-                profile = form.cleaned_data['profile']
-                edu = form.cleaned_data['edu']
-                Doctor = doctor()
-                Doctor.first_name = first_name
-                Doctor.last_name = last_name
-                Doctor.profile = profile
-                Doctor.save()
-                Doctor.edu.set(edu)
-                Doctor.hospital.set(hospital)
-                return HttpResponseRedirect(reverse('doctors-detail', args=(Doctor.id,)))
-            else:
-                for field, items in form.errors.items():
-                    for item in items:
-                        messages.error(request, '{}: {}'.format(field, item))
-                return render(request = request, template_name = "enlist.html",context={"form":form})
-        elif 'hospitalform' in request.POST:
-            formhospital = EnlistHospitalForm(request.POST, prefix='hospital')   
-            if formhospital.is_valid():
-                name = formhospital.cleaned_data['name']
-                desc = formhospital.cleaned_data['desc']
-                building = formhospital.cleaned_data['building']
-                street = formhospital.cleaned_data['street']
-                pincode = formhospital.cleaned_data['pincode']
-                beds = formhospital.cleaned_data['beds']
-                profile = formhospital.cleaned_data['profile']
-                Hospital = hospital()
-                Hospital.name = name
-                Hospital.desc = desc
-                Hospital.building = building
-                Hospital.street = street
-                Hospital.pincode = pincode
-                Hospital.beds = beds
-                Hospital.profile = profile
-                Hospital.save()
-                return HttpResponseRedirect(reverse('hospitals-detail', args=(Hospital.id,)))
-            else:
-                for field, items in formhospital.errors.items():
-                    for item in items:
-                        messages.error(request, '{}: {}'.format(field, item))
-                return render(request = request, template_name = "enlist.html",context={"formhospital":formhospital})
-    form = EnlistDoctorForm()
-    formhospital = EnlistHospitalForm'''
     return render(request = request, template_name = "enlist.html")
 
 def enlistdoctor(request):

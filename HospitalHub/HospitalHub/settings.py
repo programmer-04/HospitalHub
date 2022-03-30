@@ -77,6 +77,8 @@ WSGI_APPLICATION = 'HospitalHub.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+
+#If you want to create a MySQL backend.
 ''''default': {
         'NAME': 'HospitalHub',
         'ENGINE': 'django.db.backends.mysql',
