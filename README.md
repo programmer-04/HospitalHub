@@ -17,4 +17,4 @@ The database used here is SQLlite. You should implement a similar design in MySQ
 - `cd HospitalHub`
 - `python3 manage.py runserver 0.0.0.0:3000` to run on port 3000
 
-It was hosted on Heroku for a brief period. We created this website to learn Django, and later submitted it as our third-year project.
+It was hosted on Heroku for a brief period. We created this website to learn Django, and later submitted it as our third-year engineering project.
