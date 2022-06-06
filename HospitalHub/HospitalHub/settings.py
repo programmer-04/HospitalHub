@@ -94,13 +94,8 @@ WSGI_APPLICATION = 'HospitalHub.wsgi.application'
     }'''
 DATABASES = {
     'default': {
-        'NAME': 'HospitalHub',
-        'ENGINE': 'django.db.backends.mysql',
-        'USER': 'djangouser',
-        'PASSWORD': '1234',
-        'OPTIONS': {
-          'autocommit': True,
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
